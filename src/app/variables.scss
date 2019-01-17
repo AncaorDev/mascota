@@ -1,0 +1,102 @@
+/* ==========================================================================
+	 Variables
+========================================================================== */
+
+// font-family: 'K2D', sans-serif;
+// font-family: 'Niramit', sans-serif;
+// font-family: 'Ubuntu', sans-serif;
+
+$light: #fff;
+$muted:#e9e9e9;
+$dark:#757575;
+$dark-green :#3b938b;
+$green:#43ACA1;
+$orange:#FFC324;
+$red:#FF3504;
+$gray:#898989;
+$light_2: #FAFAFA;
+$store: #8BC34A;
+$imple: #8BC34A;
+$imple2: #7C45FF;
+$grad:#03a9f4;
+$grad2: #e91e63;
+$plans: #8BC34A;
+//register theme
+$red1: #F44336;
+$red2: #F44336;
+$cyan1: #00bcd4;
+$cyan2: #00bcd4;
+$pink1: #E91E63;
+$pink2: #E91E63;
+$lblue1: #03A9F4;
+$lblue2: #03A9F4;
+$purple1: #9C27B0;
+$purple2: #9C27B0;
+$green1: #4CAF50;
+$green2: #4CAF50;
+$orange1: #FF9800;
+$orange2: #FF9800;
+$yellow1: #FFEB3B;
+$yellow2: #FFEB3B;
+$brown1: #795548;
+$brown2: #795548;
+$indigo1: #3F51B5;
+$indigo2: #3F51B5;
+$teal1: #009688;
+$teal2: #009688;
+$blue1: #2196F3;
+$blue2: #2196F3;
+$gray1: #9E9E9E;
+$black: #303030;
+$black2: #424242;
+
+$red-ancaor: #d32f2f;
+$primary : #20376C;
+$secundary : #6699FF;
+
+$font-family: 'PT Sans, sans-serif';
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.m-auto {
+    margin: auto !important;
+}
+
+.height-100 {
+    height: 100%;
+}
+
+.c-white {
+    color: #FFF;
+}
+.b-white {
+    color: #FFF;
+}
+.display-none{
+    display: none;
+}
+
+.flex {
+    display: flex;
+    &_center {
+        align-content: center
+    }
+}
+
+.clear {
+    clear: both;
+}
+
+@keyframes opacityAnimation {
+    0% {
+       opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

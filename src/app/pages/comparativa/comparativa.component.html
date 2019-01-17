@@ -1,0 +1,30 @@
+
+<section class="theme-ancaor height-100" id="contenido">
+  <div class="notices content-section">
+    <p class="title-cont-notice">Averigua cual es la mejor comida para tu pequeño.</p>
+    <div class="cont-notices">
+      <mat-card class="card-info">
+        <mat-card-content class="card-notice-content">
+          <mat-form-field appearance="outline">
+            <mat-select placeholder="Favorite">
+              <mat-option *ngFor="let list of lista" [value]="list.value">{{list.viewValue}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-select placeholder="Favorite">
+              <mat-option *ngFor="let list of lista" [value]="list.value">{{list.viewValue}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-select placeholder="Favorite">
+              <mat-option *ngFor="let list of lista" [value]="list.value">{{list.viewValue}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary">Enviar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</section>

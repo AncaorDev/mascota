@@ -1,0 +1,52 @@
+@import './../../variables.scss';
+@mixin div-icon {
+    display: block;
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#contenido {
+    background: $primary;
+    display: flex;
+    .notices {
+        width: 100vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        padding-top: 230px;
+        .title-cont-notice {
+            color: white;
+            text-align: center;
+        }
+        .cont-notices {
+            display: flex;
+            padding: 1vw;
+            .card-info {
+                padding: 3vw;
+                box-shadow:none !important;
+                width: 30vw;
+                margin: 0 auto;
+                .card-notice-content {
+                    mat-form-field {
+                        width: 100%;
+                    }
+                    display: block;
+                    p {
+                        width: 100%;
+                    }
+                    .img-notice {
+                        width: 30%;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+                &:hover {
+                    -webkit-box-shadow: 2px 5px 18px -1px rgba(0,0,0,0.75) !important;
+                    -moz-box-shadow: 2px 5px 18px -1px rgba(0,0,0,0.75) !important;
+                    box-shadow: 2px 5px 18px -1px rgba(0,0,0,0.75) !important;
+                }
+            }
+        }
+    }
+}

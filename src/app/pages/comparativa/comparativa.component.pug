@@ -1,0 +1,17 @@
+section.theme-ancaor.height-100(id="contenido")
+	.notices.content-section
+		p.title-cont-notice Averigua cual es la mejor comida para tu pequeño.
+		.cont-notices
+			mat-card.card-info
+				mat-card-content.card-notice-content
+					mat-form-field(appearance="outline")
+						mat-select(placeholder="Favorite")
+							mat-option(*ngFor="let list of lista", [value]="list.value") {{list.viewValue}}
+					mat-form-field(appearance="outline")
+						mat-select(placeholder="Favorite")
+							mat-option(*ngFor="let list of lista", [value]="list.value") {{list.viewValue}}
+					mat-form-field(appearance="outline")
+						mat-select(placeholder="Favorite")
+							mat-option(*ngFor="let list of lista", [value]="list.value") {{list.viewValue}}
+				mat-card-actions
+					button(mat-flat-button , color="primary") Enviar

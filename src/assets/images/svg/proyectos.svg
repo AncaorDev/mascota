@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2018 (64 Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="30px" height="30px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 30 30"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .style_cap1 {fill:#6D7B00}
+    .stile_cap0 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="stile_cap0" cx="15.15" cy="14.85" r="14.625"/>
+  <g id="_2128843852192">
+   <path class="style_cap1" d="M6.572 6.541l11.009 0c0.657,0 1.194,0.537 1.194,1.194l0 14.351c0,0.656 -0.537,1.194 -1.194,1.194l-11.009 0c-0.656,0 -1.194,-0.538 -1.194,-1.194l0 -14.351c0,-0.657 0.538,-1.194 1.194,-1.194zm0.264 1.41l10.481 0 0 13.919 -10.481 0 0 -13.919z"/>
+   <rect class="style_cap1" x="7.925" y="9.772" width="8.121" height="1.405" rx="1.765" ry="1.277"/>
+   <rect class="style_cap1" x="7.925" y="12.639" width="8.121" height="1.405" rx="1.765" ry="1.277"/>
+   <rect class="style_cap1" x="8.049" y="15.64" width="8.121" height="1.405" rx="1.765" ry="1.277"/>
+   <rect class="style_cap1" x="8.042" y="18.432" width="8.121" height="1.405" rx="1.765" ry="1.277"/>
+   <rect class="style_cap1" transform="matrix(1.26825 -0.0103761 0.010376 1.26825 20.1467 10.1495)" width="2.423" height="6.705"/>
+   <path class="style_cap1" d="M21.165 8.268l1.044 -0.008c0.558,-0.005 1.018,0.448 1.022,1.006l0.005 0.599 -3.072 0.025 -0.005 -0.599c-0.005,-0.558 0.448,-1.018 1.006,-1.023z"/>
+   <path class="style_cap1" d="M21.792 21.231c-0.229,0.01 -1.065,-1.491 -1.562,-2.277l3.086 -0.025c-0.485,0.785 -1.314,2.29 -1.524,2.302z"/>
+  </g>
+ </g>
+</svg>

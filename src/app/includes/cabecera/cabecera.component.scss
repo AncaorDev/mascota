@@ -1,0 +1,30 @@
+@import './../../variables.scss';
+
+.portada {
+    width: 100%;
+}
+.nav-body{
+    transition :height 0.2s linear, background 0.3s linear;
+    height: 110px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+    .nav {
+        padding-left: 0px;
+    }
+    .nav > a  {
+        width: 100%;
+        align-self: center;
+        padding: 10px;
+        text-decoration: none;
+        color: white;
+        li {
+            list-style: none;
+        }
+    }
+    .active {
+        text-decoration: underline !important;
+    }
+}
