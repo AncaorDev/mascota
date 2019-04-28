@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-// import { AncaorInicioObservable } from './app.observable';
+import { AppService } from './app.service';
+
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    // providers:[AncaorInicioObservable]
+    providers:[AppService]
 })
 export class AppComponent {
     title:string = 'Mascota';
-    constructor(){
+    constructor(private app_srv: AppService){
 
     }
     ngOnInit(){

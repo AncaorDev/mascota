@@ -1,30 +1,85 @@
 
 <section class="theme-ancaor" id="contenido">
-  <div class="notices content-section">
-    <p class="title-cont-notice">Averigua cual es la mejor comida para tu pequeño.</p>
-    <div class="cont-notices">
-      <mat-card class="card-info">
-        <mat-card-content class="card-notice-content">
-          <mat-form-field appearance="outline">
-            <mat-select placeholder="Favorite">
-              <mat-option *ngFor="let list of lista" [value]="list.value">{{list.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-select placeholder="Favorite">
-              <mat-option *ngFor="let list of lista" [value]="list.value">{{list.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-select placeholder="Favorite">
-              <mat-option *ngFor="let list of lista" [value]="list.value">{{list.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-flat-button color="primary">Enviar</button>
-        </mat-card-actions>
-      </mat-card>
+  <div class="content-section" [ngClass]="{'display-none' : step1}">
+    <h2>¿Cuentanos de tu mascota?</h2>
+    <div class="continue">
+      <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; processInfo()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    <form class="division" [formGroup]="formDetail">
+      <div class="top">
+        <div class="content div1"><span>Alimentación</span>
+          <div class="select">
+            <mat-form-field class="full-width" appearance="fill" color="accent">
+              <mat-select placeholder="Seleccione una opción" formControlName="feeding">
+                <mat-option *ngFor="let list of data_opt?.feeding?.data" [value]="list.value">{{ list.desc }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="content div2"><span>Raza</span>
+          <div class="select">
+            <mat-form-field class="full-width" appearance="fill" color="accent">
+              <mat-select placeholder="Seleccione una opción" formControlName="race">
+                <mat-option *ngFor="let list of data_opt?.race?.data" [value]="list.value">{{ list.desc }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="top">
+        <div class="content div3"><span>Tamaño</span>
+          <div class="select">
+            <mat-form-field class="full-width" appearance="fill" color="accent">
+              <mat-select placeholder="Seleccione una opción" formControlName="size">
+                <mat-option *ngFor="let list of data_opt?.size?.data" [value]="list.value">{{ list.desc }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="content div4"><span>Edad</span>
+          <div class="select">
+            <mat-form-field class="full-width" appearance="fill" color="accent">
+              <mat-select placeholder="Seleccione una opción" formControlName="age">
+                <mat-option *ngFor="let list of data_opt?.age?.data" [value]="list.value">{{ list.desc }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="content-section" [ngClass]="{'display-none' : step2}">
+    <h2>¿Quiero recomendación por?</h2>
+    <div class="back">
+      <button mat-fab color="primary" (click)="returnOpt()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div class="continue">
+      <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; processInfo()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    <div class="division">
+      <div class="sabor">
+        <div class="box">
+          <p>Sabor</p>
+        </div>
+        <div class="box">
+          <p>Carne y Hueso Vacuno, Pollo y Vísceras</p>
+        </div>
+        <div class="box">
+          <p>Pollo y Vísceras</p>
+        </div>
+        <div class="box">
+          <p>Carne y Hueso Vacuno</p>
+        </div>
+        <div class="box">
+          <p>Pescado</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

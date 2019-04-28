@@ -14,6 +14,8 @@ import { Globals } from './shared/globals';
 import { HttpClientModule } from '@angular/common/http';
 import { CsMatIconComponent } from './shared/cs-mat-icon/cs-mat-icon.component';
 import { ComparativaComponent } from './pages/comparativa/comparativa.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecomendacionComponent } from './pages/recomendacion/recomedacion.component';
 @NgModule({
   	declarations: [
 		AppComponent,
@@ -22,14 +24,17 @@ import { ComparativaComponent } from './pages/comparativa/comparativa.component'
 		AppWebComponent,
 		CabeceraComponent,
 		LoadingWebComponent,
-		CsMatIconComponent
+		CsMatIconComponent,
+		RecomendacionComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MaterialModule,
-		HttpClientModule
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule
 	],
 	providers: [Globals],
 	bootstrap: [AppComponent]

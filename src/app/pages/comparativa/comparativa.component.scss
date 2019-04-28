@@ -50,3 +50,116 @@
         }
     }
 }
+
+.mat-form-field-flex {
+    background: white !important;
+}
+.content-section {
+    overflow: hidden;
+    width: 100%;
+    h2 {
+        width: 100%;
+        color: white;
+        text-align: center;
+    }
+    .continue {
+        position: absolute;
+        right: 6vw;
+    }
+    .back {
+        position: absolute;
+        left: 6vw;
+    }
+    .division {
+        width: 100%;
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .content {
+                width: 20vw;
+                height: 20vw;
+                display: block;
+                position: relative;
+                background-size: cover;
+                .select {
+                    background: white;
+                    height: 40px;
+                    border-radius: 6px;
+                    width: 15vw;
+                    right: 2vw;
+                    top: 13vw;
+                    position: absolute;
+                    mat-form-field {
+                        width: 100%;
+                    }
+                }
+                span {
+                    text-align: center;
+                    width: 100%;
+                    margin-top: 60px;
+                    display: block;
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                }
+            }
+            .div1 {
+                background-image: url('./../../../assets/images/food_pet.jpg');
+                clip-path: circle(100% at 100% 100%);
+                border-right-style: solid;
+                border-bottom-style: solid;
+                border-color: $primary;
+                span {
+                    text-align: right;
+                    margin-left: -30px;
+                }
+            }
+            .div2 {
+                background-image: url('./../../../assets/images/race_pet.jpg');
+                clip-path: circle(100% at 0 100%);
+                border-left-style: solid;
+                border-bottom-style: solid;
+                border-color: $primary;
+                .select {
+                    right: 3vw;
+                }
+                span {
+                    text-align: left;
+                    margin-left: 30px;
+                }
+            }
+            .div3 {
+                background-image: url('./../../../assets/images/size_pet.png');
+                clip-path: circle(100% at 100% 0);
+                border-right-style: solid;
+                border-top-style: solid;
+                border-color: $primary;
+                .select {
+                    top: 8vw;
+                }
+            }
+            .div4 {
+                background-image: url('./../../../assets/images/age_pet.jpg');
+                clip-path: circle(100% at 0 0);
+                border-left-style: solid;
+                border-top-style: solid;
+                border-color: $primary;
+                .select {
+                    top: 8vw;
+                    right: 3vw;
+                }
+            }
+        }
+        .sabor {
+            padding: 20px;
+            display: flex;
+            width: 80%;
+            background: darkgray;
+            margin: 0 auto;
+            border-radius: 10px;
+            .box {
+                padding: 10px;
+            }
+        }
+    }
+}

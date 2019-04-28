@@ -1,17 +1,54 @@
 section.theme-ancaor(id="contenido")
-	.notices.content-section
-		p.title-cont-notice Averigua cual es la mejor comida para tu pequeño.
-		.cont-notices
-			mat-card.card-info
-				mat-card-content.card-notice-content
-					mat-form-field(appearance="outline")
-						mat-select(placeholder="Favorite")
-							mat-option(*ngFor="let list of lista", [value]="list.value") {{list.viewValue}}
-					mat-form-field(appearance="outline")
-						mat-select(placeholder="Favorite")
-							mat-option(*ngFor="let list of lista", [value]="list.value") {{list.viewValue}}
-					mat-form-field(appearance="outline")
-						mat-select(placeholder="Favorite")
-							mat-option(*ngFor="let list of lista", [value]="list.value") {{list.viewValue}}
-				mat-card-actions
-					button(mat-flat-button , color="primary") Enviar
+	.content-section([ngClass]="{'display-none' : step1}")
+		h2 ¿Cuentanos de tu mascota?
+		.continue
+			button(mat-fab color="primary", [disabled]="formDetail.invalid", (click)="formDetail.valid && processInfo()")
+				mat-icon send
+		form.division([formGroup]="formDetail")
+			.top
+				.content.div1
+					span Alimentación
+					.select
+						mat-form-field.full-width(appearance="fill", color="accent")
+							mat-select(placeholder="Seleccione una opción", formControlName="feeding")
+								mat-option(*ngFor="let list of data_opt?.feeding?.data", [value]="list.value") {{ list.desc }}
+				.content.div2
+					span Raza
+					.select
+						mat-form-field.full-width(appearance="fill", color="accent")
+							mat-select(placeholder="Seleccione una opción", formControlName="race")
+								mat-option(*ngFor="let list of data_opt?.race?.data", [value]="list.value") {{ list.desc }}
+			.top
+				.content.div3
+					span Tamaño
+					.select
+						mat-form-field.full-width(appearance="fill", color="accent")
+							mat-select(placeholder="Seleccione una opción",  formControlName="size")
+								mat-option(*ngFor="let list of data_opt?.size?.data", [value]="list.value") {{ list.desc }}
+				.content.div4
+					span Edad
+					.select
+						mat-form-field.full-width(appearance="fill", color="accent")
+							mat-select(placeholder="Seleccione una opción", formControlName="age")
+								mat-option(*ngFor="let list of data_opt?.age?.data", [value]="list.value") {{ list.desc }}
+	.content-section([ngClass]="{'display-none' : step2}")
+		h2 ¿Quiero recomendación por?
+		.back
+			button(mat-fab color="primary", (click)="returnOpt()")
+				mat-icon arrow_back
+		.continue
+			button(mat-fab color="primary", [disabled]="formDetail.invalid", (click)="formDetail.valid && processInfo()")
+				mat-icon send
+		.division
+			.sabor
+				.box
+					p Sabor
+				.box
+					p Carne y Hueso Vacuno, Pollo y Vísceras
+				.box
+					p Pollo y Vísceras
+				.box
+					p Carne y Hueso Vacuno
+				.box
+					p Pescado
+

@@ -29,9 +29,9 @@ export class CabeceraComponent implements OnInit {
 
 	@HostListener("window:scroll", ['event'])
 	onWindowScroll(event: Event) {
-		let heightCab = this.cabecera.clientHeight;
-		let scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
-		if (this.fixed)  this.fixed = (scrollTop == 0) ? false : true;
-		else this.fixed = (scrollTop > heightCab) ? true : false;
+		// let heightCab = this.cabecera.clientHeight;
+		// let scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+		// if (this.fixed)  this.fixed = (scrollTop == 0) ? false : true;
+		// else this.fixed = (scrollTop > heightCab) ? true : false;
     }
 }

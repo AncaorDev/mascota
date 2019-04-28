@@ -1,8 +1,7 @@
-section.theme-ancaor.height-100(id="contenido")
-	.notices.content-section
-		//- h2.title-cont-notice NOTICIAS / CIENCIA Y TECNOLOGÍA
-		.cont-notices
-			mat-card.card-info
-				mat-card-content.card-notice-content
-					p Bienvenido a la web que se preocupa por tu mascota
-				mat-card-actions
+section.theme-ancaor(id="contenido")
+	.content-section
+		h2 ¿Quién es tu engreido?
+		.images
+			img.cat(src="./assets/images/mascota2.png", alt="")
+			img.food(src="./assets/images/food.png", alt="")
+			img.dog(src="./assets/images/mascota1.png", alt="", routerLink="/comparativa", routerLinkActive="active")
