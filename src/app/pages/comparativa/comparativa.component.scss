@@ -150,6 +150,43 @@
                 }
             }
         }
+        .card {
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            img {
+                max-width: 50vw;
+                filter: grayscale(80%);
+            }
+            &__top {
+                img {
+                    border-radius: 20px 20px 0 0;
+                }
+            }
+            &__bottom {
+                img {
+                    border-radius: 0 0 20px 20px;
+                }
+            }
+            .text {
+                display: flex;
+                padding: 10px;
+                position: absolute;
+                justify-content: center;
+                align-items: center;
+                // background: black;
+                p {
+                    margin: 10px;
+                    color: brown;
+                    font-size: 25px;
+                }
+                img {
+                    width: 50px;
+                    height: 40px;
+                }
+            }
+        }
         .sabor {
             padding: 20px;
             display: flex;
@@ -161,5 +198,20 @@
                 padding: 10px;
             }
         }
+
+        .card-taste {
+            display: flex;
+            padding-left: 80px;
+            padding-right: 80px;
+            .taste-item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+    .color {
+        filter: grayscale(0%) !important;
     }
 }

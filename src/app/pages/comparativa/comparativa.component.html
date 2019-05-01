@@ -1,9 +1,9 @@
 
-<section class="theme-ancaor" id="contenido">
-  <div class="content-section" [ngClass]="{'display-none' : step1}">
+<section class="theme-ancaor" id="contenido" [ngSwitch]="step">
+  <div class="content-section" *ngSwitchCase="'0'">
     <h2>¿Cuentanos de tu mascota?</h2>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; processInfo()">
+      <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; goToStep('1')">
         <mat-icon>send</mat-icon>
       </button>
     </div>
@@ -50,34 +50,47 @@
       </div>
     </form>
   </div>
-  <div class="content-section" [ngClass]="{'display-none' : step2}">
-    <h2>¿Quiero recomendación por?</h2>
+  <div class="content-section" *ngSwitchCase="'1'">
+    <h2>Quiero recomendación por:</h2>
     <div class="back">
-      <button mat-fab color="primary" (click)="returnOpt()">
+      <button mat-fab color="primary" (click)="goToStep('0')">
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; processInfo()">
+      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="(sabor || beneficios) &amp;&amp; goToStep('2')">
         <mat-icon>send</mat-icon>
       </button>
     </div>
     <div class="division">
-      <div class="sabor">
-        <div class="box">
-          <p>Sabor</p>
+      <div class="card card__top" (click)="sabor = true;beneficios = false;"><img src="./assets/images/sabor.png" alt="" [ngClass]="{'color' : sabor }">
+        <div class="text">
+          <p>Sabor</p><img src="./assets/images/huella.png" alt="">
         </div>
-        <div class="box">
-          <p>Carne y Hueso Vacuno, Pollo y Vísceras</p>
+      </div>
+      <div class="card card__bottom" (click)="sabor = false;beneficios = true;"><img src="./assets/images/beneficios.png" alt="" [ngClass]="{'color' : beneficios }">
+        <div class="text">
+          <p>Beneficios</p><img src="./assets/images/huella.png" alt="">
         </div>
-        <div class="box">
-          <p>Pollo y Vísceras</p>
-        </div>
-        <div class="box">
-          <p>Carne y Hueso Vacuno</p>
-        </div>
-        <div class="box">
-          <p>Pescado</p>
+      </div>
+    </div>
+  </div>
+  <div class="content-section" *ngSwitchCase="'2'">
+    <h2>Elija el sabor</h2>
+    <div class="back">
+      <button mat-fab color="primary" (click)="goToStep('1')">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div class="continue">
+      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="formDetail.valid &amp;&amp; goToStep('3')">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    <div class="division">
+      <div class="card-taste">
+        <div class="taste-item" *ngFor="let item of tastes;">
+          <p>{{ item.name }}</p><img [src]="item.imagen" alt="">
         </div>
       </div>
     </div>

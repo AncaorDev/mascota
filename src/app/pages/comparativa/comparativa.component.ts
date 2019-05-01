@@ -11,10 +11,24 @@ export class ComparativaComponent implements OnInit {
 	// disabled_send:boolean = true;
 	lista:any = [{value:1, viewValue: "Opción 1"}]
 	data_opt:any;
-	step1:boolean = false;
-	step2:boolean = true;
+
+	step:number = 2;
+	step1:boolean = true;
+	step2:boolean = false;
+
+	sabor:boolean = false;
+	beneficios:boolean = false;
 	formDetail: FormGroup;
 
+	tastes:any = [
+					{name : 'Carne' , imagen : './assets/images/svg/carne_hueso.svg'},
+					{name : 'Carne fresca vacuno' , imagen : './assets/images/svg/carne_fresca_vacuno.svg'},
+					{name : 'Pollo' , imagen : './assets/images/svg/pollo_pierna.svg'},
+					{name : 'Visceras' , imagen : './assets/images/svg/visceras.svg'}
+				];
+	// carne_fresca_vacuno.svg
+	// pollo_pierna.svg
+	// visceras
 	constructor(private app_srv:AppService,
 				private form_build:FormBuilder) {
 	}
@@ -30,6 +44,10 @@ export class ComparativaComponent implements OnInit {
 		console.log('redirect');
 	}
 
+	goToStep(step) {
+		this.step = step;
+	}
+
 	private _builderForm() {
         let form = this.form_build.group({
 			feeding	: ['', [Validators.required]],
@@ -43,12 +61,14 @@ export class ComparativaComponent implements OnInit {
         return form;
 	}
 	processInfo(){
-		this.step1 = true;
-		this.step2 = false;
+		this.step = 1;
+		// this.step1 = true;
+		// this.step2 = false;
 	}
 	returnOpt(){
-		this.step1 = false;
-		this.step2 = true;
+		this.step = 0;
+		// this.step1 = false;
+		// this.step2 = true;
 		// console.log(this.formDetail.value);
 	}
 }

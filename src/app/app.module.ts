@@ -16,6 +16,7 @@ import { CsMatIconComponent } from './shared/cs-mat-icon/cs-mat-icon.component';
 import { ComparativaComponent } from './pages/comparativa/comparativa.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecomendacionComponent } from './pages/recomendacion/recomedacion.component';
+import { LoginComponent } from './pages/login/login.component';
 @NgModule({
   	declarations: [
 		AppComponent,
@@ -25,7 +26,8 @@ import { RecomendacionComponent } from './pages/recomendacion/recomedacion.compo
 		CabeceraComponent,
 		LoadingWebComponent,
 		CsMatIconComponent,
-		RecomendacionComponent
+		RecomendacionComponent,
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,

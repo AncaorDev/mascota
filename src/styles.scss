@@ -123,6 +123,10 @@ $theme-app-theme: mat-light-theme($theme-app-primary, $theme-app-accent, $theme-
 .mat-option-text {
     font-size: 0.9em !important;
 }
+
+section {
+    padding: 60px
+}
 // @mixin md-icon-size($size: 24px) {
 //     font-size: $size;
 //     height: $size;

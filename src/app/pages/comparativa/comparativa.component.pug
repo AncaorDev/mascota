@@ -1,8 +1,8 @@
-section.theme-ancaor(id="contenido")
-	.content-section([ngClass]="{'display-none' : step1}")
+section.theme-ancaor(id="contenido", [ngSwitch]="step")
+	.content-section(*ngSwitchCase="'0'")
 		h2 ¿Cuentanos de tu mascota?
 		.continue
-			button(mat-fab color="primary", [disabled]="formDetail.invalid", (click)="formDetail.valid && processInfo()")
+			button(mat-fab color="primary", [disabled]="formDetail.invalid", (click)="formDetail.valid && goToStep('1')")
 				mat-icon send
 		form.division([formGroup]="formDetail")
 			.top
@@ -31,24 +31,37 @@ section.theme-ancaor(id="contenido")
 						mat-form-field.full-width(appearance="fill", color="accent")
 							mat-select(placeholder="Seleccione una opción", formControlName="age")
 								mat-option(*ngFor="let list of data_opt?.age?.data", [value]="list.value") {{ list.desc }}
-	.content-section([ngClass]="{'display-none' : step2}")
-		h2 ¿Quiero recomendación por?
+	.content-section(*ngSwitchCase="'1'")
+		h2 Quiero recomendación por:
 		.back
-			button(mat-fab color="primary", (click)="returnOpt()")
+			button(mat-fab color="primary", (click)="goToStep('0')")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="formDetail.invalid", (click)="formDetail.valid && processInfo()")
+			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="(sabor || beneficios) && goToStep('2')")
 				mat-icon send
 		.division
-			.sabor
-				.box
+			.card.card__top((click)="sabor = true;beneficios = false;")
+				img(src="./assets/images/sabor.png", alt="", [ngClass]="{'color' : sabor }")
+				.text
 					p Sabor
-				.box
-					p Carne y Hueso Vacuno, Pollo y Vísceras
-				.box
-					p Pollo y Vísceras
-				.box
-					p Carne y Hueso Vacuno
-				.box
-					p Pescado
+					img(src="./assets/images/huella.png", alt="")
+			.card.card__bottom((click)="sabor = false;beneficios = true;")
+				img(src="./assets/images/beneficios.png", alt="", [ngClass]="{'color' : beneficios }")
+				.text
+					p Beneficios
+					img(src="./assets/images/huella.png", alt="")
 
+	.content-section(*ngSwitchCase="'2'")
+		h2 Elija el sabor
+		.back
+			button(mat-fab color="primary", (click)="goToStep('1')")
+				mat-icon arrow_back
+		.continue
+			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep('3')")
+				mat-icon send
+		.division
+			.card-taste
+				.taste-item(*ngFor="let item of tastes;")
+					//-  y Hueso Vacuno Pollo y Vísceras
+					p {{ item.name }}
+					img([src]="item.imagen", alt="")
