@@ -15,4 +15,6 @@ export class Globals {
             proyectos: 'assets/images/svg/proyectos.svg'
         }
     }
+
+    __LOCAL_BACKEND__: string = 'http://localhost:3000';
 }

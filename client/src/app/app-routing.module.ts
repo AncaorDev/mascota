@@ -5,7 +5,8 @@ import { ComparativaComponent } from './pages/comparativa/comparativa.component'
 
 const ROUTES: Routes = [
     { path: '', component: InicioComponent },
-    { path: 'comparativa', component : ComparativaComponent}
+    { path: 'comparativa/:id_mascota', component : ComparativaComponent},
+    { path: 'comparativa/', component : ComparativaComponent}
 ];
 
 @NgModule({

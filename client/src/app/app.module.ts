@@ -16,6 +16,7 @@ import { CsMatIconComponent } from './shared/cs-mat-icon/cs-mat-icon.component';
 import { ComparativaComponent } from './pages/comparativa/comparativa.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecomendacionComponent } from './pages/recomendacion/recomedacion.component';
+import { HeadersService } from './core/header.service';
 @NgModule({
   	declarations: [
 		AppComponent,
@@ -36,7 +37,7 @@ import { RecomendacionComponent } from './pages/recomendacion/recomedacion.compo
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [Globals],
+	providers: [Globals,HeadersService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
