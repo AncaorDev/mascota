@@ -3,7 +3,7 @@
 -- DROP DATABASE mascota;
 
 CREATE DATABASE mascota
-    WITH 
+    WITH
     OWNER = postgres
     ENCODING = 'UTF8'
     LC_COLLATE = 'Spanish_Peru.1252'
@@ -11,9 +11,31 @@ CREATE DATABASE mascota
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
--- Table: public.animal
+-- Table: public.persona
 
--- DROP TABLE public.animal;
+-- DROP TABLE public.persona;
+
+CREATE TABLE public.persona
+(
+    id_persona SERIAL NOT NULL,
+    nom_persona character varying(60) COLLATE pg_catalog."default",
+    ape_pate_pers character varying(60) COLLATE pg_catalog."default",
+    ape_mate_pers character varying(60) COLLATE pg_catalog."default",
+    foto_persona character varying(120) COLLATE pg_catalog."default",
+    fec_naci date,
+    tipo_documento character varying(1) COLLATE pg_catalog."default",
+    nro_documento character varying(20) COLLATE pg_catalog."default",
+    correo_pers character varying(120) COLLATE pg_catalog."default",
+    celular character varying(15) COLLATE pg_catalog."default",
+    telefono character varying(15) COLLATE pg_catalog."default",
+    usuario character varying(50) COLLATE pg_catalog."default",
+    clave bytea,
+    CONSTRAINT pk_persona__01 PRIMARY KEY (id_persona)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
 CREATE TABLE public.animal
 (
@@ -81,31 +103,7 @@ WITH (
 )
 TABLESPACE pg_default;
 
--- Table: public.persona
 
--- DROP TABLE public.persona;
-
-CREATE TABLE public.persona
-(
-    id_persona integer NOT NULL DEFAULT nextval('persona_id_persona_seq'::regclass),
-    nom_persona character varying(60) COLLATE pg_catalog."default",
-    ape_pate_pers character varying(60) COLLATE pg_catalog."default",
-    ape_mate_pers character varying(60) COLLATE pg_catalog."default",
-    foto_persona character varying(120) COLLATE pg_catalog."default",
-    fec_naci date,
-    tipo_documento character varying(1) COLLATE pg_catalog."default",
-    nro_documento character varying(20) COLLATE pg_catalog."default",
-    correo_pers character varying(120) COLLATE pg_catalog."default",
-    celular character varying(15) COLLATE pg_catalog."default",
-    telefono character varying(15) COLLATE pg_catalog."default",
-    usuario character varying(50) COLLATE pg_catalog."default",
-    clave bytea,
-    CONSTRAINT pk_persona__01 PRIMARY KEY (id_persona)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
 
 
 -- Table: public.raza
@@ -147,7 +145,7 @@ VALUES
 (1,'Perro'),
 (2,'Gato');
 
-INSERT 
+INSERT
   INTO alimento
 VALUES (1,1,'Casera'),
 (1,2,'Mixta (Casera y Balanceado)'),
@@ -162,7 +160,7 @@ VALUES (1,1,'Casera'),
 (1,11,'Alimento húmedo en latas'),
 (1,12,'Balanceado Holístico');
 
-INSERT 
+INSERT
   INTO edades
 VALUES
 (1,1,'Cachorro (0 a 2 meses)'),
@@ -172,7 +170,7 @@ VALUES
 (1,5,'Maduro Senior Adulto( 7 años a más)'),
 (1,6,'Preñada');
 
-INSERT 
+INSERT
   INTO raza
 VALUES
 (1,1,'Mestizo'),
@@ -182,7 +180,7 @@ VALUES
 (1,5,'Bulldog francés'),
 (1,6,'Bulldog ingles');
 
-INSERT 
+INSERT
   INTO size
 VALUES
 (1,1,'Raza Pequeña (1 -10 Kilos)'),
