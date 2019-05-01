@@ -1,17 +1,12 @@
-server/node_modules
-server/package-lock.json
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 # /dist
-client/tmp
-client/out-tsc
+/tmp
+/out-tsc
 
 # dependencies
-client/node_modules
-server/node_modules
-server/package-lock.json
-client/package-lock.json
+/node_modules
 
 # IDEs and editors
 /.idea
