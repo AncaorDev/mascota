@@ -20,16 +20,26 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	sub_data_opt:Subscription = new Subscription();
 	sub_params:Subscription = new Subscription();
 
-	step:number = 0;
-
+	step:number = 2;
+	super_pet:any;
 	sabor:boolean = false;
 	beneficios:boolean = false;
 
 	tastes:any = [
-					{name : 'Carne' , imagen : './assets/images/svg/carne_hueso.svg'},
-					{name : 'Carne fresca vacuno' , imagen : './assets/images/svg/carne_fresca_vacuno.svg'},
-					{name : 'Pollo' , imagen : './assets/images/svg/pollo_pierna.svg'},
-					{name : 'Visceras' , imagen : './assets/images/svg/visceras.svg'}
+					{id: 1 , name : 'Carne y Hueso' , imagen : './assets/images/svg/carne_hueso.svg' , enable : false},
+					{id: 2 , name : 'Carne fresca vacuno' , imagen : './assets/images/svg/carne_fresca_vacuno.svg', enable : false},
+					{id: 3 , name : 'Pollo' , imagen : './assets/images/svg/pollo_pierna.svg', enable : false},
+					{id: 4 , name : 'Visceras' , imagen : './assets/images/svg/visceras.svg', enable : false},
+					{id: 5 , name : 'Pescado' , imagen : './assets/images/svg/pescado.png', enable : false},
+					{id: 6 , name : 'Cordero' , imagen : './assets/images/svg/cordero.svg', enable : false},
+					{id: 7 , name : 'Vegetariano' , imagen : './assets/images/svg/ensalada.svg', enable : false},
+					// {id: 1 , name : 'Carne y Hueso' , imagen : './assets/images/svg/carne_hueso.svg' , enable : false},
+					// {id: 2 , name : 'Carne fresca vacuno' , imagen : './assets/images/svg/carne_fresca_vacuno.svg', enable : false},
+					// {id: 3 , name : 'Pollo' , imagen : './assets/images/svg/pollo_pierna.svg', enable : false},
+					// {id: 4 , name : 'Visceras' , imagen : './assets/images/svg/visceras.svg', enable : false},
+					// {id: 5 , name : 'Pescado' , imagen : './assets/images/svg/pescado.png', enable : false},
+					// {id: 6 , name : 'Cordero' , imagen : './assets/images/svg/cordero.svg', enable : false},
+					// {id: 7 , name : 'Vegetariano' , imagen : './assets/images/svg/ensalada.svg', enable : false}
 				];
 
 	constructor(
@@ -91,6 +101,23 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 
 	goToStep(step) {
 		this.step = step;
+	}
+
+	enableItem(item) {
+		console.log(item);
+	}
+
+	tastesSelect() {
+		return this.tastes.filter(res => res.enable).length > 0 ? false : true;
+	}
+
+	resumeData() {
+		this.app_srv.getDataSuperPet().subscribe(res => {
+			this.super_pet = res;
+			this.super_pet.map(row => {
+				console.log(row);
+			})
+		});
 	}
 }
 

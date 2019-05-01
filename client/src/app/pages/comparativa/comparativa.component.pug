@@ -37,7 +37,7 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", (click)="goToStep('0')")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="(sabor || beneficios) && goToStep('2')")
+			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="(sabor || beneficios) && goToStep(sabor ? '2' : '3')")
 				mat-icon send
 		.division
 			.card.card__top((click)="sabor = true;beneficios = false;")
@@ -57,11 +57,27 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", (click)="goToStep('1')")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep('3')")
+			button(mat-fab color="primary", [disabled]="tastesSelect()", (click)="tastesSelect() && goToStep('3')")
 				mat-icon send
 		.division
 			.card-taste
-				.taste-item(*ngFor="let item of tastes;")
+				.taste-item(*ngFor="let item of tastes;", (click)="item.enable = !item.enable", [ngClass]="{'disable' : !item.enable}")
 					//-  y Hueso Vacuno Pollo y Vísceras
 					p {{ item.name }}
 					img([src]="item.imagen", alt="")
+
+
+	.content-section(*ngSwitchCase="'3'")
+		h2 Elija el beneficio
+		.back
+			button(mat-fab color="primary", (click)="goToStep('1')")
+				mat-icon arrow_back
+		.continue
+			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep('3')")
+				mat-icon send
+		.division
+			//- .card-taste
+			//- 	.taste-item(*ngFor="let item of tastes;")
+			//- 		//-  y Hueso Vacuno Pollo y Vísceras
+			//- 		p {{ item.name }}
+			//- 		img([src]="item.imagen", alt="")

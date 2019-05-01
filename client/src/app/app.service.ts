@@ -25,6 +25,10 @@ export class AppService implements OnInit{
         return this._httpClient.get("./assets/data_opt.json");
     }
 
+    getDataSuperPet(): Observable<any> {
+        return this._httpClient.get("./assets/supert_pet.json");
+    }
+
     getCombosByMascota(id_mascota:any):void {
         let Params = new HttpParams()
             .set('id_mascota', id_mascota);

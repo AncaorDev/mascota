@@ -58,7 +58,7 @@
       </button>
     </div>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="(sabor || beneficios) &amp;&amp; goToStep('2')">
+      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="(sabor || beneficios) &amp;&amp; goToStep(sabor ? '2' : '3')">
         <mat-icon>send</mat-icon>
       </button>
     </div>
@@ -83,16 +83,30 @@
       </button>
     </div>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="formDetail.valid &amp;&amp; goToStep('3')">
+      <button mat-fab color="primary" [disabled]="tastesSelect()" (click)="tastesSelect() &amp;&amp; goToStep('3')">
         <mat-icon>send</mat-icon>
       </button>
     </div>
     <div class="division">
       <div class="card-taste">
-        <div class="taste-item" *ngFor="let item of tastes;">
+        <div class="taste-item" *ngFor="let item of tastes;" (click)="item.enable = !item.enable" [ngClass]="{'disable' : !item.enable}">
           <p>{{ item.name }}</p><img [src]="item.imagen" alt="">
         </div>
       </div>
     </div>
+  </div>
+  <div class="content-section" *ngSwitchCase="'3'">
+    <h2>Elija el beneficio</h2>
+    <div class="back">
+      <button mat-fab color="primary" (click)="goToStep('1')">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div class="continue">
+      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="formDetail.valid &amp;&amp; goToStep('3')">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    <div class="division"></div>
   </div>
 </section>

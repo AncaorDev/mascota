@@ -203,15 +203,31 @@
             display: flex;
             padding-left: 80px;
             padding-right: 80px;
+            justify-content: center;
+            flex-wrap: wrap;
             .taste-item {
+                padding: 20px;
+                cursor: pointer;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                P {
+                    color: white;
+                }
+                img {
+                    width: 110px;
+
+                }
             }
         }
     }
     .color {
         filter: grayscale(0%) !important;
+    }
+    .disable {
+        img {
+            filter: grayscale(80%);
+        }
     }
 }
