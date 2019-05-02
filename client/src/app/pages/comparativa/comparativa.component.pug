@@ -57,7 +57,7 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", (click)="goToStep('1')")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="tastesSelect()", (click)="tastesSelect() && goToStep('3')")
+			button(mat-fab color="primary", [disabled]="tastesSelect()", (click)="!tastesSelect() && resumeData()")
 				mat-icon send
 		.division
 			.card-taste
@@ -76,8 +76,24 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep('3')")
 				mat-icon send
 		.division
-			//- .card-taste
-			//- 	.taste-item(*ngFor="let item of tastes;")
-			//- 		//-  y Hueso Vacuno Pollo y Vísceras
-			//- 		p {{ item.name }}
-			//- 		img([src]="item.imagen", alt="")
+
+	.content-section(*ngSwitchCase="'5'")
+		h2 Las mejores recomendaciones de sabor según lo que selecciónó son:
+		.back
+			button(mat-fab color="primary", (click)="goToStep('2')")
+				mat-icon arrow_back
+		.continue
+			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep('3')")
+				mat-icon send
+		.division
+			.card-productos
+				mat-list(*ngIf="filterData && filterData.length > 0")
+					mat-list-item(*ngFor="let item of filterData")
+						img(matListAvatar, [src]="item?.Imagen", alt="")
+						h4(mat-line) {{item?.Nombre }}
+						p(mat-line) Precio {{item?.Precio }}
+						p(mat-line) {{item?.Peso }}
+						p(mat-line) Marca: {{item?.Marca }}
+						span.cs-spacer
+						a(mat-raised-button, [href]="item?.Enlace", target="_blank") web
+				h4(*ngIf="filterData && filterData.length == 0")  No se encontraron resultados
