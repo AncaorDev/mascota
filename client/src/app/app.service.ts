@@ -10,6 +10,7 @@ export class AppService implements OnInit{
     path_mascota:string;
     header:any;
     combos_mascota = new BehaviorSubject<any>(null);
+    user = new BehaviorSubject<any>({});
     constructor(
         public _httpClient: HttpClient,
         public _headersService : HeadersService,

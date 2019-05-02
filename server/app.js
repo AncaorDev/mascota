@@ -21,9 +21,11 @@ app
 
 // Routes
 let r_mascota = require('./modulos/mascota/r_mascota');
+let r_auth    = require('./auth/r_auth');
 
 app
-    .use('/mascota', r_mascota)
+	.use('/mascota', r_mascota)
+	.use('/auth', r_auth)
 
 
 module.exports = app;

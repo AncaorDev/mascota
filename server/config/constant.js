@@ -5,6 +5,7 @@ global.HTTP_400 = 400;
 global.HTTP_500 = 500;
 
 global.MSJ_ERROR = 'Hubo un error';
+global.ANP = 'Acción no permitida';
 
 
 /**

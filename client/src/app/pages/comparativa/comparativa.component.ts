@@ -20,7 +20,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	sub_data_opt:Subscription = new Subscription();
 	sub_params:Subscription = new Subscription();
 
-	step:number = 2;
+	step:number = 0;
 	super_pet:any;
 	sabor:boolean = false;
 	beneficios:boolean = false;

@@ -6,21 +6,21 @@
       <div class="cs-panel">
         <mat-card class="cs-width no-padding">
           <div *ngIf="showProgress"></div>
-          <form [formGroup]="newUserForm">
+          <form [formGroup]="form">
             <div class="isLoading cs-input-full">
               <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Usuario</mat-label>
-                <input matInput placeholder="" [value]="userCache?.email" formControlName="username" maxlength="50" minlength="5">
-                <mat-error *ngIf="newUserForm.controls['username'].errors">
-                  <ng-container *ngIf="newUserForm.controls['username'].errors.required; else elseif1">Ingresa tu usuario</ng-container>
+                <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5">
+                <mat-error *ngIf="username.errors">
+                  <ng-container *ngIf="username.errors.required; else elseif1">Ingresa tu usuario</ng-container>
                   <ng-template #elseif1>
-                    <ng-container *ngIf="newUserForm.controls['username'].errors.pattern; else elseif2">Caracteres incorrectos</ng-container>
+                    <ng-container *ngIf="username.errors.pattern; else elseif2">Caracteres incorrectos</ng-container>
                   </ng-template>
                   <ng-template #elseif2>
-                    <ng-container *ngIf="newUserForm.controls['username'].errors.minlength; else elseif3">Ingresa mínimo 5 caracteres</ng-container>
+                    <ng-container *ngIf="username.errors.minlength; else elseif3">Ingresa mínimo 5 caracteres</ng-container>
                   </ng-template>
                   <ng-template #elseif3>
-                    <ng-container *ngIf="newUserForm.controls['username'].errors.maxlength">Ingreso máximo de 50 caracteres</ng-container>
+                    <ng-container *ngIf="username.errors.maxlength">Ingreso máximo de 50 caracteres</ng-container>
                   </ng-template>
                 </mat-error>
               </mat-form-field>
@@ -29,15 +29,14 @@
               <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Contraseña</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20">
-                <mat-error *ngIf="newUserForm.controls['password'].errors"><span *ngIf="newUserForm.controls['password'].errors.required">Ingresa tu contraseña</span><span *ngIf="newUserForm.controls['password'].errors.minlength">Ingresa mínimo {{ globals.__MINLENGTH_PASS }} caracteres</span></mat-error>
+                <mat-error *ngIf="password.errors"><span *ngIf="password.errors.required">Ingresa tu contraseña</span><span *ngIf="password.errors.minlength">Ingresa mínimo {{ _globals.__MINLENGTH_PASS }} caracteres</span></mat-error>
               </mat-form-field>
-              <mat-hint *ngIf="msj_error"><span class="cs-error">{{ msj_error }}</span></mat-hint>
             </div>
             <div class="isLoading md"><a>¿Has olvidado cómo ingresar?</a></div>
           </form>
           <div class="cs-action">
             <div class="isLoading gt-button">
-              <button class="full-width" (click)="login()" mat-raised-button color="primary" [disabled]="!newUserForm.valid"> Ingresar</button>
+              <button class="full-width" (click)="login()" mat-raised-button color="primary" [disabled]="!form.valid"> Ingresar</button>
             </div>
             <div class="cs-line">
               <div class="isLoading xl">O conectar con</div>

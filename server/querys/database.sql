@@ -188,3 +188,6 @@ VALUES
 (1,3,'Raza Grande( 26 -44 kg)'),
 (1,4,'Raza Gigante (más de 45 Kilos)'),
 (1,5,'Raza Pequeña (1 -10 Kilos)');
+
+ALTER TABLE persona
+ ADD COLUMN flg_acti character varying(1)

@@ -12,7 +12,7 @@ global.ensureAuth = (req, res, next) => {
         let trimmedPath = path.replace(/^\/+|\/+$/g,'');
 
         // Url que omitan la validación de token
-        let url_NoToken = ['getCombosByMascota'];
+        let url_NoToken = ['getCombosByMascota','login'];
         
         if (url_NoToken.indexOf(trimmedPath) < 0) {
             let token = (req.body.token) ? req.body.token : req.query.token;

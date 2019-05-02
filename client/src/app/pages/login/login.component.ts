@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 // import { Globals } from '../../../globals';
 // import { AppService } from '../../../app.service';
 import { Router } from '@angular/router';
+import { Globals } from 'src/app/shared/globals';
+import { AuthService } from 'src/app/auth/auth.service';
 /** Helpers */
 // import { only_one_espace, __messageSnackBar } from '../../../shared/helpers/utils';
 // import { DeviceDetectorService } from 'ngx-device-detector';
@@ -32,23 +34,23 @@ var colorTmp: string = '';
             background: ${colorTmp} !important;
         }
     `],
-    providers: [MediaMatcher],
+    providers: [MediaMatcher, AuthService],
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./login.component.scss'],
 })
 
 export class LoginComponent implements OnInit {
 
-    showFailedLogin: boolean;
-    showNoConnection: boolean;
-    @Input() color: string = '';
+    // showFailedLogin: boolean;
+    // showNoConnection: boolean;
+    // @Input() color: string = '';
     // @ViewChild('formColor') formColor: TemplateRef<any>;
-    private _mobileQueryListener: () => void;
+    // private _mobileQueryListener: () => void;
     mobileQuery: MediaQueryList;
-    primary: string = '';
-    secondary: string = '';
-    light: string = '';
-    userCache: any;
+    // primary: string = '';
+    // secondary: string = '';
+    // light: string = '';
+    // userCache: any;
     // SharedConstants.ICONS.RUTA_IMG_LOGIN
     // SMILEDU_ICO: string = SharedConstants.ICONS.SMILEDU_ICO;
     // CHRISMAS: string = SharedConstants.ICONS.CHRISMAS;
@@ -59,64 +61,62 @@ export class LoginComponent implements OnInit {
     // ICON_GOOGLE: string = SharedConstants.ICONS.ICON_GOOGLE;
     // ICON_OUTLOOK: string = SharedConstants.ICONS.ICON_OUTLOOK;
     // MESSAGE_HELP: string = SharedConstants.ICONS.MESSAGE_HELP;
-    WEB_SMILEDU: string = '';
-    LOGO_COLEGIO: string = '';
-    ESCUDO_COLE_PATH: string = '';
-    isSkeletonPage: boolean = false;
+    // WEB_SMILEDU: string = '';
+    // LOGO_COLEGIO: string = '';
+    // ESCUDO_COLE_PATH: string = '';
+    // isSkeletonPage: boolean = false;
     hide = true;
-    collegePage: any;
-    usernameControl: FormControl;
-    newUserForm: FormGroup;
-    usuario: string;
-    pass: string;
-    metadata: any;
-    msj_error: string;
-    invalidForm: boolean;
-    pagInicio: string;
-    foto: any;
-    msg_login: any;
-    usersTmp: any = [];
-    isActive: boolean = true;
-    mostrar: boolean = true;
+    // collegePage: any;
+    // usernameControl: FormControl;
+    // newUserForm: FormGroup;
+    // usuario: string;
+    // pass: string;
+    // metadata: any;
+    // msj_error: string;
+    // invalidForm: boolean;
+    // pagInicio: string;
+    // foto: any;
+    // msg_login: any;
+    // usersTmp: any = [];
+    // isActive: boolean = true;
+    // mostrar: boolean = true;
     showProgress: boolean = false;
-    headerColor: string;
-    color_progres: string;
-    name_colegio: string = 'Smiledu';
+    // headerColor: string;
+    // color_progres: string;
+    // name_colegio: string = 'Smiledu';
+    form:FormGroup = null;
 
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _media: MediaMatcher,
         private _formBuilder: FormBuilder,
-        private _router: Router
+        private _router: Router,
+        public _globals:Globals,
+        private _authService : AuthService
     ) {
-        this.newUserForm = this._builderForm();
-        this.setMediaQuery();
+        this.form = this._builderForm();
+        // this.setMediaQuery();
     }
 
-    setMediaQuery() {
-        this.mobileQuery = this._media.matchMedia('(max-width: 767px)');
-        this._mobileQueryListener = () => this._changeDetectorRef.detectChanges();
-        this.mobileQuery.addListener(this._mobileQueryListener);
-    }
+    // setMediaQuery() {
+    //     this.mobileQuery = this._media.matchMedia('(max-width: 767px)');
+    //     this._mobileQueryListener = () => this._changeDetectorRef.detectChanges();
+    //     this.mobileQuery.addListener(this._mobileQueryListener);
+    // }
 
-    selectUser(user) {
-        this.mostrar = false;
-        this.userCache = user;
-        this.usermane.setValue(user.email);
-    }
+    // selectUser(user) {
+    //     this.mostrar = false;
+    //     this.userCache = user;
+    //     this.usermane.setValue(user.email);
+    // }
 
-    ngOnInit() {
-        this.showFailedLogin  = false;
-        this.showNoConnection = false;
-    }
-
-    ngOnChanges() {
-        this.usersTmp.length == 0 ? this.isActive = true : this.isActive = false;
-        localStorage.getItem('usuario') == 'null' ? this.isActive = true : this.isActive = false;
+    ngOnInit():void {
+        // this.showFailedLogin  = false;
+        // this.showNoConnection = false;
     }
 
     ngOnDestroy(): void {
-        this.mobileQuery && this.mobileQuery.removeListener(this._mobileQueryListener);
+        // this.mobileQuery && this.mobileQuery.removeListener(this._mobileQueryListener);
     }
 
     private _builderForm() {
@@ -125,80 +125,77 @@ export class LoginComponent implements OnInit {
             username: ['', [Validators.required, Validators.pattern(usuario), Validators.minLength(5), Validators.maxLength(50)]],
             password: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])]
         });
-        form.valueChanges.subscribe(() => {
-            this.invalidForm = this.newUserForm.invalid;
-        })
         return form;
     }
+    
+
 
     login(): void {
         this.showProgress = true;
-        let user_repeat = false;
-        this.usuario = this.usermane.value;
-        this.pass = this.password.value.replace(/\\/g, '.');
-        this.msj_error = null;
-        if (this.invalidForm || this.usuario == '' || this.pass == '') {
+        // let user_repeat = false;
+        if (this.username.invalid || this.password.invalid) {
             this.showProgress = false;
             return;
         }
-        this.usermane.disable();
+        this.username.disable();
         this.password.disable();
-        // this.metadata = this._deviceService.getDeviceInfo();
-        // this.metadata.platform = this.globals.__PLATFORM_;
-        let obj = { usuario: this.usuario, pass: this.pass, metadata: this.metadata };
-    }
-    valUser() {
-        this.mostrar = true;
-        // this.usermane.setValue(only_one_espace(this.usermane.value));
-        if (this.usermane.value != this.usuario) {
-            this.msj_error = null;
-        }
-    }
+        console.log('datos de login => ',this.form.getRawValue());
+        this._authService.login(this.form.getRawValue());
 
-    valPass() {
-        // this.password.setValue(only_one_espace(this.password.value));
-        if (this.password.value != this.pass) {
-            this.msj_error = null;
-        }
+        
     }
+    // valUser() {
+    //     this.mostrar = true;
+    //     // this.usermane.setValue(only_one_espace(this.usermane.value));
+    //     if (this.usermane.value != this.usuario) {
+    //         this.msj_error = null;
+    //     }
+    // }
+
+    // valPass() {
+    //     // this.password.setValue(only_one_espace(this.password.value));
+    //     if (this.password.value != this.pass) {
+    //         this.msj_error = null;
+    //     }
+    // }
 
     /**Getters */
-    get usermane() { return this.newUserForm.controls['username']; }
-    get password() { return this.newUserForm.controls['password']; }
+    get username() { return this.form.controls['username']; }
+    get password() { return this.form.controls['password']; }
 
-    setColor(color: string) {
-        this.primary = color;
-        colorTmp = this.primary;
-        this.isSkeletonPage = true;
-    }
+    // setColor(color: string) {
+    //     this.primary = color;
+    //     colorTmp = this.primary;
+    //     this.isSkeletonPage = true;
+    // }
 
-    value = 0;
-    interval: any;
-    isIntro: boolean = false;
-    showWelcome() {
-        this.interval = setInterval(() => {
-            this.value++;
-            if (this.value > 100) {
-                clearInterval(this.interval);
-                this.isIntro = true;
-            }
-        }, 30);
-    }
+    // value = 0;
+    // interval: any;
+    // isIntro: boolean = false;
+    // showWelcome() {
+    //     this.interval = setInterval(() => {
+    //         this.value++;
+    //         if (this.value > 100) {
+    //             clearInterval(this.interval);
+    //             this.isIntro = true;
+    //         }
+    //     }, 30);
+    // }
 
-    filter: boolean;
-    valueInput: string = "";
+    // filter: boolean;
+    // valueInput: string = "";
 
-    write() {
-        if (this.usermane.value.length == 0) {
-            this.filter = false;
-        } else {
-            this.filter = true;
-        }
-    }
+    // write() {
+    //     if (this.usermane.value.length == 0) {
+    //         this.filter = false;
+    //     } else {
+    //         this.filter = true;
+    //     }
+    // }
 
-    ingresar() {
-        // if (only_one_espace(this.password.value).length >= 6) {
-        //     this.login();
-        // }
-    }
+    // ingresar() {
+    //     // if (only_one_espace(this.password.value).length >= 6) {
+    //     //     this.login();
+    //     // }
+    // }
 }

@@ -17,4 +17,5 @@ export class Globals {
     }
 
     __LOCAL_BACKEND__: string = 'http://localhost:3000';
+    __MINLENGTH_PASS = 6;
 }
