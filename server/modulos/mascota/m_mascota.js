@@ -8,7 +8,7 @@ function getCombosByMascota(id_mascota) {
                                         'desc', 'Raza',
                                         'data', COALESCE((SELECT ARRAY_TO_JSON(ARRAY_AGG(tab))::JSONB
                                                             FROM (SELECT correlativo AS value,
-                                                                         desc_raza   AS desc 
+                                                                         desc_raza   AS desc
                                                                     FROM raza
                                                                    WHERE _id_animal = m.id_mascota) tab
                                                          ),'[]'::JSONB
@@ -18,7 +18,7 @@ function getCombosByMascota(id_mascota) {
                                         'desc', 'Tamaño',
                                         'data', COALESCE((SELECT ARRAY_TO_JSON(ARRAY_AGG(tab))::JSONB
                                                             FROM (SELECT correlativo AS value,
-                                                                         desc_size   AS desc 
+                                                                         desc_size   AS desc
                                                                     FROM size
                                                                    WHERE _id_animal = m.id_mascota) tab
                                                         ),'[]'::JSONB
@@ -28,7 +28,7 @@ function getCombosByMascota(id_mascota) {
                                         'desc', 'Edad',
                                         'data', COALESCE((SELECT ARRAY_TO_JSON(ARRAY_AGG(tab))::JSONB
                                                             FROM (SELECT correlativo AS value,
-                                                                         desc_edad   AS desc 
+                                                                         desc_edad   AS desc
                                                                     FROM edades
                                                                    WHERE _id_animal = m.id_mascota) tab
                                                         ),'[]'::JSONB
@@ -38,7 +38,7 @@ function getCombosByMascota(id_mascota) {
                                         'desc', 'Alimentación',
                                         'data', COALESCE((SELECT ARRAY_TO_JSON(ARRAY_AGG(tab))::JSONB
                                                             FROM (SELECT correlativo AS value,
-                                                                         desc_alimento   AS desc 
+                                                                         desc_alimento   AS desc
                                                                     FROM alimento
                                                                    WHERE _id_animal = m.id_mascota) tab
                                                         ),'[]'::JSONB
@@ -47,6 +47,7 @@ function getCombosByMascota(id_mascota) {
                         ) AS combos
                    FROM (SELECT $1 AS id_mascota) m;`;
         sql = pgpromise.as.format(sql, [id_mascota]);
+        console.log(sql);
         dbp.any(sql).then(data => {
             resolve(data[0].combos);
         }).catch(err => {

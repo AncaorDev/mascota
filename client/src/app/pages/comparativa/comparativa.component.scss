@@ -206,7 +206,7 @@
             justify-content: center;
             flex-wrap: wrap;
             .taste-item {
-                padding: 20px;
+                padding: 40px;
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
@@ -219,6 +219,17 @@
                     width: 110px;
 
                 }
+            }
+        }
+        .card-productos {
+            width: 60vw;
+            background: white;
+            /* padding-left: 50px; */
+            margin: 0 auto;
+            border-radius: 20px;
+            h3 {
+                text-align: center;
+                padding: 30px;
             }
         }
     }
