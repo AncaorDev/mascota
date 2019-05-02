@@ -131,7 +131,7 @@
             <p mat-line>Marca: {{item?.Marca }}</p><span class="cs-spacer"></span><a mat-raised-button [href]="item?.Enlace" target="_blank">web</a>
           </mat-list-item>
         </mat-list>
-        <h4 *ngIf="filterData &amp;&amp; filterData.length == 0"> No se encontraron resultados</h4>
+        <h3 *ngIf="filterData &amp;&amp; filterData.length == 0"> No se encontraron resultados</h3>
       </div>
     </div>
   </div>

@@ -96,4 +96,4 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 						p(mat-line) Marca: {{item?.Marca }}
 						span.cs-spacer
 						a(mat-raised-button, [href]="item?.Enlace", target="_blank") web
-				h4(*ngIf="filterData && filterData.length == 0")  No se encontraron resultados
+				h3(*ngIf="filterData && filterData.length == 0")  No se encontraron resultados
