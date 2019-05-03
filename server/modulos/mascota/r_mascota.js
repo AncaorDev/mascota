@@ -6,4 +6,7 @@ const express = require('express'),
 
 api
     .get('/getCombosByMascota',ensureAuth, ctrl.getCombosByMascota)
+    .post('/insertScraper',ensureAuth, ctrl.insertScraper)
+    .get('/getDataScraperBySite',ensureAuth, ctrl.getDataScraperBySite)
+    
 module.exports = api;

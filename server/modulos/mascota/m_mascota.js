@@ -47,7 +47,6 @@ function getCombosByMascota(id_mascota) {
                         ) AS combos
                    FROM (SELECT $1 AS id_mascota) m;`;
         sql = pgpromise.as.format(sql, [id_mascota]);
-        console.log(sql);
         dbp.any(sql).then(data => {
             resolve(data[0].combos);
         }).catch(err => {
@@ -55,6 +54,60 @@ function getCombosByMascota(id_mascota) {
         })
     });
 }
+
+function insertScraper(_id_site,web_scraper_order,web_scraper_start_url, categorias, categorias_href, productos, enlace, nombre,precio,peso,marca,imagen) {
+    return new Promise((resolve,reject) => {
+        let sql = `INSERT INTO scraper_x_site
+                      (_id_site,web_scraper_order,web_scraper_start_url, categorias, categorias_href, productos, enlace, nombre,precio,peso,marca,imagen)
+                   SELECT $1,
+                          $2,
+                          $3,
+                          $4,
+                          $5,
+                          $6,
+                          $7,
+                          $8,
+                          $9,
+                          $10,
+                          $11,
+                          $12`;
+        sql = pgpromise.as.format(sql, [
+            _id_site,
+            web_scraper_order,
+            web_scraper_start_url,
+            categorias,
+            categorias_href,
+            productos,
+            enlace,
+            nombre,
+            precio,
+            peso,
+            marca,
+            imagen]);
+        dbp.result(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => insertsuperpet => " + err });
+        })              
+    });
+}
+
+function getDataScraperBySite(id_site) {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT *
+                     FROM scraper_x_site
+                    ORDER BY id_scraper`;
+        sql = pgpromise.as.format(sql, [id_site]);
+        dbp.any(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getDataScraperBySite => " + err });
+        })
+    });
+}
+
 module.exports = {
-    getCombosByMascota
+    getCombosByMascota,
+    insertScraper,
+    getDataScraperBySite
 };

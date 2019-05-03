@@ -12,7 +12,7 @@ global.ensureAuth = (req, res, next) => {
         let trimmedPath = path.replace(/^\/+|\/+$/g,'');
 
         // Url que omitan la validación de token
-        let url_NoToken = ['getCombosByMascota','login'];
+        let url_NoToken = ['getCombosByMascota','login', 'insertScraper', 'getDataScraperBySite'];
         
         if (url_NoToken.indexOf(trimmedPath) < 0) {
             let token = (req.body.token) ? req.body.token : req.query.token;
@@ -37,10 +37,10 @@ global.ensureAuth = (req, res, next) => {
                 noWarnings: false
             });
         }
-        global.__BD_USER__ = 'postgres';
-        global.__BD_PASS__ = 'postgres';
-        global.__BD_HOST__ = 'localhost';
-        global.__BD_PORT__ = 5434;
+        global.__BD_USER__  = 'postgres';
+        global.__BD_PASS__  = 'postgres';
+        global.__BD_HOST__  = 'localhost';
+        global.__BD_PORT__  = 5432;
         global.__DATABASE__ = 'mascota';
 
         let __conexion = 'postgres://' + global.__BD_USER__ + ':' + global.__BD_PASS__ + '@' + global.__BD_HOST__ + ':' + global.__BD_PORT__ + '/' + global.__DATABASE__;

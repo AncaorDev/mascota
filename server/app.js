@@ -25,7 +25,7 @@ let r_auth    = require('./auth/r_auth');
 
 app
 	.use('/mascota', r_mascota)
-	.use('/auth', r_auth)
+	.use('/auth', r_auth);
 
 
 module.exports = app;
