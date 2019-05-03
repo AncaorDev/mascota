@@ -116,25 +116,24 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		// feeding: 3
 		// race: 2
 		// size: 4
-		this.step = 5;
-		let race = this.data_opt.race.data.filter(res => res.value == this.formDetail.value.race);
-		let feeding = this.data_opt.feeding.data.filter(res => res.value == this.formDetail.value.feeding);
-		let age =  this.data_opt.age.data.filter(res => res.value == this.formDetail.value.age);
-		let size = this.data_opt.size.data.filter(res => res.value == this.formDetail.value.size);
+		this.step        = 5;
+		let race         = this.data_opt.race.data.filter(res => res.value == this.formDetail.value.race);
+		let feeding      = this.data_opt.feeding.data.filter(res => res.value == this.formDetail.value.feeding);
+		let age          = this.data_opt.age.data.filter(res => res.value == this.formDetail.value.age);
+		let size         = this.data_opt.size.data.filter(res => res.value == this.formDetail.value.size);
 		let taste_select = this.tastes.filter(res => res.enable);
-		this.app_srv.getDataSuperPet().subscribe(res => {
+		this.app_srv.getDataScraperBySite().subscribe(res => {
 			this.super_pet  = res;
 			this.filterData = this.super_pet.filter(row => {
 				let is_data = 0;
 				taste_select.map(res => {
 					let age_desc = age[0].desc.substring(0,5);
-					if(row.Nombre.toLowerCase().includes(res.name_filter.toLowerCase()) && row.Nombre.toLowerCase().includes(age_desc.toLowerCase())) {
+					if(row.nombre.toLowerCase().includes(res.name_filter.toLowerCase()) && row.nombre.toLowerCase().includes(age_desc.toLowerCase())) {
 						is_data++;
 					}
 				});
 				return is_data > 0;
 			});
-			console.log(this.filterData);
 		});
 	}
 }

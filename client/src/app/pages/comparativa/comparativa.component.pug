@@ -89,11 +89,11 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			.card-productos
 				mat-list(*ngIf="filterData && filterData.length > 0")
 					mat-list-item(*ngFor="let item of filterData")
-						img(matListAvatar, [src]="item?.Imagen", alt="")
-						h4(mat-line) {{item?.Nombre }}
-						p(mat-line) Precio {{item?.Precio }}
-						p(mat-line) {{item?.Peso }}
-						p(mat-line) Marca: {{item?.Marca }}
+						img(matListAvatar, [src]="item?.imagen", alt="")
+						h4(mat-line) {{item?.nombre }}
+						p(mat-line) Precio {{item?.precio }}
+						p(mat-line) {{item?.peso }}
+						p(mat-line) Marca: {{item?.marca }}
 						span.cs-spacer
-						a(mat-raised-button, [href]="item?.Enlace", target="_blank") web
+						a(mat-raised-button, [href]="item?.enlace", target="_blank") web
 				h3(*ngIf="filterData && filterData.length == 0")  No se encontraron resultados

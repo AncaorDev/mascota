@@ -39,4 +39,8 @@ export class AppService implements OnInit{
             console.log(err);
         });
     }
+
+    getDataScraperBySite(): Observable<any> {
+        return this._httpClient.get(this.path_mascota+'getDataScraperBySite');
+    }
 }

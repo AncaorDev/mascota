@@ -124,11 +124,11 @@
     <div class="division">
       <div class="card-productos">
         <mat-list *ngIf="filterData &amp;&amp; filterData.length &gt; 0">
-          <mat-list-item *ngFor="let item of filterData"><img matListAvatar [src]="item?.Imagen" alt="">
-            <h4 mat-line>{{item?.Nombre }}</h4>
-            <p mat-line>Precio {{item?.Precio }}</p>
-            <p mat-line>{{item?.Peso }}</p>
-            <p mat-line>Marca: {{item?.Marca }}</p><span class="cs-spacer"></span><a mat-raised-button [href]="item?.Enlace" target="_blank">web</a>
+          <mat-list-item *ngFor="let item of filterData"><img matListAvatar [src]="item?.imagen" alt="">
+            <h4 mat-line>{{item?.nombre }}</h4>
+            <p mat-line>Precio {{item?.precio }}</p>
+            <p mat-line>{{item?.peso }}</p>
+            <p mat-line>Marca: {{item?.marca }}</p><span class="cs-spacer"></span><a mat-raised-button [href]="item?.enlace" target="_blank">web</a>
           </mat-list-item>
         </mat-list>
         <h3 *ngIf="filterData &amp;&amp; filterData.length == 0"> No se encontraron resultados</h3>
