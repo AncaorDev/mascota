@@ -19,15 +19,22 @@ export class AuthService {
       this.path_auth = this._globals.__LOCAL_BACKEND__ +'/auth/';
   }
 
-  login(values:any):void {
-      let Params = new HttpParams()
-          .set('username', values.username)
-          .set('password', values.password);
-      this._httpClient.get(this.path_auth+'login',{ params: Params }).subscribe(res => {
-        console.log('token',res );
-          this.app_srv.user.next(res);
-      },err => {
-          console.log(err);
-      });
-  }
+//   login(values:any):void {
+//       let Params = new HttpParams()
+//           .set('username', values.username)
+//           .set('password', values.password);
+//       this._httpClient.get(this.path_auth+'login',{ params: Params }).subscribe(res => {
+//         console.log('token',res );
+//           this.app_srv.user.next(res);
+//       },err => {
+//           console.log(err);
+//       });
+//   }
+login(values:any): Observable<any> {
+    let Params = new HttpParams()
+        .set('username', values.username)
+        .set('password', values.password);
+    return this._httpClient.get(this.path_auth+'login',{ params: Params });
+}
+
 }

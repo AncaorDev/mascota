@@ -1,7 +1,8 @@
 .portada
     img(src="/assets/img/logo/logo.png")
     a(routerLink="/") Patitas
-    span(routerLink="/login")  Iniciar Sesión
+    span(routerLink="/login", *ngIf="!user")  Iniciar Sesión
+    span(*ngIf="user")  {{user.nom_persona+' '+user.ape_pate_pers+' '+user.ape_mate_pers}}
 
 //- .nav-body(id="cabecera")
 //- 	ul.nav.nav-menu.flex.flex_center

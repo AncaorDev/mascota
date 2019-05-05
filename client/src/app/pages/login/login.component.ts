@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Globals } from 'src/app/shared/globals';
 import { AuthService } from 'src/app/auth/auth.service';
+import { AppService } from 'src/app/app.service';
 /** Helpers */
 // import { only_one_espace, __messageSnackBar } from '../../../shared/helpers/utils';
 // import { DeviceDetectorService } from 'ngx-device-detector';
@@ -92,7 +93,8 @@ export class LoginComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _router: Router,
         public _globals:Globals,
-        private _authService : AuthService
+        private _authService : AuthService,
+        private _app_srv : AppService
     ) {
         this.form = this._builderForm();
         // this.setMediaQuery();
@@ -139,8 +141,12 @@ export class LoginComponent implements OnInit {
         }
         this.username.disable();
         this.password.disable();
-        console.log('datos de login => ',this.form.getRawValue());
-        this._authService.login(this.form.getRawValue());
+        this._authService.login(this.form.getRawValue()).subscribe(res => {
+            this._app_srv.user.next(res);
+            this._router.navigate(['/']);
+        },err => {
+            console.log('err',err);
+        });
 
         
     }

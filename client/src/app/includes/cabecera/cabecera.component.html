@@ -1,2 +1,2 @@
 
-<div class="portada"><img src="/assets/img/logo/logo.png"><a routerLink="/">Patitas</a><span routerLink="/login"> Iniciar Sesión</span></div>
+<div class="portada"><img src="/assets/img/logo/logo.png"><a routerLink="/">Patitas</a><span routerLink="/login" *ngIf="!user"> Iniciar Sesión</span><span *ngIf="user"> {{user.nom_persona+' '+user.ape_pate_pers+' '+user.ape_mate_pers}}</span></div>
