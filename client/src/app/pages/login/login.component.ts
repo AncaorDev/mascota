@@ -142,7 +142,8 @@ export class LoginComponent implements OnInit {
         this.username.disable();
         this.password.disable();
         this._authService.login(this.form.getRawValue()).subscribe(res => {
-            this._app_srv.user.next(res);
+            this._app_srv.user.next(res.data);
+            localStorage.setItem('token', res.token);
             this._router.navigate(['/']);
         },err => {
             console.log('err',err);

@@ -13,6 +13,19 @@ function login(data) {
     });
 }
 
+function datosUserSession(id_persona) {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT * FROM persona WHERE id_persona = $1`;
+        sql = pgpromise.as.format(sql, [id_persona]);
+        dbp.any(sql).then(data => {
+            resolve(data[0] ? data[0] : {});
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_auth => datosUserSession => " + err });
+        })
+    });
+}
+
 module.exports = {
-    login
+    login,
+    datosUserSession
 };

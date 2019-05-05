@@ -7,6 +7,7 @@ const express    = require('express'),
 // Configurations
 require('./config/constant');
 require('./config/authenticated');
+require('./helpers/util.helper');
 
 // JWT
 global.jwt = require('jwt-simple');

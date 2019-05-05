@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecomendacionComponent } from './pages/recomendacion/recomedacion.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HeadersService } from './core/header.service';
+import { AppService } from './app.service';
 @NgModule({
   	declarations: [
 		AppComponent,
@@ -39,7 +40,7 @@ import { HeadersService } from './core/header.service';
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [Globals,HeadersService],
+	providers: [Globals,HeadersService,AppService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
