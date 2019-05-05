@@ -11,6 +11,7 @@ export class AppService implements OnInit{
     header:any;
     combos_mascota = new BehaviorSubject<any>(null);
     user = new BehaviorSubject<any>({});
+    sabores_x_mascota = new BehaviorSubject<any[]>(null);
     constructor(
         public _httpClient: HttpClient,
         public _headersService : HeadersService,
@@ -40,7 +41,19 @@ export class AppService implements OnInit{
         });
     }
 
-    getDataScraperBySite(): Observable<any> {
-        return this._httpClient.get(this.path_mascota+'getDataScraperBySite');
+    getDataScraperBySite(obj:any): Observable<any> {
+        let Params = new HttpParams()
+            .set('data', JSON.stringify(obj));
+        return this._httpClient.get(this.path_mascota+'getDataScraperBySite',{ params: Params });
+    }
+
+    getSaborPorMascota(obj:any):void {
+        let Params = new HttpParams()
+            .set('id_mascota', obj.id_mascota);
+        this._httpClient.get(this.path_mascota+'getSaborPorMascota',{ params: Params }).subscribe((res:any) => {
+            this.sabores_x_mascota.next(res);
+        },err => {
+            console.log(err);
+        });
     }
 }

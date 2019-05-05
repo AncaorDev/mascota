@@ -5,8 +5,9 @@ const express = require('express'),
     api       = express.Router();
 
 api
-    .get('/getCombosByMascota',ensureAuth, ctrl.getCombosByMascota)
-    .post('/insertScraper',ensureAuth, ctrl.insertScraper)
-    .get('/getDataScraperBySite',ensureAuth, ctrl.getDataScraperBySite)
+    .get('/getCombosByMascota'   , ensureAuth, ctrl.getCombosByMascota)
+    .post('/insertScraper'       , ensureAuth, ctrl.insertScraper)
+    .get('/getDataScraperBySite' , ensureAuth, ctrl.getDataScraperBySite)
+    .get('/getSaborPorMascota'   , ensureAuth, ctrl.getSaborPorMascota)
     
 module.exports = api;

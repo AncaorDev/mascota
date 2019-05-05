@@ -108,3 +108,8 @@ $font-family: 'PT Sans, sans-serif';
         opacity: 1;
     }
 }
+
+.flex-center {
+    display: flex;
+    justify-content: center !important;
+}

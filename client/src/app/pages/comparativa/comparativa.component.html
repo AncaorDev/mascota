@@ -1,9 +1,9 @@
 
 <section class="theme-ancaor" id="contenido" [ngSwitch]="step">
-  <div class="content-section" *ngSwitchCase="'0'">
+  <div class="content-section" *ngSwitchCase="0">
     <h2>¿Cuentanos de tu mascota?</h2>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; goToStep('1')">
+      <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; goToStep(1)">
         <mat-icon>send</mat-icon>
       </button>
     </div>
@@ -50,15 +50,15 @@
       </div>
     </form>
   </div>
-  <div class="content-section" *ngSwitchCase="'1'">
+  <div class="content-section" *ngSwitchCase="1">
     <h2>Quiero recomendación por:</h2>
     <div class="back">
-      <button mat-fab color="primary" (click)="goToStep('0')">
+      <button mat-fab color="primary" (click)="goToStep(0)">
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="(sabor || beneficios) &amp;&amp; goToStep(sabor ? '2' : '3')">
+      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="(sabor || beneficios) &amp;&amp; goToStep(sabor ? 2 : 3)">
         <mat-icon>send</mat-icon>
       </button>
     </div>
@@ -75,10 +75,10 @@
       </div>
     </div>
   </div>
-  <div class="content-section" *ngSwitchCase="'2'">
+  <div class="content-section" *ngSwitchCase="2">
     <h2>Elija el sabor</h2>
     <div class="back">
-      <button mat-fab color="primary" (click)="goToStep('1')">
+      <button mat-fab color="primary" (click)="goToStep(1)">
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
@@ -88,41 +88,47 @@
       </button>
     </div>
     <div class="division">
-      <div class="card-taste">
+      <div class="card-taste" *ngIf="!tastes">
+        <mat-spinner diameter="30"></mat-spinner>
+      </div>
+      <div class="card-taste" *ngIf="tastes">
         <div class="taste-item" *ngFor="let item of tastes;" (click)="item.enable = !item.enable" [ngClass]="{'disable' : !item.enable}">
-          <p>{{ item.name }}</p><img [src]="item.imagen" alt="">
+          <p>{{ item.desc_sabor }}</p><img [src]="item.imagen" alt="">
         </div>
       </div>
     </div>
   </div>
-  <div class="content-section" *ngSwitchCase="'3'">
+  <div class="content-section" *ngSwitchCase="3">
     <h2>Elija el beneficio</h2>
     <div class="back">
-      <button mat-fab color="primary" (click)="goToStep('1')">
+      <button mat-fab color="primary" (click)="goToStep(1)">
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="formDetail.valid &amp;&amp; goToStep('3')">
+      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="formDetail.valid &amp;&amp; goToStep(3)">
         <mat-icon>send</mat-icon>
       </button>
     </div>
     <div class="division"></div>
   </div>
-  <div class="content-section" *ngSwitchCase="'5'">
+  <div class="content-section" *ngSwitchCase="5">
     <h2>Las mejores recomendaciones de sabor según lo que selecciónó son:</h2>
     <div class="back">
-      <button mat-fab color="primary" (click)="goToStep('2')">
+      <button mat-fab color="primary" (click)="goToStep(2)">
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
     <div class="continue">
-      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="formDetail.valid &amp;&amp; goToStep('3')">
+      <button mat-fab color="primary" [disabled]="!sabor &amp;&amp; !beneficios" (click)="formDetail.valid &amp;&amp; goToStep(3)">
         <mat-icon>send</mat-icon>
       </button>
     </div>
     <div class="division">
-      <div class="card-productos">
+      <div class="flex-center" *ngIf="!filterData">
+        <mat-spinner diameter="30"></mat-spinner>
+      </div>
+      <div class="card-productos" *ngIf="filterData">
         <mat-list *ngIf="filterData &amp;&amp; filterData.length &gt; 0">
           <mat-list-item *ngFor="let item of filterData"><img matListAvatar [src]="item?.imagen" alt="">
             <h4 mat-line>{{item?.nombre }}</h4>

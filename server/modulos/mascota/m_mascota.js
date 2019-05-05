@@ -92,12 +92,21 @@ function insertScraper(_id_site,web_scraper_order,web_scraper_start_url, categor
     });
 }
 
-function getDataScraperBySite(id_site) {
+function getDataScraperBySite(data) {
     return new Promise((resolve,reject) => {
-        let sql = `SELECT *
-                     FROM scraper_x_site
-                    ORDER BY id_scraper`;
-        sql = pgpromise.as.format(sql, [id_site]);
+        let sql = `WITH scraper AS (
+                        SELECT sxs.*
+                          FROM scraper_x_site sxs,
+                               (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[]) AS desc_sabor) tab
+                         WHERE LOWER(sxs.nombre) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%'))
+                        )
+                   SELECT *
+                     FROM scraper s
+                    WHERE LOWER(s.nombre) ILIKE LOWER(CONCAT('%',(SELECT SUBSTRING(desc_edad,1,5) 
+                                                                    FROM edades 
+                                                                   WHERE _id_animal  = $2
+                                                                     AND correlativo = $3),'%'))`;
+        sql = pgpromise.as.format(sql, [data.sabores_selected, data.id_mascota, data.age]);
         dbp.any(sql).then(data => {
             resolve(data);
         }).catch(err => {
@@ -106,8 +115,31 @@ function getDataScraperBySite(id_site) {
     });
 }
 
+function getSaborPorMascota(id_mascota) {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT s.id_sabor,
+                          s.desc_sabor,
+                          s.abvr,
+                          CONCAT('./assets/images/svg/',s.imagen) AS imagen,
+                          false AS enable
+                     FROM sabor_x_animal sxa,
+                          animal a,
+                          sabor s
+                    WHERE a.id_animal = $1
+                      AND s.id_sabor  = sxa._id_sabor
+                      AND s.flg_acti  = '1'`;
+        sql = pgpromise.as.format(sql, [id_mascota]);
+        dbp.any(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getSaborPorMascota => " + err });
+        })
+    });
+}
+
 module.exports = {
     getCombosByMascota,
     insertScraper,
-    getDataScraperBySite
+    getDataScraperBySite,
+    getSaborPorMascota
 };

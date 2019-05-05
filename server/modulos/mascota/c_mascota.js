@@ -40,15 +40,31 @@ async function insertScraper(req,res) {
 
 async function getDataScraperBySite(req,res) {
     try {
-        let id_site = 1;
-        let data = await M_mascota.getDataScraperBySite(id_site);
+        let data_req              = JSON.parse(req.query.data);
+        // data_req.id_site          = 1;
+        data_req.sabores_selected = Array.from(data_req.sabores_selected, row => row.abvr);
+        data_req.sabores_selected = data_req.sabores_selected.length > 0 ? data_req.sabores_selected.join() : '';
+        let data                  = await M_mascota.getDataScraperBySite(data_req);
         res.status(global.HTTP_200).send(data);
     } catch (err) {
         print_response_error(req.url, err, res);
     }
 }
+
+async function getSaborPorMascota(req,res) {
+    try {
+        let data_req = req.query;
+
+        // Traer sabores
+        let data = await M_mascota.getSaborPorMascota(data_req.id_mascota);
+        res.status(global.HTTP_200).send(data);
+    } catch (err) {
+       print_response_error(err); 
+    }
+}
 module.exports = {
     getCombosByMascota,
     insertScraper,
-    getDataScraperBySite
+    getDataScraperBySite,
+    getSaborPorMascota
 };
