@@ -115,6 +115,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		}
 		this.filterData = null;
 		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
+			console.log('res => ',res);
 			this.filterData  = res;
 			// this.filterData = this.super_pet.filter(row => {
 			// 	let is_data = 0;

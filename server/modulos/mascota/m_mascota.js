@@ -100,7 +100,19 @@ function getDataScraperBySite(data) {
                                (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[]) AS desc_sabor) tab
                          WHERE LOWER(sxs.nombre) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%'))
                         )
-                   SELECT *
+                   SELECT *,
+                          (SELECT __get_arry_nombre_mark(LOWER(s.nombre),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
+                                                                     FROM (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[] || CONCAT('{',(SELECT LOWER(SUBSTRING(desc_edad,1,5))
+                                                                                                                                     FROM edades 
+                                                                                                                                    WHERE _id_animal  = $2
+                                                                                                                                      AND correlativo = $3
+                                                                                                                                  ),'}'
+                                                                                                                             )::TEXT[]
+                                                                                  ) AS val
+                                                                          ) tab
+                                                                  )
+                                                        )
+                          ) AS arry_nombre
                      FROM scraper s
                     WHERE LOWER(s.nombre) ILIKE LOWER(CONCAT('%',(SELECT SUBSTRING(desc_edad,1,5) 
                                                                     FROM edades 
