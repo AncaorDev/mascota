@@ -105,7 +105,8 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 				mat-list(*ngIf="filterData && filterData.length > 0")
 					mat-list-item(*ngFor="let item of filterData")
 						img(matListAvatar, [src]="item?.imagen", alt="")
-						h4(mat-line) {{item?.nombre }}
+						h4(mat-line)
+							span(*ngFor="let nom of item.arry_nombre", [class.highlight]="nom.flg_mark") {{ nom.desc }}
 						p(mat-line) Precio {{item?.precio }}
 						p(mat-line) {{item?.peso }}
 						p(mat-line) Marca: {{item?.marca }}

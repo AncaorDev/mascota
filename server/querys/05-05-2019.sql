@@ -56,3 +56,4 @@ ALTER TABLE public.scraper_x_site
 
 ALTER TABLE public.scraper_x_site
     ADD COLUMN key_word character varying(300)
+

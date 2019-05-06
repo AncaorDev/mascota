@@ -51,7 +51,6 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			this.tastes = res;
 		});
 		this.sub_data_sabores = this.app_srv.beneficio_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
-			console.log(res);
 			this.benefice = res;
 		});
 	}

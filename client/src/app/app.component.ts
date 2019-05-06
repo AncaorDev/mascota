@@ -16,7 +16,6 @@ export class AppComponent implements OnInit{
         private _authService : AuthService
         ) {
         this.token = localStorage.getItem('token');
-        console.log(this.token);
         if (this.token) {
             this.validateToken();
         }
