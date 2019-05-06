@@ -62,9 +62,23 @@ async function getSaborPorMascota(req,res) {
        print_response_error(err); 
     }
 }
+
+async function getBeneficioPorMascota(req,res) {
+    try {
+        console.log('llego aqui');
+        let data_req = req.query;
+
+        // Traer sabores
+        let data = await M_mascota.getBeneficioPorMascota(data_req.id_mascota);
+        res.status(global.HTTP_200).send(data);
+    } catch (err) {
+       print_response_error(err);
+    }
+}
 module.exports = {
     getCombosByMascota,
     insertScraper,
     getDataScraperBySite,
-    getSaborPorMascota
+    getSaborPorMascota,
+    getBeneficioPorMascota
 };

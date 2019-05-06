@@ -75,14 +75,21 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", (click)="goToStep(1)")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep(3)")
+			button(mat-fab color="primary", [disabled]="beneficeSelect()", (click)="!beneficeSelect() && dataBenefice()")
 				mat-icon send
 		.division
+			.card-taste(*ngIf="!tastes")
+				mat-spinner(diameter="30")
+			.card-taste(*ngIf="tastes")
+				.taste-item(*ngFor="let item of benefice;", (click)="item.enable = !item.enable", [ngClass]="{'disable' : !item.enable}")
+					//-  y Hueso Vacuno Pollo y Vísceras
+					p {{ item.desc_beneficio }}
+					img([src]="item.imagen", alt="")
 
 	.content-section(*ngSwitchCase="5")
 		h2 Las mejores recomendaciones de sabor según lo que selecciónó son:
 		.back
-			button(mat-fab color="primary", (click)="goToStep(2)")
+			button(mat-fab color="primary", (click)="goToStep()")
 				mat-icon arrow_back
 		.continue
 			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep(3)")

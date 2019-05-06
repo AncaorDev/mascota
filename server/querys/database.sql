@@ -1,3 +1,5 @@
+-- Ejecutada en prod
+
 -- Database: mascota
 
 -- DROP DATABASE mascota;
@@ -167,8 +169,9 @@ VALUES
 (1,2,'Cachorro (2 a 4 meses)'),
 (1,3,'Cachorro (4 a 6 meses)'),
 (1,4,'Cachorro (6 a 12 meses)'),
-(1,5,'Maduro Senior Adulto( 7 años a más)'),
-(1,6,'Preñada');
+(1,5,'Adulto (1-7 años)'),
+(1,6,'Maduro Senior Adulto( 7 años a más)'),
+(1,7,'Preñada');
 
 INSERT
   INTO raza
@@ -178,7 +181,29 @@ VALUES
 (1,3,'Bichón maltés'),
 (1,4,'Boxer'),
 (1,5,'Bulldog francés'),
-(1,6,'Bulldog ingles');
+(1,6,'Bulldog ingles'),
+(1,7,'Caniche'),
+(1,8,'Caniche toy'),
+(1,9,'Chihuahua'),
+(1,10,'Cocker Spaniel Americano'),
+(1,11,'Cocker Spaniel Inglés'),
+(1,12,'Dálmata'),
+(1,13,'Dogo Alemán'),
+(1,14,'Golden Retriever'),
+(1,15,'Jack russell terrier'),
+(1,16,'Pastor alemán'),
+(1,17,'Retriever del Labrador'),
+(1,18,'Rotwiller'),
+(1,19,'Schnauzer'),
+(1,20,'Setter Gordon'),
+(1,21,'Setter Inglés'),
+(1,22,'Setter Irlándés'),
+(1,23,'Shih Tzu'),
+(1,24,'Teckel'),
+(1,25,'Teckel Miniatura'),
+(1,26,'West Highland White terrier'),
+(1,27,'Yorkshire terrier');
+
 
 INSERT
   INTO size

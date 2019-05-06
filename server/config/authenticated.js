@@ -17,9 +17,10 @@ global.ensureAuth = (req, res, next) => {
             'login',
             'insertScraper',
             'getDataScraperBySite',
-            'getSaborPorMascota'
+            'getSaborPorMascota',
+            'getBeneficioPorMascota'
         ];
-        
+
         if (url_NoToken.indexOf(trimmedPath) < 0) {
             let token = (req.body.token) ? req.body.token : req.query.token;
             if(token == null) {
@@ -43,9 +44,9 @@ global.ensureAuth = (req, res, next) => {
                 noWarnings: false
             });
         }
-        global.__BD_USER__  = 'postgres';
-        global.__BD_PASS__  = 'postgres';
-        global.__BD_HOST__  = 'localhost';
+        global.__BD_USER__  = 'ancaor_beta';
+        global.__BD_PASS__  = 'cJ9ULSBtkS2vUSU';
+        global.__BD_HOST__  = '35.245.104.208';
         global.__BD_PORT__  = 5432;
         global.__DATABASE__ = 'mascota';
 

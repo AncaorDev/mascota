@@ -34,7 +34,7 @@ WITH (
 INSERT
   INTO sabor
        (desc_sabor, abvr,imagen,flg_acti)
-VALUES 
+VALUES
 ('Carne y Hueso','carne','carne_hueso.svg','1'),
 ('Carne fresca vacuno','res','carne_fresca_vacuno.svg','1'),
 ('Pollo','pollo','pollo_pierna.svg','1'),
