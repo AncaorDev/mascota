@@ -52,7 +52,7 @@ FROM beneficio;
 
 
 ALTER TABLE public.scraper_x_site
-    ADD COLUMN descripcion character varying(500)
+    ADD COLUMN descripcion character varying(5000)
 
 ALTER TABLE public.scraper_x_site
     ADD COLUMN key_word character varying(300)
