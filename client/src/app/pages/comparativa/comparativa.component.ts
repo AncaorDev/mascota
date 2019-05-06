@@ -27,7 +27,9 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	beneficios:boolean = false;
 	resume= false;
 	id_mascota:string = null;
-	tastes:any[] = null;
+	tastes:any[] = [];
+	benefice:any[] = []
+	last_step:number;
 	constructor(
 		private app_srv:AppService,
 		private route: ActivatedRoute,
@@ -47,6 +49,10 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 
 		this.sub_data_sabores = this.app_srv.sabores_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
 			this.tastes = res;
+		});
+		this.sub_data_sabores = this.app_srv.beneficio_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
+			console.log(res);
+			this.benefice = res;
 		});
 	}
 
@@ -86,10 +92,19 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.step2 = true;
 	}
 
-	goToStep(step:number) {
+	goToStep(step:number = null) {
+
+		if(!step && this.last_step) {
+			this.step = this.last_step;
+			return;
+		}
+
 		this.step = step;
 		if (step == 2) {
 			this.getSaborPorMascota();
+		}
+		if(step == 3) {
+			this.getBeneficioPorMascota();
 		}
 	}
 
@@ -101,12 +116,14 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		return this.tastes.filter(res => res.enable).length > 0 ? false : true;
 	}
 
+
+	beneficeSelect() {
+		if (!this.benefice) return false;
+		return this.benefice.filter(res => res.enable).length > 0 ? false : true;
+	}
+
 	resumeData():void {
-		// let race         = this.data_opt.race.data.filter(res => res.value == this.formDetail.value.race);
-		// let feeding      = this.data_opt.feeding.data.filter(res => res.value == this.formDetail.value.feeding);
-		// let age          = this.data_opt.age.data.filter(res => res.value == this.formDetail.value.age);
-		// let size         = this.data_opt.size.data.filter(res => res.value == this.formDetail.value.size);
-		// let taste_select = this.tastes.filter(res => res.enable);
+		this.last_step   = 2;
 		this.step        = 5;
 		let obj = {
 			id_mascota : this.id_mascota,
@@ -116,16 +133,20 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.filterData = null;
 		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
 			this.filterData  = res;
-			// this.filterData = this.super_pet.filter(row => {
-			// 	let is_data = 0;
-			// 	taste_select.map(res => {
-			// 		let age_desc = age[0].desc.substring(0,5);
-			// 		if(row.nombre.toLowerCase().includes(res.name_filter.toLowerCase()) && row.nombre.toLowerCase().includes(age_desc.toLowerCase())) {
-			// 			is_data++;
-			// 		}
-			// 	});
-			// 	return is_data > 0;
-			// });
+		});
+	}
+
+	dataBenefice() {
+		this.last_step   = 3;
+		this.step        = 5;
+		let obj = {
+			id_mascota : this.id_mascota,
+			...this.formDetail.value,
+			sabores_selected : this.benefice.filter(res => res.enable)
+		}
+		this.filterData = null;
+		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
+			this.filterData  = res;
 		});
 	}
 
@@ -135,6 +156,14 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		};
 
 		this.app_srv.getSaborPorMascota(obj);
+	}
+
+	getBeneficioPorMascota():void {
+		let obj:any = {
+			id_mascota : this.id_mascota
+		};
+
+		this.app_srv.getBeneficioPorMascota(obj);
 	}
 }
 

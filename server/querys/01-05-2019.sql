@@ -6,7 +6,7 @@ CREATE OR REPLACE FUNCTION public.__login(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 DECLARE
@@ -93,12 +93,12 @@ BEGIN
 		 WHERE LOWER(usuario) = LOWER(__usuario)
 		   AND (clave = __ENC_PASSWORD OR __flg_clave_maes = TRUE)
 		   AND flg_acti = '1';
-		
+
 		 IF __id_usuario IS NULL THEN
              RAISE EXCEPTION USING ERRCODE = 'SMILE', MESSAGE = 'Usuario y/o contraseña incorrectos';
          END IF;
 	END IF;
-										
+
     ----TRAEMOS LA DATA
 		SELECT *
     	  INTO __rec_usuario

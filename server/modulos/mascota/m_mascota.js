@@ -88,7 +88,7 @@ function insertScraper(_id_site,web_scraper_order,web_scraper_start_url, categor
             resolve(data);
         }).catch(err => {
             reject({ msj: global.MSJ_ERROR, err: "M_mascota => insertsuperpet => " + err });
-        })              
+        })
     });
 }
 
@@ -99,14 +99,16 @@ function getDataScraperBySite(data) {
                           FROM scraper_x_site sxs,
                                (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[]) AS desc_sabor) tab
                          WHERE LOWER(sxs.nombre) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%'))
+                            OR LOWER(sxs.descripcion) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%'))
                         )
                    SELECT *
                      FROM scraper s
-                    WHERE LOWER(s.nombre) ILIKE LOWER(CONCAT('%',(SELECT SUBSTRING(desc_edad,1,5) 
-                                                                    FROM edades 
+                    WHERE LOWER(s.nombre) ILIKE LOWER(CONCAT('%',(SELECT SUBSTRING(desc_edad,1,5)
+                                                                    FROM edades
                                                                    WHERE _id_animal  = $2
                                                                      AND correlativo = $3),'%'))`;
         sql = pgpromise.as.format(sql, [data.sabores_selected, data.id_mascota, data.age]);
+        console.log(sql);
         dbp.any(sql).then(data => {
             resolve(data);
         }).catch(err => {
@@ -137,9 +139,33 @@ function getSaborPorMascota(id_mascota) {
     });
 }
 
+function getBeneficioPorMascota(id_mascota) {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT b.id_beneficio,
+                          b.desc_beneficio,
+                          b.abvr,
+                          CONCAT('./assets/images/svg/',b.imagen) AS imagen,
+                          false AS enable
+                     FROM beneficio_x_animal sxa,
+                          animal a,
+                          beneficio b
+                    WHERE a.id_animal = $1
+                      AND b.id_beneficio  = sxa._id_beneficio
+                      AND b.flg_acti  = '1'`;
+        sql = pgpromise.as.format(sql, [id_mascota]);
+        console.log(sql);
+        dbp.any(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getBeneficioPorMascota => " + err });
+        })
+    });
+}
+
 module.exports = {
     getCombosByMascota,
     insertScraper,
     getDataScraperBySite,
-    getSaborPorMascota
+    getSaborPorMascota,
+    getBeneficioPorMascota
 };
