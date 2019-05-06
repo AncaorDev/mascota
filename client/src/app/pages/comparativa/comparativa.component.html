@@ -143,11 +143,12 @@
       </div>
       <div class="card-productos" *ngIf="filterData">
         <mat-list *ngIf="filterData &amp;&amp; filterData.length &gt; 0">
-          <mat-list-item *ngFor="let item of filterData"><img matListAvatar [src]="item?.imagen" alt="">
+          <mat-list-item *ngFor="let item of filterData"><img class="img-producto" matListAvatar [src]="item?.imagen" alt="">
             <h4 mat-line><span *ngFor="let nom of item.arry_nombre" [class.highlight]="nom.flg_mark">{{ nom.desc }}</span></h4>
             <p mat-line>Precio {{item?.precio }}</p>
             <p mat-line>{{item?.peso }}</p>
-            <p mat-line>Marca: {{item?.marca }}</p><span class="cs-spacer"></span><a mat-raised-button [href]="item?.enlace" target="_blank">web</a>
+            <p mat-line>Marca: {{item?.marca }}</p>
+            <p mat-line [matTooltip]="item?.descripcion ? item?.descripcion : null "> {{item?.descripcion ? item?.descripcion : '' }}</p><span class="cs-spacer"></span><a mat-raised-button [href]="item?.enlace" target="_blank">web</a>
           </mat-list-item>
         </mat-list>
         <h3 *ngIf="filterData &amp;&amp; filterData.length == 0"> No se encontraron resultados</h3>

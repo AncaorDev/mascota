@@ -104,12 +104,13 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			.card-productos(*ngIf="filterData")
 				mat-list(*ngIf="filterData && filterData.length > 0")
 					mat-list-item(*ngFor="let item of filterData")
-						img(matListAvatar, [src]="item?.imagen", alt="")
+						img.img-producto(matListAvatar, [src]="item?.imagen", alt="")
 						h4(mat-line)
 							span(*ngFor="let nom of item.arry_nombre", [class.highlight]="nom.flg_mark") {{ nom.desc }}
 						p(mat-line) Precio {{item?.precio }}
 						p(mat-line) {{item?.peso }}
 						p(mat-line) Marca: {{item?.marca }}
+						p(mat-line, [matTooltip]="item?.descripcion ? item?.descripcion : null ")  {{item?.descripcion ? item?.descripcion : '' }}
 						span.cs-spacer
 						a(mat-raised-button, [href]="item?.enlace", target="_blank") web
 				h3(*ngIf="filterData && filterData.length == 0")  No se encontraron resultados
