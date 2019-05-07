@@ -10,5 +10,7 @@ api
     .get('/getDataScraperBySite' , ensureAuth, ctrl.getDataScraperBySite)
     .get('/getSaborPorMascota'   , ensureAuth, ctrl.getSaborPorMascota)
     .get('/getBeneficioPorMascota', ensureAuth, ctrl.getBeneficioPorMascota)
+    .get('/getDataScraper'        , ensureAuth, ctrl.getDataScraper)
+    .get('/deleteDataScraper'     , ensureAuth, ctrl.deleteDataScraper)
 
 module.exports = api;

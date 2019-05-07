@@ -66,8 +66,21 @@
         position: absolute;
         right: 6vw;
     }
+    .back {
+        position: absolute;
+        left: 6vw;
+    }
     .division {
         width: 100%;
+        .opt_filter {
+            width: 20vw;
+            background: white;
+            border-radius: 10px;
+            margin: 0 auto;
+            height: 3vw;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
         .top {
             display: flex;
             align-items: center;
@@ -90,22 +103,28 @@
                         width: 100%;
                     }
                 }
-                span {
+                .span-content {
                     text-align: center;
                     width: 100%;
                     margin-top: 60px;
                     display: block;
-                    font-weight: bold;
+                    // font-weight: bold;
                     font-size: 1.1rem;
+                    color:white;
+                    span {
+                        border-radius: 6px;
+                        padding: 2px;
+                        background: $primary;
+                    }
                 }
             }
             .div1 {
-                background-image: url('./../../../assets/images/food_pet.jpg');
+                background-image: url('./../../../assets/images/food_pet.png');
                 clip-path: circle(100% at 100% 100%);
                 border-right-style: solid;
                 border-bottom-style: solid;
                 border-color: $primary;
-                span {
+                .span-content {
                     text-align: right;
                     margin-left: -30px;
                 }
@@ -119,7 +138,7 @@
                 .select {
                     right: 3vw;
                 }
-                span {
+                .span-content {
                     text-align: left;
                     margin-left: 30px;
                 }
@@ -144,7 +163,140 @@
                     top: 8vw;
                     right: 3vw;
                 }
+                .span-content {
+                    margin-left: -64px;
+                }
+            }
+        }
+        .card {
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            img {
+                max-width: 50vw;
+                filter: grayscale(80%);
+            }
+            &__top {
+                img {
+                    border-radius: 20px 20px 0 0;
+                }
+            }
+            &__bottom {
+                img {
+                    border-radius: 0 0 20px 20px;
+                }
+            }
+            .text {
+                margin-top: -50px;
+                display: flex;
+                padding: 10px;
+                position: absolute;
+                justify-content: center;
+                align-items: center;
+                // background: black;
+                p {
+                    margin: 10px;
+                    color: brown;
+                    font-size: 25px;
+                }
+                img {
+                    width: 50px;
+                    height: 40px;
+                }
+            }
+        }
+        .sabor {
+            padding: 20px;
+            display: flex;
+            width: 80%;
+            background: darkgray;
+            margin: 0 auto;
+            border-radius: 10px;
+            .box {
+                padding: 10px;
+            }
+        }
+
+        .card-taste {
+            min-height: 40vw;
+            display: flex;
+            padding-left: 80px;
+            padding-right: 80px;
+            justify-content: center;
+            flex-wrap: wrap;
+            .taste-item {
+                padding: 40px;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                P {
+                    color: white;
+                }
+                .content-check {
+                    display: block;
+                    position: relative;
+                    img {
+                        position: absolute;
+                        width: 30px;
+                        display: block;
+                        top: 44px;
+                        right: 0;
+                        z-index: 5;
+                        left: 53px;
+                    }
+                }
+            }
+            .enable {
+                .icon {
+                    width: 110px;
+                    padding: 2px;
+                    background: #fc3131;
+                    border-radius: 50%;
+                }
+            }
+            .disable {
+                .icon {
+                    width: 110px;
+                    // padding: 4px;
+                    background:transparent !important;
+                    padding: 0 !important;
+                    // border-radius: 50%;
+                }
+            }
+        }
+        .card-productos {
+            min-height: 40vw;
+            width: 60vw;
+            background: white;
+            /* padding-left: 50px; */
+            margin: 0 auto;
+            border-radius: 20px;
+            h3 {
+                text-align: center;
+                padding: 30px;
+            }
+            .img-producto {
+                width: 300px;
+                height: 300px;
             }
         }
     }
+    .color {
+        filter: grayscale(0%) !important;
+        padding: 4px;
+        background: #fc3131;
+        // border-radius: 50%;
+    }
+    .disable {
+        img {
+            filter: grayscale(80%);
+        }
+    }
+}
+
+.highlight {
+    background-color:#FFFF99;
 }

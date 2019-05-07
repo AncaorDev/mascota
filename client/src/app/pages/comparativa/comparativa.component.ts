@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -21,15 +21,18 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	sub_params:Subscription = new Subscription();
 	sub_data_sabores:Subscription = new Subscription();
 	filterData:any;
+	data_alterna:any;
 	step:number = 0;
 	super_pet:any;
 	sabor:boolean = false;
 	beneficios:boolean = false;
 	resume= false;
 	id_mascota:string = null;
-	tastes:any[] = [];
-	benefice:any[] = []
+	tastes:any;
+	benefice:any;
+	type_reco:number;
 	last_step:number;
+	mark:FormControl = new FormControl();
 	constructor(
 		private app_srv:AppService,
 		private route: ActivatedRoute,
@@ -53,6 +56,17 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.sub_data_sabores = this.app_srv.beneficio_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
 			this.benefice = res;
 		});
+		this.mark.valueChanges.subscribe(res => {
+			this.filterData = this.data_alterna;
+			if(res.length == 0) {
+				return;
+			}
+			if(this.filterData && res && res.length > 0) {
+				this.filterData = this.filterData.filter(row => {
+					return res.includes(row.marca)
+				});
+			}
+		})
 	}
 
 	ngOnDestroy(): void {
@@ -132,9 +146,15 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.filterData = null;
 		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
 			this.filterData  = res;
+			this.filterData.map(row => {
+				if(!this.marcas.includes(row.marca)) {
+					this.marcas.push(row.marca);
+				}
+			});
+			this.data_alterna = [...this.filterData];
 		});
 	}
-
+	marcas:any = [];
 	dataBenefice() {
 		this.last_step   = 3;
 		this.step        = 5;
@@ -146,6 +166,12 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.filterData = null;
 		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
 			this.filterData  = res;
+			this.filterData.map(row => {
+				if(!this.marcas.includes(row.marca)) {
+					this.marcas.push(row.marca);
+				}
+			});
+			this.data_alterna = [...this.filterData];
 		});
 	}
 
@@ -165,64 +191,3 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.app_srv.getBeneficioPorMascota(obj);
 	}
 }
-
-// import { Component, OnInit, HostListener } from '@angular/core';
-// import { AppService } from 'src/app/app.service';
-// import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-// @Component({
-// 	selector: 'app-comparativa',
-// 	templateUrl: './comparativa.component.html',
-// 	styleUrls: ['./comparativa.component.scss']
-// })
-
-// export class ComparativaComponent implements OnInit {
-// 	// disabled_send:boolean = true;
-// 	lista:any = [{value:1, viewValue: "Opción 1"}]
-// 	data_opt:any;
-
-
-// 	// carne_fresca_vacuno.svg
-// 	// pollo_pierna.svg
-// 	// visceras
-// 	constructor(private app_srv:AppService,
-// 				private form_build:FormBuilder) {
-// 	}
-
-// 	ngOnInit() {
-// 		this.app_srv.getJSON().subscribe(res => {
-// 			this.data_opt = res;
-// 		})
-// 		this.formDetail = this._builderForm();
-// 	}
-
-// 	redirect() {
-// 	}
-
-// 	goToStep(step) {
-// 		this.step = step;
-// 	}
-
-// 	private _builderForm() {
-//         let form = this.form_build.group({
-// 			feeding	: ['', [Validators.required]],
-// 			race	: ['', [Validators.required]],
-// 			size	: ['', [Validators.required]],
-// 			age		: ['', [Validators.required]]
-//         });
-//         // form.valueChanges.subscribe(() => {
-//         //     this.invalidForm = this.newUserForm.invalid;
-//         // })
-//         return form;
-// 	}
-// 	processInfo(){
-// 		this.step = 1;
-// 		// this.step1 = true;
-// 		// this.step2 = false;
-// 	}
-// 	returnOpt(){
-// 		this.step = 0;
-// 		// this.step1 = false;
-// 		// this.step2 = true;
-// 	}
-// }
-

@@ -4,13 +4,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
 	selector: 'app-recomedacion',
 	templateUrl: './recomedacion.component.html',
-	styleUrls: []
+	styleUrls: ['./recomedacion.component.scss']
 })
 
 export class RecomendacionComponent implements OnInit {
 	// disabled_send:boolean = true;
 	lista:any = [{value:1, viewValue: "Opción 1"}]
 	data_opt:any;
+	filterData:any;
 
 	formDetail: FormGroup;
 
@@ -19,12 +20,26 @@ export class RecomendacionComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		// this.app_srv.getJSON().subscribe(res => {
-		// 	this.data_opt = res;
-		// })
-		// this.formDetail = this._builderForm();
+		let obj = {
+
+		}
+		this.app_srv.getDataScraper(obj).subscribe(res => {
+			this.filterData  = res;
+		});
 	}
 
+	deleteItem(raw){
+		console.log(raw);
+		let obj = {
+			scraper : raw
+		}
+		this.app_srv.deleteDataScraper(obj).subscribe(res => {
+			if(res.rowCount>0){
+				this.filterData = this.filterData.filter(row => !(row.id_scraper == raw.id_scraper && row._id_site == raw._id_site))
+			}
+			// this.filterData  = res;
+		});
+	}
 	// redirect() {
 	// 	console.log('redirect');
 	// }

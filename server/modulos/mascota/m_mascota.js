@@ -104,7 +104,7 @@ function getDataScraperBySite(data) {
                    SELECT *,
                           (SELECT __get_arry_nombre_mark(LOWER(s.nombre),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
                                                                      FROM (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[] || CONCAT('{',(SELECT LOWER(SUBSTRING(desc_edad,1,5))
-                                                                                                                                     FROM edades 
+                                                                                                                                     FROM edades
                                                                                                                                     WHERE _id_animal  = $2
                                                                                                                                       AND correlativo = $3
                                                                                                                                   ),'}'
@@ -118,7 +118,8 @@ function getDataScraperBySite(data) {
                     WHERE LOWER(s.nombre) ILIKE LOWER(CONCAT('%',(SELECT SUBSTRING(desc_edad,1,5)
                                                                     FROM edades
                                                                    WHERE _id_animal  = $2
-                                                                     AND correlativo = $3),'%'))`;
+                                                                     AND correlativo = $3),'%'))
+                    AND s.marca <> 'Whiskas'`;
         sql = pgpromise.as.format(sql, [data.sabores_selected, data.id_mascota, data.age]);
         console.log(sql);
         dbp.any(sql).then(data => {
@@ -174,10 +175,37 @@ function getBeneficioPorMascota(id_mascota) {
     });
 }
 
+function getDataScraper() {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT * FROM scraper_x_site WHERE imagen IS NOT NULL`;
+        sql = pgpromise.as.format(sql);
+        console.log(sql);
+        dbp.any(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getDataScraper => " + err });
+        })
+    });
+}
+
+function deleteDataScraper(id_scraper, id_site){
+    return new Promise((resolve,reject) => {
+        let sql = `DELETE FROM scraper_x_site WHERE id_scraper = $1 AND _id_site = $2`;
+        sql = pgpromise.as.format(sql, [id_scraper, id_site]);
+        console.log(sql);
+        dbp.result(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getDataScraper => " + err });
+        })
+    });
+}
 module.exports = {
     getCombosByMascota,
     insertScraper,
     getDataScraperBySite,
     getSaborPorMascota,
-    getBeneficioPorMascota
+    getBeneficioPorMascota,
+    getDataScraper,
+    deleteDataScraper
 };

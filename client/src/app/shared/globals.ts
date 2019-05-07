@@ -16,6 +16,6 @@ export class Globals {
         }
     }
 
-    __LOCAL_BACKEND__: string = 'http://localhost:3000';
+    __LOCAL_BACKEND__: string = 'https://43e50e99.ngrok.io';
     __MINLENGTH_PASS = 6;
 }

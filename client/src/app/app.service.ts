@@ -13,6 +13,10 @@ export class AppService implements OnInit{
     user = new BehaviorSubject<any>({});
     sabores_x_mascota = new BehaviorSubject<any[]>(null);
     beneficio_x_mascota  = new BehaviorSubject<any[]>(null);
+
+    scraperData = new BehaviorSubject<any[]>(null);
+    deleteData = new BehaviorSubject<any[]>(null);
+
     constructor(
         public _httpClient: HttpClient,
         public _headersService : HeadersService,
@@ -67,4 +71,19 @@ export class AppService implements OnInit{
             console.log(err);
         });
     }
+
+
+    getDataScraper(obj:any): Observable<any> {
+        let Params = new HttpParams()
+            .set('data', JSON.stringify(obj));
+        return this._httpClient.get(this.path_mascota+'getDataScraper',{ params: Params });
+    }
+
+
+    deleteDataScraper(obj:any): Observable<any> {
+        let Params = new HttpParams()
+            .set('data', JSON.stringify(obj));
+        return this._httpClient.get(this.path_mascota+'deleteDataScraper',{ params: Params });
+    }
+
 }

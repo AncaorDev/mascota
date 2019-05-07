@@ -41,18 +41,23 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", (click)="goToStep(0)")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="(sabor || beneficios) && goToStep(sabor ? 2 : 3)")
+			button(mat-fab color="primary", [disabled]="!type_reco", (click)="type_reco && goToStep(type_reco)")
 				mat-icon send
 		.division
-			.card.card__top((click)="sabor = true;beneficios = false;")
-				img(src="./assets/images/sabor.png", alt="", [ngClass]="{'color' : sabor }")
+			.card.card__top((click)="type_reco = 2")
+				img(src="./assets/images/sabor.png", alt="", [ngClass]="{'color' : type_reco == 2 }")
 				.text
 					p Sabor
 					img(src="./assets/images/huella.png", alt="")
-			.card.card__bottom((click)="sabor = false;beneficios = true;")
-				img(src="./assets/images/beneficios.png", alt="", [ngClass]="{'color' : beneficios }")
+			.card.card((click)="type_reco = 3")
+				img(src="./assets/images/beneficios.png", alt="", [ngClass]="{'color' : type_reco == 3 }")
 				.text
 					p Beneficios
+					img(src="./assets/images/huella.png", alt="")
+			.card.card__bottom((click)="type_reco = 4;")
+				img(src="./assets/images/money.png", alt="", [ngClass]="{'color' : type_reco == 4 }")
+				.text
+					p Costos
 					img(src="./assets/images/huella.png", alt="")
 
 	.content-section(*ngSwitchCase="2")
@@ -67,10 +72,12 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			.card-taste(*ngIf="!tastes")
 				mat-spinner(diameter="30")
 			.card-taste(*ngIf="tastes")
-				.taste-item(*ngFor="let item of tastes;", (click)="item.enable = !item.enable", [ngClass]="{'disable' : !item.enable}")
+				.taste-item(*ngFor="let item of tastes;", (click)="item.enable = !item.enable", [ngClass]="{'disable' : !item.enable, 'enable' : item.enable}")
+					.content-check(*ngIf="item.enable")
+						img(src="./assets/images/svg/check.svg", alt="")
 					//-  y Hueso Vacuno Pollo y Vísceras
 					p {{ item.desc_sabor }}
-					img([src]="item.imagen", alt="")
+					img.icon([src]="item.imagen", alt="")
 
 
 	.content-section(*ngSwitchCase="3")
@@ -82,29 +89,49 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", [disabled]="beneficeSelect()", (click)="!beneficeSelect() && dataBenefice()")
 				mat-icon send
 		.division
-			.card-taste(*ngIf="!tastes")
+			.card-taste(*ngIf="!benefice")
 				mat-spinner(diameter="30")
-			.card-taste(*ngIf="tastes")
-				.taste-item(*ngFor="let item of benefice;", (click)="item.enable = !item.enable", [ngClass]="{'disable' : !item.enable}")
+			.card-taste(*ngIf="benefice")
+				.taste-item(*ngFor="let item of benefice;", (click)="item.enable = !item.enable", [ngClass]="{'disable' : !item.enable, 'enable' : item.enable}")
+					.content-check(*ngIf="item.enable")
+						img(src="./assets/images/svg/check.svg", alt="")
 					//-  y Hueso Vacuno Pollo y Vísceras
 					p {{ item.desc_beneficio }}
-					img([src]="item.imagen", alt="")
+					img.icon([src]="item.imagen", alt="")
+
+	.content-section(*ngSwitchCase="4")
+		h2 Costo por beneficio
+		.back
+			button(mat-fab color="primary", (click)="goToStep(1)")
+				mat-icon arrow_back
+		.continue
+			button(mat-fab color="primary", [disabled]="beneficeSelect()", (click)="!beneficeSelect() && dataBenefice()")
+				mat-icon send
+		.division
+			.card-taste
+				h2 Proximamente
+
 
 	.content-section(*ngSwitchCase="5")
-		h2 Las mejores recomendaciones de sabor según lo que selecciónó son:
+		h2 Las mejores recomendaciones de sabor o beneficios según lo que seleccionó son:
 		.back
 			button(mat-fab color="primary", (click)="goToStep()")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep(3)")
-				mat-icon send
+			//- button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep(3)")
+			//- 	mat-icon send
 		.division
 			.flex-center(*ngIf="!filterData")
 				mat-spinner(diameter="30")
+			.flex-center.opt_filter(*ngIf="filterData")
+				mat-form-field.full-width(appearance="fill", color="accent")
+					mat-label Marca
+					mat-select(placeholder="Seleccione una marca", [formControl]="mark", multiple)
+						mat-option(*ngFor="let row of marcas", [value]="row") {{ row }}
 			.card-productos(*ngIf="filterData")
 				mat-list(*ngIf="filterData && filterData.length > 0")
 					mat-list-item(*ngFor="let item of filterData")
-						img.img-producto(matListAvatar, [src]="item?.imagen", alt="")
+						img.img-producto(matListAvatar, [src]="item?.imagen || 'no_image.png'", alt="")
 						h4(mat-line)
 							span(*ngFor="let nom of item.arry_nombre", [class.highlight]="nom.flg_mark") {{ nom.desc }}
 						p(mat-line) Precio {{item?.precio }}

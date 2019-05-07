@@ -18,7 +18,9 @@ global.ensureAuth = (req, res, next) => {
             'insertScraper',
             'getDataScraperBySite',
             'getSaborPorMascota',
-            'getBeneficioPorMascota'
+            'getBeneficioPorMascota',
+            'getDataScraper',
+            'deleteDataScraper',
         ];
 
         if (url_NoToken.indexOf(trimmedPath) < 0) {
@@ -32,10 +34,11 @@ global.ensureAuth = (req, res, next) => {
             if (segments.length !== 3) {
                 throw {msj : 'El token no tiene el formato correcto', status : global.HTTP_400};
             }
-            payload = jwt.decode(token, JWT_KEY);
-            if(payload.exp == undefined || payload.exp <= moment().unix()) {
-                //return res.status(200).send({message: 'Token ha expirado', error: 2});
-            }
+            console.log(token);
+            // payload = token ? jwt.decode(token, JWT_KEY) : null;
+            // if(payload.exp == undefined || payload.exp <= moment().unix()) {
+            //     //return res.status(200).send({message: 'Token ha expirado', error: 2});
+            // }
             req.user = payload;
         }
         /********************************************* CONEXION A BD *******************************/

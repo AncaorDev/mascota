@@ -1,6 +1,5 @@
 
 'use strict'
-
 const M_mascota = require('./m_mascota');
 
 async function getCombosByMascota(req, res) {
@@ -59,15 +58,13 @@ async function getSaborPorMascota(req,res) {
         let data = await M_mascota.getSaborPorMascota(data_req.id_mascota);
         res.status(global.HTTP_200).send(data);
     } catch (err) {
-       print_response_error(err); 
+       print_response_error(err);
     }
 }
 
 async function getBeneficioPorMascota(req,res) {
     try {
-        console.log('llego aqui');
         let data_req = req.query;
-
         // Traer sabores
         let data = await M_mascota.getBeneficioPorMascota(data_req.id_mascota);
         res.status(global.HTTP_200).send(data);
@@ -75,10 +72,32 @@ async function getBeneficioPorMascota(req,res) {
        print_response_error(err);
     }
 }
+
+async function getDataScraper(req,res) {
+    try {
+        // let data_req = req.query;
+        // Traer sabores
+        let data = await M_mascota.getDataScraper();
+        res.status(global.HTTP_200).send(data);
+    } catch (err) {
+       console.log(err);
+    }
+}
+
+async function deleteDataScraper(req,res) {
+    // let data_req = req.query;
+    let info = JSON.parse(req.query.data);
+    let data = await M_mascota.deleteDataScraper(info.scraper.id_scraper, info.scraper._id_site);
+    console.log(data);
+    res.status(global.HTTP_200).send(data);
+}
+
 module.exports = {
     getCombosByMascota,
     insertScraper,
     getDataScraperBySite,
     getSaborPorMascota,
-    getBeneficioPorMascota
+    getBeneficioPorMascota,
+    getDataScraper,
+    deleteDataScraper
 };

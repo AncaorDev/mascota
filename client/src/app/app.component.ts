@@ -25,6 +25,6 @@ export class AppComponent implements OnInit{
     }
 
     validateToken():void {
-        this._authService.validateToken(this.token);
+        // this._authService.validateToken(this.token);
     }
 }
