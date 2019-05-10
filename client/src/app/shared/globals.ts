@@ -16,6 +16,6 @@ export class Globals {
         }
     }
 
-    __LOCAL_BACKEND__: string = 'https://43e50e99.ngrok.io';
+    __LOCAL_BACKEND__: string = 'https://d20768de.ngrok.io';
     __MINLENGTH_PASS = 6;
 }

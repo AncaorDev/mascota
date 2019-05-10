@@ -73,13 +73,19 @@
     .division {
         width: 100%;
         .opt_filter {
-            width: 20vw;
+            width: 40vw;
             background: white;
             border-radius: 10px;
             margin: 0 auto;
-            height: 3vw;
+            height: 4vw;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            .opt_form {
+                display: flex;
+                .mat-form-field {
+                    padding: 5px;
+                }
+            }
         }
         .top {
             display: flex;
@@ -224,6 +230,7 @@
             padding-left: 80px;
             padding-right: 80px;
             justify-content: center;
+            align-items: flex-start;
             flex-wrap: wrap;
             .taste-item {
                 padding: 40px;
@@ -297,6 +304,9 @@
     }
 }
 
+.no-wrap {
+    white-space: inherit !important;
+}
 .highlight {
     background-color:#FFFF99;
 }

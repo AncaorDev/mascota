@@ -86,7 +86,10 @@ export class LoginComponent implements OnInit {
     // color_progres: string;
     // name_colegio: string = 'Smiledu';
     form:FormGroup = null;
+    usernameInput = document.querySelector('.username')
 
+    showPasswordButton = document.querySelector('.password-button')
+    face = document.querySelector('.face')
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _media: MediaMatcher,
@@ -113,6 +116,20 @@ export class LoginComponent implements OnInit {
     // }
 
     ngOnInit():void {
+        let passwordInput = document.querySelector('.password');
+        passwordInput.addEventListener('focus', event => {
+            document.querySelectorAll('.hand').forEach(hand => {
+              hand.classList.add('hide')
+            })
+            document.querySelector('.tongue').classList.remove('breath')
+        });
+        passwordInput.addEventListener('blur', event => {
+            document.querySelectorAll('.hand').forEach(hand => {
+                hand.classList.remove('hide')
+                hand.classList.remove('peek')
+            })
+            document.querySelector('.tongue').classList.add('breath')
+        });
         // this.showFailedLogin  = false;
         // this.showNoConnection = false;
     }
@@ -129,7 +146,6 @@ export class LoginComponent implements OnInit {
         });
         return form;
     }
-    
 
 
     login(): void {
@@ -148,8 +164,6 @@ export class LoginComponent implements OnInit {
         },err => {
             console.log('err',err);
         });
-
-        
     }
     // valUser() {
     //     this.mostrar = true;
@@ -205,4 +219,57 @@ export class LoginComponent implements OnInit {
     //     //     this.login();
     //     // }
     // }
+/*
+  Inspired by: "Login Page & Homepage"
+  By: Neo
+  Link: https://dribbble.com/shots/4485321-Login-Page-Homepage
+*/
+
+
+
+
+
+// passwordInput.addEventListener('blur', event => {
+//   document.querySelectorAll('.hand').forEach(hand => {
+//     hand.classList.remove('hide')
+//     hand.classList.remove('peek')
+//   })
+//   document.querySelector('.tongue').classList.add('breath')
+// })
+
+// usernameInput.addEventListener('focus', event => {
+//   let length = Math.min(usernameInput.value.length - 16, 19)
+//   document.querySelectorAll('.hand').forEach(hand => {
+//     hand.classList.remove('hide')
+//     hand.classList.remove('peek')
+//   })
+  
+//   face.style.setProperty('--rotate-head', `${-length}deg`)
+// })
+
+// usernameInput.addEventListener('blur', event => {
+//   face.style.setProperty('--rotate-head', '0deg')
+// })
+  
+// usernameInput.addEventListener('input', _.throttle(event => {
+//   let length = Math.min(event.target.value.length - 16, 19)
+  
+//   face.style.setProperty('--rotate-head', `${-length}deg`)
+// }, 100))
+
+// showPasswordButton.addEventListener('click', event => {
+//   if (passwordInput.type === 'text') {
+//     passwordInput.type = 'password'
+//     document.querySelectorAll('.hand').forEach(hand => {
+//       hand.classList.remove('peek')
+//       hand.classList.add('hide')
+//     })
+//   } else {
+//     passwordInput.type = 'text'
+//     document.querySelectorAll('.hand').forEach(hand => {
+//       hand.classList.remove('hide')
+//       hand.classList.add('peek')
+//     })
+//   }
+// })
 }

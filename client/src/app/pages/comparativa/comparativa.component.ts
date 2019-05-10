@@ -33,6 +33,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	type_reco:number;
 	last_step:number;
 	mark:FormControl = new FormControl();
+	web_site:FormControl = new FormControl();
 	constructor(
 		private app_srv:AppService,
 		private route: ActivatedRoute,
@@ -57,13 +58,28 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			this.benefice = res;
 		});
 		this.mark.valueChanges.subscribe(res => {
+			// console.log(res);
 			this.filterData = this.data_alterna;
+			if(!res) return;
 			if(res.length == 0) {
 				return;
 			}
 			if(this.filterData && res && res.length > 0) {
 				this.filterData = this.filterData.filter(row => {
 					return res.includes(row.marca)
+				});
+			}
+		});
+		this.web_site.valueChanges.subscribe(res => {
+			// console.log(res);
+			this.filterData = this.data_alterna;
+			if(!res) return;
+			if(res.length == 0) {
+				return;
+			}
+			if(this.filterData && res && res.length > 0) {
+				this.filterData = this.filterData.filter(row => {
+					return res.includes(row.desc_site)
 				});
 			}
 		})
@@ -109,6 +125,8 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 
 		if(!step && this.last_step) {
 			this.step = this.last_step;
+			this.mark.setValue(null);
+			this.web_site.setValue(null);
 			return;
 		}
 
@@ -145,16 +163,21 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		}
 		this.filterData = null;
 		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
+			// console.log(res);
 			this.filterData  = res;
 			this.filterData.map(row => {
 				if(!this.marcas.includes(row.marca)) {
 					this.marcas.push(row.marca);
+				}
+				if(!this.webs.includes(row.desc_site)) {
+					this.webs.push(row.desc_site);
 				}
 			});
 			this.data_alterna = [...this.filterData];
 		});
 	}
 	marcas:any = [];
+	webs:any = [];
 	dataBenefice() {
 		this.last_step   = 3;
 		this.step        = 5;
@@ -165,10 +188,14 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		}
 		this.filterData = null;
 		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
+			// console.log(res);
 			this.filterData  = res;
 			this.filterData.map(row => {
 				if(!this.marcas.includes(row.marca)) {
 					this.marcas.push(row.marca);
+				}
+				if(!this.webs.includes(row.desc_site)) {
+					this.webs.push(row.desc_site);
 				}
 			});
 			this.data_alterna = [...this.filterData];
