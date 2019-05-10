@@ -8,7 +8,7 @@ div.theme.ancaor.general
                         //- mat-progress-bar.nino.loading(mode="indeterminate", color = "primary")
                     form([formGroup]="form")
                         .isLoading.cs-input-full
-                            mat-form-field.full-width(appearance="fill")
+                            mat-form-field.full-width
                                 //- mat-label Usuario o correo
                                 mat-label Usuario
                                 input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
@@ -21,16 +21,13 @@ div.theme.ancaor.general
                                     ng-template(#elseif3)
                                         ng-container(*ngIf="username.errors.maxlength") Ingreso máximo de 50 caracteres
                         .isLoading.cs-input-full
-                            mat-form-field.full-width(appearance="fill")
+                            mat-form-field.full-width
                                 mat-label Contraseña
                                 input(matInput, [type]="hide ? 'password' : 'text'", placeholder="", formControlName="password", maxlength="20")
                                 //- cs-mat-icon.pointer.gray(matSuffix, (click)="hide = !hide", *ngIf="filter", [icono]="hide ? 'round_visibility' : 'round_visibility_off'")
                                 mat-error(*ngIf="password.errors")
                                     span(*ngIf="password.errors.required") Ingresa tu contraseña
                                     span(*ngIf="password.errors.minlength") Ingresa mínimo {{ _globals.__MINLENGTH_PASS }} caracteres
-
-                        .isLoading.md
-                            a ¿Has olvidado cómo ingresar?
                             //- mat-menu(#menu="matMenu")
                             //-     button(mat-menu-item, (click)="openFortgotUser('password')") ¿Has olvidado tu contraseña?
                                 //- button(mat-menu-item, (click)="openFortgotUser('usuario')") ¿Has olvidado tu usuario?

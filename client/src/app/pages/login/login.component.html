@@ -8,7 +8,7 @@
           <div *ngIf="showProgress"></div>
           <form [formGroup]="form">
             <div class="isLoading cs-input-full">
-              <mat-form-field class="full-width" appearance="fill">
+              <mat-form-field class="full-width">
                 <mat-label>Usuario</mat-label>
                 <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5">
                 <mat-error *ngIf="username.errors">
@@ -26,13 +26,12 @@
               </mat-form-field>
             </div>
             <div class="isLoading cs-input-full">
-              <mat-form-field class="full-width" appearance="fill">
+              <mat-form-field class="full-width">
                 <mat-label>Contraseña</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20">
                 <mat-error *ngIf="password.errors"><span *ngIf="password.errors.required">Ingresa tu contraseña</span><span *ngIf="password.errors.minlength">Ingresa mínimo {{ _globals.__MINLENGTH_PASS }} caracteres</span></mat-error>
               </mat-form-field>
             </div>
-            <div class="isLoading md"><a>¿Has olvidado cómo ingresar?</a></div>
           </form>
           <div class="cs-action">
             <div class="isLoading gt-button">
