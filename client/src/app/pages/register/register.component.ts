@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef, ViewEncapsulation, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef, ViewEncapsulation, Input } from '@angular/core';
 // import { SharedConstants } from '../../../shared/shared.constants';
 import { MediaMatcher } from '@angular/cdk/layout';
 // import { AuthService } from '../../../core/providers/session/auth.service';
@@ -22,8 +22,8 @@ import { AppService } from 'src/app/app.service';
 var colorTmp: string = '';
 
 @Component({
-    selector: 'cs-login',
-    templateUrl: 'login.component.html',
+    selector: 'cs-register',
+    templateUrl: 'register.component.html',
     styles: [`
         mat-form-field.mat-focused .mat-form-field-label {
             color : ${colorTmp} !important;
@@ -37,16 +37,15 @@ var colorTmp: string = '';
     `],
     providers: [MediaMatcher, AuthService],
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./../register/register.component.scss'],
+    styleUrls: ['./register.component.scss'],
 })
 
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
     // showFailedLogin: boolean;
     // showNoConnection: boolean;
     // @Input() color: string = '';
     // @ViewChild('formColor') formColor: TemplateRef<any>;
-    // @ViewChild('input_pass') input_pass:ElementRef;
     // private _mobileQueryListener: () => void;
     mobileQuery: MediaQueryList;
     // primary: string = '';
@@ -87,7 +86,10 @@ export class LoginComponent implements OnInit {
     // color_progres: string;
     // name_colegio: string = 'Smiledu';
     form:FormGroup = null;
+    usernameInput = document.querySelector('.username')
 
+    showPasswordButton = document.querySelector('.password-button')
+    face = document.querySelector('.face')
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _media: MediaMatcher,
@@ -114,46 +116,11 @@ export class LoginComponent implements OnInit {
     // }
 
     ngOnInit():void {
-        let passwordInput = document.querySelector('.password');
-        let usernameInput = document.querySelector('.user_name');
-        let face:any = document.querySelector('.face')
 
-        passwordInput.addEventListener('focus', event => {
-            document.querySelectorAll('.hand').forEach(hand => {
-              hand.classList.add('hide')
-            })
-            document.querySelector('.tongue').classList.remove('breath')
-        });
+    }
 
-        passwordInput.addEventListener('blur', event => {
-            document.querySelectorAll('.hand').forEach(hand => {
-                hand.classList.remove('hide')
-                hand.classList.remove('peek')
-            })
-            document.querySelector('.tongue').classList.add('breath')
-        });
-
-        passwordInput.addEventListener('blur', event => {
-            document.querySelectorAll('.hand').forEach(hand => {
-                hand.classList.remove('hide')
-                hand.classList.remove('peek')
-            })
-            document.querySelector('.tongue').classList.add('breath')
-        });
-
-        usernameInput.addEventListener('focus', event => {
-            let length = Math.min(this.username.value.length - 16, 19)
-            document.querySelectorAll('.hand').forEach(hand => {
-                hand.classList.remove('hide')
-                hand.classList.remove('peek')
-            });
-
-            face.style.setProperty('--rotate-head', `${-length}deg`)
-        });
-
-        usernameInput.addEventListener('blur', event => {
-            face.style.setProperty('--rotate-head', '0deg')
-        });
+    ngOnDestroy(): void {
+        // this.mobileQuery && this.mobileQuery.removeListener(this._mobileQueryListener);
     }
 
     private _builderForm() {
@@ -163,9 +130,6 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])]
         });
         return form;
-    }
-
-    ngOnDestroy(): void {
     }
 
 
@@ -186,28 +150,111 @@ export class LoginComponent implements OnInit {
             console.log('err',err);
         });
     }
+    // valUser() {
+    //     this.mostrar = true;
+    //     // this.usermane.setValue(only_one_espace(this.usermane.value));
+    //     if (this.usermane.value != this.usuario) {
+    //         this.msj_error = null;
+    //     }
+    // }
+
+    // valPass() {
+    //     // this.password.setValue(only_one_espace(this.password.value));
+    //     if (this.password.value != this.pass) {
+    //         this.msj_error = null;
+    //     }
+    // }
 
     /**Getters */
     get username() { return this.form.controls['username']; }
     get password() { return this.form.controls['password']; }
-    /*
-    Inspired by: "Login Page & Homepage"
-    By: Neo
-    Link: https://dribbble.com/shots/4485321-Login-Page-Homepage
-    */
 
-    ShowHidePass() {
-        this.hide = !this.hide;
-        if (this.hide) {
-            document.querySelectorAll('.hand').forEach(hand => {
-            hand.classList.remove('peek')
-            hand.classList.add('hide')
-            })
-        } else {
-            document.querySelectorAll('.hand').forEach(hand => {
-            hand.classList.remove('hide')
-            hand.classList.add('peek')
-            })
-        }
-    }
+    // setColor(color: string) {
+    //     this.primary = color;
+    //     colorTmp = this.primary;
+    //     this.isSkeletonPage = true;
+    // }
+
+    // value = 0;
+    // interval: any;
+    // isIntro: boolean = false;
+    // showWelcome() {
+    //     this.interval = setInterval(() => {
+    //         this.value++;
+    //         if (this.value > 100) {
+    //             clearInterval(this.interval);
+    //             this.isIntro = true;
+    //         }
+    //     }, 30);
+    // }
+
+    // filter: boolean;
+    // valueInput: string = "";
+
+    // write() {
+    //     if (this.usermane.value.length == 0) {
+    //         this.filter = false;
+    //     } else {
+    //         this.filter = true;
+    //     }
+    // }
+
+    // ingresar() {
+    //     // if (only_one_espace(this.password.value).length >= 6) {
+    //     //     this.login();
+    //     // }
+    // }
+/*
+  Inspired by: "Login Page & Homepage"
+  By: Neo
+  Link: https://dribbble.com/shots/4485321-Login-Page-Homepage
+*/
+
+
+
+
+
+// passwordInput.addEventListener('blur', event => {
+//   document.querySelectorAll('.hand').forEach(hand => {
+//     hand.classList.remove('hide')
+//     hand.classList.remove('peek')
+//   })
+//   document.querySelector('.tongue').classList.add('breath')
+// })
+
+// usernameInput.addEventListener('focus', event => {
+//   let length = Math.min(usernameInput.value.length - 16, 19)
+//   document.querySelectorAll('.hand').forEach(hand => {
+//     hand.classList.remove('hide')
+//     hand.classList.remove('peek')
+//   })
+  
+//   face.style.setProperty('--rotate-head', `${-length}deg`)
+// })
+
+// usernameInput.addEventListener('blur', event => {
+//   face.style.setProperty('--rotate-head', '0deg')
+// })
+  
+// usernameInput.addEventListener('input', _.throttle(event => {
+//   let length = Math.min(event.target.value.length - 16, 19)
+  
+//   face.style.setProperty('--rotate-head', `${-length}deg`)
+// }, 100))
+
+// showPasswordButton.addEventListener('click', event => {
+//   if (passwordInput.type === 'text') {
+//     passwordInput.type = 'password'
+//     document.querySelectorAll('.hand').forEach(hand => {
+//       hand.classList.remove('peek')
+//       hand.classList.add('hide')
+//     })
+//   } else {
+//     passwordInput.type = 'text'
+//     document.querySelectorAll('.hand').forEach(hand => {
+//       hand.classList.remove('hide')
+//       hand.classList.add('peek')
+//     })
+//   }
+// })
 }

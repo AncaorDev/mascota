@@ -1,0 +1,4 @@
+# Copyright 2017, Google, Inc.
+# [START gae_quickstart_yaml]
+runtime: nodejs10
+# [END gae_quickstart_yaml]

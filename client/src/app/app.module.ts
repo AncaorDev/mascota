@@ -19,6 +19,7 @@ import { RecomendacionComponent } from './pages/recomendacion/recomedacion.compo
 import { LoginComponent } from './pages/login/login.component';
 import { HeadersService } from './core/header.service';
 import { AppService } from './app.service';
+import { RegisterComponent } from './pages/register/register.component';
 @NgModule({
   	declarations: [
 		AppComponent,
@@ -29,7 +30,8 @@ import { AppService } from './app.service';
 		LoadingWebComponent,
 		CsMatIconComponent,
 		RecomendacionComponent,
-		LoginComponent
+		LoginComponent,
+		RegisterComponent
 	],
 	imports: [
 		BrowserModule,

@@ -1,5 +1,6 @@
 'use strict'
-const express    = require('express'),
+const port = process.env.PORT || 3000,
+	  express    = require('express'),
 	  bodyParser = require('body-parser'),
 	  cors       = require('cors'),
 	  app        = express();
@@ -27,6 +28,7 @@ let r_auth    = require('./auth/r_auth');
 app
 	.use('/mascota', r_mascota)
 	.use('/auth', r_auth);
-
+	// Iniciar servidor
+app.listen(port, () => {});
 
 module.exports = app;

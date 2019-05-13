@@ -49,14 +49,17 @@
 		label
 			mat-form-field.full-width
 				mat-label Usuario
-				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
+				input.user_name(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
 
 		label
 			mat-form-field.full-width
 				mat-label Contraseña
 				input.password(matInput, [type]="hide ? 'password' : 'text'", placeholder="", formControlName="password", maxlength="20")
-				button.password-button Mostrar
+				button.password-button((click)="ShowHidePass()") {{ hide ? 'Mostrar' : 'Ocultar' }}
 		button.login-button Iniciar Sesión
+		.cont-post-login
+			P ¿Aún no tienes una cuenta?
+			a(routerLink="/register") Registrate
 
 //-   .social-buttons
 //-     .social
@@ -65,63 +68,3 @@
 //-       .fa.fa-weibo
 //-     .social
 //-       .fa.fa-paw
-
-//- div.theme.ancaor.general
-//-     div.cs-color-toolbar
-//-     .cs-wrapper
-//-         .cs-content.cs-wancho
-//-             .cs-panel
-//-                 mat-card.cs-width.no-padding
-//-                     div(*ngIf="showProgress")
-//-                         //- mat-progress-bar.nino.loading(mode="indeterminate", color = "primary")
-//-                     form([formGroup]="form")
-//-                         .isLoading.cs-input-full
-//-                             mat-form-field.full-width
-//-                                 //- mat-label Usuario o correo
-//-                                 mat-label Usuario
-//-                                 input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
-//-                                 mat-error(*ngIf="username.errors")
-//-                                     ng-container(*ngIf="username.errors.required; else elseif1") Ingresa tu usuario
-//-                                     ng-template(#elseif1)
-//-                                         ng-container(*ngIf="username.errors.pattern; else elseif2") Caracteres incorrectos
-//-                                     ng-template(#elseif2)
-//-                                         ng-container(*ngIf="username.errors.minlength; else elseif3") Ingresa mínimo 5 caracteres
-//-                                     ng-template(#elseif3)
-//-                                         ng-container(*ngIf="username.errors.maxlength") Ingreso máximo de 50 caracteres
-//-                         .isLoading.cs-input-full
-//-                             mat-form-field.full-width
-//-                                 mat-label Contraseña
-//-                                 input(matInput, [type]="hide ? 'password' : 'text'", placeholder="", formControlName="password", maxlength="20")
-//-                                 //- cs-mat-icon.pointer.gray(matSuffix, (click)="hide = !hide", *ngIf="filter", [icono]="hide ? 'round_visibility' : 'round_visibility_off'")
-//-                                 mat-error(*ngIf="password.errors")
-//-                                     span(*ngIf="password.errors.required") Ingresa tu contraseña
-//-                                     span(*ngIf="password.errors.minlength") Ingresa mínimo {{ _globals.__MINLENGTH_PASS }} caracteres
-//-                             //- mat-menu(#menu="matMenu")
-//-                             //-     button(mat-menu-item, (click)="openFortgotUser('password')") ¿Has olvidado tu contraseña?
-//-                                 //- button(mat-menu-item, (click)="openFortgotUser('usuario')") ¿Has olvidado tu usuario?
-//-                     .cs-action
-//-                         .isLoading.gt-button
-//-                             button.full-width((click)="login()", mat-raised-button, color="primary", [disabled]="!form.valid")  Ingresar
-
-//-                         //- .cs-line
-//-                         //-     .isLoading.xl O conectar con
-
-//-                     .cs-connect
-//-                         //- .isLoading.gt-btn-icon.circle
-//-                         //-     button( mat-icon-button, disabled)
-//-                         //-         cs-mat-icon.mi-height-32.mi-width-32(icono="round_facebook_outline")
-//-                         //- .isLoading.gt-btn-icon.circle
-//-                         //-     button( mat-icon-button, disabled)
-//-                         //-         cs-mat-icon.mi-height-32.mi-width-32(icono="round_google_outline")
-//-                         //- .isLoading.gt-btn-icon.circle
-//-                         //-     button( mat-icon-button, disabled)
-//-                         //-         cs-mat-icon.mi-height-32.mi-width-32(icono="round_outlook_outline")
-//-                         //- .isLoading.gt-btn-icon.circle
-//-                         //-     button(mat-icon-button, disabled)
-//-                         //-         img([src]="ICON_FACEBOOK")
-//-                         //- .isLoading.gt-btn-icon.circle
-//-                         //-     button(mat-icon-button, disabled)
-//-                         //-         img([src]="ICON_GOOGLE")
-//-                         //- .isLoading.gt-btn-icon.circle
-//-                         //-     button(mat-icon-button, disabled)
-//-                         //-         img([src]="ICON_OUTLOOK")

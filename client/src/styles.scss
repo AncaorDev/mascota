@@ -127,7 +127,7 @@ $theme-app-theme: mat-light-theme($theme-app-primary, $theme-app-accent, $theme-
 section {
     padding: 60px
 }
-cs-login {
+cs-login, cs-register {
     width: 100%;
     display: block;
     background-image: linear-gradient(to top right, #f9a743, #f9db5f);

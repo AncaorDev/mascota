@@ -63,16 +63,19 @@
     <label>
       <mat-form-field class="full-width">
         <mat-label>Usuario</mat-label>
-        <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5">
+        <input class="user_name" matInput placeholder="" formControlName="username" maxlength="50" minlength="5">
       </mat-form-field>
     </label>
     <label>
       <mat-form-field class="full-width">
         <mat-label>Contraseña</mat-label>
         <input class="password" matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20">
-        <button class="password-button">Mostrar</button>
+        <button class="password-button" (click)="ShowHidePass()">{{ hide ? 'Mostrar' : 'Ocultar' }}</button>
       </mat-form-field>
     </label>
     <button class="login-button">Iniciar Sesión</button>
+    <div class="cont-post-login">
+      <P>¿Aún no tienes una cuenta?</P><a routerLink="/register">Registrate</a>
+    </div>
   </form>
 </div>

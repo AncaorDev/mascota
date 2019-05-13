@@ -1,0 +1,35 @@
+
+<div class="center">
+  <h3>Ingrese sus datos</h3>
+  <form class="login" [formGroup]="form">
+    <label>
+      <mat-form-field class="full-width">
+        <mat-label>Apellidos</mat-label>
+        <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field class="full-width">
+        <mat-label>Nombres</mat-label>
+        <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input class="password" matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20">
+        <button class="password-button">Mostrar</button>
+      </mat-form-field>
+    </label>
+    <button class="login-button">Registrarse</button>
+    <div class="cont-post-login">
+      <P>¿Ya tienes una cuenta?</P><a routerLink="/login">Iniciar Sesión</a>
+    </div>
+  </form>
+</div>

@@ -1,13 +1,3 @@
-* {
-    box-sizing: border-box;
-  }
-//   body {
-//     width: 100vw;
-//     height: 100vh;
-//     background-color: #e0e0e0;
-//     overflow: hidden;
-//     font-size: 12px;
-//   }
   .inspiration {
     position: fixed;
     bottom: 0;
@@ -24,17 +14,20 @@
   }
   .center {
     position: relative;
-    top: 250px;
-    // top: 50%;
     left: 50%;
     display: inline-block;
     width: 275px;
-    height: 490px;
+    height: 550px;
+    top: 285px;
     border-radius: 3px;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
     overflow: hidden;
     background-image: linear-gradient(to top right, #f9a743, #f9db5f);
+    box-shadow: 2px 2px 10px -4px black;
+    h3 {
+      text-align: center;
+    }
   }
   @media screen and (max-height: 500px) {
     .center {
@@ -283,8 +276,8 @@
     border-radius: 30px;
   }
   .center .login input {
-    padding: 0 20px 0 40px;
-    margin: 5px 0;
+    padding: 2px;
+    margin: 1px 0;
     box-shadow: none;
     outline: none;
   }
@@ -301,7 +294,7 @@
     color: #ccc;
   }
   .center .login input.password {
-    padding: 0 90px 0 40px;
+    // padding: 0 90px 0 40px;
   }
   .center .login .password-button {
     position: absolute;
@@ -360,6 +353,12 @@
   .center .footer {
     text-align: center;
     margin-top: 15px;
+  }
+  .cont-post-login{
+    text-align: center;
+    P {
+      margin: 2px;
+    }
   }
   @-webkit-keyframes breath {
     0%, 100% {
