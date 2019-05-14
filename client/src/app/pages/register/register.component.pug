@@ -4,11 +4,11 @@
 		label
 			mat-form-field.full-width
 				mat-label Apellidos
-				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
+				input(matInput, placeholder="", formControlName="apellidos", maxlength="50", minlength="5")
 		label
 			mat-form-field.full-width
 				mat-label Nombres
-				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
+				input(matInput, placeholder="", formControlName="nom_persona", maxlength="50", minlength="5")
 		label
 			mat-form-field.full-width
 				mat-label Usuario
@@ -18,7 +18,7 @@
 				mat-label Contraseña
 				input.password(matInput, [type]="hide ? 'password' : 'text'", placeholder="", formControlName="password", maxlength="20")
 				button.password-button Mostrar
-		button.login-button Registrarse
+		button.login-button((click)="register()") Registrarse
 		.cont-post-login
 			P ¿Ya tienes una cuenta?
 			a(routerLink="/login") Iniciar Sesión

@@ -1,4 +1,8 @@
 
 <div class="portada"><img src="/assets/img/logo/logo.png"><a routerLink="/">Masikuna</a>
-  <div class="spacer"></div><span class="login" routerLink="/login" *ngIf="!user"> Iniciar Sesión</span><span *ngIf="user"> {{user.nom_persona+' '+user.ape_pate_pers+' '+user.ape_mate_pers}}</span>
+  <div class="spacer"></div><span class="login" routerLink="/login" *ngIf="!user"> Iniciar Sesión</span>
+  <div class="user" *ngIf="user"><span>Bienvenido:</span>
+    <p>{{user.nom_persona+' '+user.ape_pate_pers }}</p>
+    <button mat-raised-button color="primary" (click)="cerrarSesion()">Cerrar Sessión</button>
+  </div>
 </div>

@@ -16,6 +16,7 @@ export class Globals {
         }
     }
 
-    __LOCAL_BACKEND__: string = 'https://api.ancaor.com';
+    __LOCAL_BACKEND__: string = 'http://localhost:3000';
     __MINLENGTH_PASS = 6;
+    __DATA_USER:any;
 }

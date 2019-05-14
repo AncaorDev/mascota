@@ -17,8 +17,23 @@
         padding: 10px;
         font-size: 24px;
         text-decoration: none;
-        color: black;
+        color: $primary;
+        font-weight: 600;
         cursor: pointer !important;
+    }
+    .user {
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        p {
+            font-weight: 600;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            color: $primary;
+        }
     }
 }
 .nav-body{

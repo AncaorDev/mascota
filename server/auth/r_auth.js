@@ -6,5 +6,6 @@ const express = require('express'),
 
 api
     .get('/login',ensureAuth, ctrl.login)
+    .post('/register',ensureAuth, ctrl.register )
     .get('/validateToken',ensureAuth, ctrl.validateToken)
 module.exports = api;

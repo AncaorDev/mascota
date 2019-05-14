@@ -15,6 +15,7 @@ global.ensureAuth = (req, res, next) => {
         let url_NoToken = [
             'getCombosByMascota',
             'login',
+            'register',
             'insertScraper',
             'getDataScraperBySite',
             'getSaborPorMascota',
