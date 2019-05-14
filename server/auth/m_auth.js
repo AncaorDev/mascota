@@ -25,7 +25,21 @@ function datosUserSession(id_persona) {
     });
 }
 
+function registerUser(data) {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT * FROM __auth__01_registrar_usuario($1) res`;
+        sql = pgpromise.as.format(sql, [JSON.stringify(data)]);
+        dbp.one(sql).then(data => {
+            if (data.res.status) return reject(data.res);
+            resolve(data.res);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_auth => registerUser => " + err });
+        })
+    });
+}
+
 module.exports = {
     login,
-    datosUserSession
+    datosUserSession,
+    registerUser
 };

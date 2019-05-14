@@ -126,12 +126,22 @@ export class RegisterComponent implements OnInit {
     private _builderForm() {
         let usuario = '^[a-zA-Z0-9._@\-]*$';
         let form = this._formBuilder.group({
-            username: ['', [Validators.required, Validators.pattern(usuario), Validators.minLength(5), Validators.maxLength(50)]],
-            password: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])]
+            nom_persona   : [null, [Validators.required,Validators.maxLength(50)]],
+            ape_pate_pers : [null, [Validators.required,Validators.maxLength(50)]],
+            ape_mate_pers : [null, [Validators.required,Validators.maxLength(50)]],
+            username      : ['', [Validators.required, Validators.pattern(usuario), Validators.minLength(5), Validators.maxLength(50)]],
+            password      : ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])]
         });
         return form;
     }
 
+    submit():void {
+        this._authService.register(this.form.value).subscribe(data => {
+            console.log(data);
+        },err => {
+            console.log(err);
+        });
+    }
 
     login(): void {
         this.showProgress = true;
@@ -166,6 +176,9 @@ export class RegisterComponent implements OnInit {
     // }
 
     /**Getters */
+    get nom_persona() { return this.form.controls['nom_persona'];}
+    get ape_pate_pers() { return this.form.controls['ape_pate_pers'];}
+    get ape_mate_pers() { return this.form.controls['ape_mate_pers'];}
     get username() { return this.form.controls['username']; }
     get password() { return this.form.controls['password']; }
 

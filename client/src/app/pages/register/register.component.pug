@@ -3,22 +3,26 @@
 	form.login([formGroup]="form")
 		label
 			mat-form-field.full-width
-				mat-label Apellidos
-				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
+				mat-label Nombre
+				input(matInput, placeholder="", formControlName="nom_persona", maxlength="50",required)
 		label
 			mat-form-field.full-width
-				mat-label Nombres
-				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
+				mat-label Apellido paterno
+				input(matInput, placeholder="", formControlName="ape_pate_pers", maxlength="50",required)
+		label
+			mat-form-field.full-width
+				mat-label Apellido materno
+				input(matInput, placeholder="", formControlName="ape_mate_pers", maxlength="50", required)
 		label
 			mat-form-field.full-width
 				mat-label Usuario
-				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5")
+				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5", required)
 		label
 			mat-form-field.full-width
 				mat-label Contraseña
 				input.password(matInput, [type]="hide ? 'password' : 'text'", placeholder="", formControlName="password", maxlength="20")
 				button.password-button Mostrar
-		button.login-button Registrarse
+		button.login-button([disabled]="form.invalid || form.pristine", (click)="form.invalid || form.pristine ? '' : submit()") Registrarse
 		.cont-post-login
 			P ¿Ya tienes una cuenta?
 			a(routerLink="/login") Iniciar Sesión

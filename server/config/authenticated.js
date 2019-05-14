@@ -21,6 +21,7 @@ global.ensureAuth = (req, res, next) => {
             'getBeneficioPorMascota',
             'getDataScraper',
             'deleteDataScraper',
+            'register'
         ];
 
         if (url_NoToken.indexOf(trimmedPath) < 0) {

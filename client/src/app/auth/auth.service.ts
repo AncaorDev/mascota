@@ -17,6 +17,7 @@ export class AuthService {
       private _app_srv:AppService
   ) {
       this.path_auth = this._globals.__LOCAL_BACKEND__ +'/auth/';
+      this.header = this._headersService.buildService();
   }
 
 
@@ -33,6 +34,10 @@ export class AuthService {
         this._httpClient.get(this.path_auth+'validateToken',{ params: Params }).subscribe(res => {
             this._app_srv.user.next(res);
         });
+    }
+
+    register(data:any): Observable<any> {
+        return this._httpClient.post(this.path_auth+'register',{data}, this.header);
     }
 
 }
