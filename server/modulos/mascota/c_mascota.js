@@ -43,6 +43,7 @@ async function getDataScraperBySite(req,res) {
         // data_req.id_site          = 1;
         data_req.sabores_selected = Array.from(data_req.sabores_selected, row => row.abvr);
         data_req.sabores_selected = data_req.sabores_selected.length > 0 ? data_req.sabores_selected.join() : '';
+        console.log(data_req);
         let data                  = await M_mascota.getDataScraperBySite(data_req);
         res.status(global.HTTP_200).send(data);
     } catch (err) {
