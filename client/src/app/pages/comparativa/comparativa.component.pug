@@ -118,8 +118,8 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", (click)="goToStep()")
 				mat-icon arrow_back
 		.continue
-			//- button(mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep(3)")
-			//- 	mat-icon send
+			button(*ngIf="_globals.__DATA_USER", mat-fab color="primary", [disabled]="!sabor && !beneficios", (click)="formDetail.valid && goToStep(3)")
+				mat-icon  save icon
 		.division
 			.flex-center(*ngIf="!filterData")
 				mat-spinner(diameter="30")

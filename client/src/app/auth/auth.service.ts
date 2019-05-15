@@ -28,6 +28,14 @@ export class AuthService {
         return this._httpClient.get(this.path_auth+'login',{ params: Params });
     }
 
+    register(obj:any): Observable<any> {
+        return this._httpClient.post(this.path_auth+'register', obj, this.header);
+        // let Params = new HttpParams()
+        //     .set('username', values.username)
+        //     .set('password', values.password);
+        // return this._httpClient.post(this.path_auth+'login',{ params: Params });
+    }
+
     validateToken(token:string):void {
         let Params = new HttpParams()
             .set('token', token);
@@ -36,8 +44,8 @@ export class AuthService {
         });
     }
 
-    register(data:any): Observable<any> {
-        return this._httpClient.post(this.path_auth+'register',{data}, this.header);
-    }
+    // register(data:any): Observable<any> {
+    //     return this._httpClient.post(this.path_auth+'register',{data}, this.header);
+    // }
 
 }

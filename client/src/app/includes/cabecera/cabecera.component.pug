@@ -3,7 +3,10 @@
     a(routerLink="/") Masikuna
     .spacer
     span.login(routerLink="/login", *ngIf="!user")  Iniciar Sesión
-    span(*ngIf="user")  {{user.nom_persona+' '+user.ape_pate_pers+' '+user.ape_mate_pers}}
+    .user(*ngIf="user")
+        span Bienvenido:
+        p {{user.nom_persona+' '+user.ape_pate_pers }}
+        button(mat-raised-button, color="primary", (click)="cerrarSesion()") Cerrar Sessión
 
 //- .nav-body(id="cabecera")
 //- 	ul.nav.nav-menu.flex.flex_center

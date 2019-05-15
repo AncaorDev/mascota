@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { Globals } from 'src/app/shared/globals';
 @Component({
 	selector    : 'app-comparativa',
 	templateUrl : './comparativa.component.html',
@@ -20,6 +21,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	sub_data_opt:Subscription = new Subscription();
 	sub_params:Subscription = new Subscription();
 	sub_data_sabores:Subscription = new Subscription();
+	sub_user:Subscription = new Subscription();
 	filterData:any;
 	data_alterna:any;
 	step:number = 0;
@@ -34,10 +36,12 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	last_step:number;
 	mark:FormControl = new FormControl();
 	web_site:FormControl = new FormControl();
+	user:any;
 	constructor(
-		private app_srv:AppService,
+		private _app_srv:AppService,
 		private route: ActivatedRoute,
-		private form_build:FormBuilder
+		private form_build:FormBuilder,
+		public _globals:Globals
 	) {}
 
 	ngOnInit(): void {
@@ -45,16 +49,16 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 
 		this.sub_params = this.route.params.pipe(filter(fil=> fil['id_mascota'] != undefined && this.getValidParam(fil['id_mascota']))).subscribe(params => {
 			this.id_mascota = params['id_mascota'];
-			this.app_srv.getCombosByMascota(params['id_mascota']);
+			this._app_srv.getCombosByMascota(params['id_mascota']);
 		 });
-		this.sub_data_opt = this.app_srv.combos_mascota.subscribe(res => {
+		this.sub_data_opt = this._app_srv.combos_mascota.subscribe(res => {
 			this.data_opt = res;
 		});
 
-		this.sub_data_sabores = this.app_srv.sabores_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
+		this.sub_data_sabores = this._app_srv.sabores_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
 			this.tastes = res;
 		});
-		this.sub_data_sabores = this.app_srv.beneficio_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
+		this.sub_data_sabores = this._app_srv.beneficio_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
 			this.benefice = res;
 		});
 		this.mark.valueChanges.subscribe(res => {
@@ -82,7 +86,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 					return res.includes(row.desc_site)
 				});
 			}
-		})
+		});
 	}
 
 	ngOnDestroy(): void {
@@ -162,7 +166,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			sabores_selected : this.tastes.filter(res => res.enable)
 		}
 		this.filterData = null;
-		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
+		this._app_srv.getDataScraperBySite(obj).subscribe(res => {
 			// console.log(res);
 			this.filterData  = res;
 			this.filterData.map(row => {
@@ -187,7 +191,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			sabores_selected : this.benefice.filter(res => res.enable)
 		}
 		this.filterData = null;
-		this.app_srv.getDataScraperBySite(obj).subscribe(res => {
+		this._app_srv.getDataScraperBySite(obj).subscribe(res => {
 			// console.log(res);
 			this.filterData  = res;
 			this.filterData.map(row => {
@@ -207,7 +211,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			id_mascota : this.id_mascota
 		};
 
-		this.app_srv.getSaborPorMascota(obj);
+		this._app_srv.getSaborPorMascota(obj);
 	}
 
 	getBeneficioPorMascota():void {
@@ -215,6 +219,6 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			id_mascota : this.id_mascota
 		};
 
-		this.app_srv.getBeneficioPorMascota(obj);
+		this._app_srv.getBeneficioPorMascota(obj);
 	}
 }

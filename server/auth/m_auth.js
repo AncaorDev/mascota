@@ -13,6 +13,22 @@ function login(data) {
     });
 }
 
+function register(nombres, apellidos, usuario, clave, flg_Acti = '1') {
+    return new Promise((resolve,reject) => {
+        let sql = `INSERT INTO persona (nom_persona, ape_pate_pers, usuario, clave , flg_Acti)
+                                VALUES ($1         , $2           , $3     , $4    , $5) `;
+        sql = pgpromise.as.format(sql, [nombres, apellidos, usuario, clave, flg_Acti]);
+        console.log(sql);
+        dbp.result(sql).then(data => {
+            // if (data.res.status) return reject(data.res);
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_auth => data => " + err });
+        })
+    });
+}
+
+
 function datosUserSession(id_persona) {
     return new Promise((resolve,reject) => {
         let sql = `SELECT * FROM persona WHERE id_persona = $1`;

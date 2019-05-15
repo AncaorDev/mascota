@@ -2,7 +2,7 @@
 'use strict'
 
 const M_auth = require('./m_auth');
-
+const M_utils = require('./../utils/m_utils')
 async function login(req, res) {
     try {
        let data_req = req.query;
@@ -11,6 +11,25 @@ async function login(req, res) {
        let data  = await M_auth.login(data_req);
        let token = jwt.encode({id_persona: data.data.id_persona},JWT_KEY);
        res.status(global.HTTP_200).send({data : data.data, token});
+    } catch (err) {
+        print_response_error(req.url, err, res);
+    }
+}
+
+async function register(req, res) {
+    try {
+        let data_req = req.body;
+        let query =  {nom_persona   : data_req.nom_persona,
+                      ape_pate_pers : data_req.apellidos,
+                      usuario       : data_req.username,
+                      clave         : data_req.password }
+        let data  = await M_utils.insertTableReturnId('persona', query, 'id_persona');
+        if(!data.id_persona) {
+            throw { msj : 'Hubo un error'}
+        }
+        query.id_persona = data.id_persona;
+        let token = jwt.encode({id_persona: data.id_persona},JWT_KEY);
+        res.status(global.HTTP_200).send({msj : 'Registro exitosó' , data : query,  token : token});
     } catch (err) {
         print_response_error(req.url, err, res);
     }
@@ -26,27 +45,27 @@ async function validateToken(req,res) {
     }
 }
 
-async function register(req,res) {
-    try {
-        let   data_req = req.body.data;
-        // Validar campos requeridos
-        if (!data_req.nom_persona ||
-            !data_req.ape_pate_pers ||
-            !data_req.ape_mate_pers ||
-            !data_req.username ||
-            !data_req.password) {
-            throw {status: global.HTTP_400, msj : global.ANP};
-        }
+// async function register(req,res) {
+//     try {
+//         let   data_req = req.body.data;
+//         // Validar campos requeridos
+//         if (!data_req.nom_persona ||
+//             !data_req.ape_pate_pers ||
+//             !data_req.ape_mate_pers ||
+//             !data_req.username ||
+//             !data_req.password) {
+//             throw {status: global.HTTP_400, msj : global.ANP};
+//         }
         
-        // Registrar en bd
-        let rpta = await M_auth.registerUser(data_req);
+//         // Registrar en bd
+//         let rpta = await M_auth.registerUser(data_req);
 
-        // Retornar respuesta
-        res.status(global.HTTP_200).send(rpta);
-    } catch (err) {
-        print_response_error(req.url, err, res);
-    }
-}
+//         // Retornar respuesta
+//         res.status(global.HTTP_200).send(rpta);
+//     } catch (err) {
+//         print_response_error(req.url, err, res);
+//     }
+// }
 module.exports = {
     login,
     validateToken,

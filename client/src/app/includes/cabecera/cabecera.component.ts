@@ -3,11 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { filter } from 'rxjs/operators';
+import { Globals } from 'src/app/shared/globals';
 
 @Component({
-  selector: 'app-cabecera',
-  templateUrl: './cabecera.component.html',
-  styleUrls: ['./cabecera.component.scss']
+	selector: 'app-cabecera',
+	templateUrl: './cabecera.component.html',
+	styleUrls: ['./cabecera.component.scss']
 })
 export class CabeceraComponent implements OnInit, OnDestroy {
 	pages: any = [
@@ -23,12 +24,19 @@ export class CabeceraComponent implements OnInit, OnDestroy {
 	sub_user:Subscription = new Subscription();
 	user:any = null;
 	constructor(
-		private _app_srv : AppService
+		private _app_srv : AppService,
+		public _globals:Globals
 	) { }
 
 	ngOnInit():void {
 		this.cabecera  = document.getElementById('cabecera');
+		if(localStorage.getItem('data_user')) {
+			this.user = JSON.parse(localStorage.getItem('data_user'));
+			this._globals.__DATA_USER = JSON.parse(localStorage.getItem('data_user'));
+		}
 		this.sub_user  = this._app_srv.user.pipe(filter(fil => fil.id_persona != null)).subscribe(res => {
+			localStorage.setItem('data_user', JSON.stringify(res));
+			this._globals.__DATA_USER = JSON.parse(localStorage.getItem('data_user'));
 			this.user = res;
 		});
 	}
@@ -37,7 +45,11 @@ export class CabeceraComponent implements OnInit, OnDestroy {
 		this.sub_user.unsubscribe();
 	}
 
-
+	cerrarSesion() {
+		localStorage.clear();
+		this._globals.__DATA_USER = null;
+		this.user = null;
+	}
 	@HostListener("window:scroll", ['event'])
 	onWindowScroll(event: Event) {
 		// let heightCab = this.cabecera.clientHeight;
