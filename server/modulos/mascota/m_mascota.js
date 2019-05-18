@@ -92,46 +92,59 @@ function insertScraper(_id_site,web_scraper_order,web_scraper_start_url, categor
     });
 }
 
-function getDataScraperBySite(data) {
+// function getDataScraperBySite(data) {
+//     return new Promise((resolve,reject) => {
+//         let sql = `WITH scraper AS (
+//                     SELECT sxs.*
+//                       FROM scraper_x_site sxs,
+//                            (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[]) AS desc_sabor) tab
+//                      WHERE LOWER(sxs.nombre) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%')) OR LOWER(sxs.descripcion) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%'))
+//                    )
+//                    SELECT *,
+//                           (SELECT __get_arry_nombre_mark(LOWER(s.nombre),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
+//                                                                             FROM (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[] || (SELECT tags::TEXT[]
+//                                                                                                                                  FROM edades
+//                                                                                                                                 WHERE _id_animal  = $2
+//                                                                                                                                   AND correlativo = $3)
+//                                                                                          ) AS val
+//                                                                                  ) tab
+//                                                                          )
+//                                                         )
+//                           ) AS arry_nombre,
+//                           (SELECT __get_arry_nombre_mark(LOWER(s.descripcion),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
+//                                                                                  FROM (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[] || (SELECT tags::TEXT[]
+//                                                                                                                                       FROM edades
+//                                                                                                                                      WHERE _id_animal  = $2
+//                                                                                                                                        AND correlativo = $3)
+//                                                                                               ) AS val
+//                                                                                       ) tab
+//                                                                               )
+//                                                         )
+//                           ) AS arry_descrip,
+//                           st.desc_site
+//                      FROM scraper s,
+//                           site st
+//                     WHERE st.id_site = s._id_site
+//                       AND LOWER(s.nombre) SIMILAR TO CONCAT('%(', (SELECT ARRAY_TO_STRING(tags, '|', '*') FROM edades WHERE _id_animal  = $2 AND correlativo = $3) , ')%'); `;
+//         sql = pgpromise.as.format(sql, [data.sabores_selected, data.id_mascota, data.age]);
+//         console.log(sql);
+//         dbp.any(sql).then(data => {
+//             resolve(data);
+//         }).catch(err => {
+//             reject({ msj: global.MSJ_ERROR, err: "M_mascota => getDataScraperBySite => " + err });
+//         })
+//     });
+// }
+function getDataScraperByMascota(id_mascota, recomendacion, filtros) {
     return new Promise((resolve,reject) => {
-        let sql = `WITH scraper AS (
-                    SELECT sxs.*
-                      FROM scraper_x_site sxs,
-                           (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[]) AS desc_sabor) tab
-                     WHERE LOWER(sxs.nombre) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%')) OR LOWER(sxs.descripcion) ILIKE LOWER(CONCAT('%',tab.desc_sabor,'%'))
-                   )
-                   SELECT *,
-                          (SELECT __get_arry_nombre_mark(LOWER(s.nombre),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
-                                                                            FROM (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[] || (SELECT tags::TEXT[]
-                                                                                                                                 FROM edades
-                                                                                                                                WHERE _id_animal  = $2
-                                                                                                                                  AND correlativo = $3)
-                                                                                         ) AS val
-                                                                                 ) tab
-                                                                         )
-                                                        )
-                          ) AS arry_nombre,
-                          (SELECT __get_arry_nombre_mark(LOWER(s.descripcion),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
-                                                                                 FROM (SELECT UNNEST(CONCAT('{',$1,'}')::TEXT[] || (SELECT tags::TEXT[]
-                                                                                                                                      FROM edades
-                                                                                                                                     WHERE _id_animal  = $2
-                                                                                                                                       AND correlativo = $3)
-                                                                                              ) AS val
-                                                                                      ) tab
-                                                                              )
-                                                        )
-                          ) AS arry_descrip,
-                          st.desc_site
-                     FROM scraper s,
-                          site st
-                    WHERE st.id_site = s._id_site
-                      AND LOWER(s.nombre) SIMILAR TO CONCAT('%(', (SELECT ARRAY_TO_STRING(tags, '|', '*') FROM edades WHERE _id_animal  = $2 AND correlativo = $3) , ')%'); `;
-        sql = pgpromise.as.format(sql, [data.sabores_selected, data.id_mascota, data.age]);
+        let sql = `SELECT * FROM __func_01_get_data_scraper($1,$2,$3) res;`;
+        sql = pgpromise.as.format(sql, [id_mascota, recomendacion, filtros]);
         console.log(sql);
-        dbp.any(sql).then(data => {
-            resolve(data);
+        dbp.one(sql).then(data => {
+            if(data.res.status) return reject (data.res);
+            resolve(data.res);
         }).catch(err => {
-            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getDataScraperBySite => " + err });
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getDataScraperByMascota => " + err });
         })
     });
 }
@@ -209,7 +222,7 @@ function deleteDataScraper(id_scraper, id_site){
 module.exports = {
     getCombosByMascota,
     insertScraper,
-    getDataScraperBySite,
+    getDataScraperByMascota,
     getSaborPorMascota,
     getBeneficioPorMascota,
     getDataScraper,

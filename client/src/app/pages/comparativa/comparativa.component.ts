@@ -62,7 +62,6 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			this.benefice = res;
 		});
 		this.mark.valueChanges.subscribe(res => {
-			// console.log(res);
 			this.filterData = this.data_alterna;
 			if(!res) return;
 			if(res.length == 0) {
@@ -75,7 +74,6 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			}
 		});
 		this.web_site.valueChanges.subscribe(res => {
-			// console.log(res);
 			this.filterData = this.data_alterna;
 			if(!res) return;
 			if(res.length == 0) {
@@ -126,8 +124,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	}
 
 	goToStep(step:number = null) {
-
-		if(!step && this.last_step) {
+		if(step == null && this.last_step) {
 			this.step = this.last_step;
 			this.mark.setValue(null);
 			this.web_site.setValue(null);
@@ -161,23 +158,17 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.last_step   = 2;
 		this.step        = 5;
 		let obj = {
-			id_mascota : this.id_mascota,
+			id_mascota : parseInt(this.id_mascota),
 			...this.formDetail.value,
-			sabores_selected : this.tastes.filter(res => res.enable)
-		}
+			selected : this.tastes.filter(res => res.enable),
+			recomendacion : 1
+		};
 		this.filterData = null;
 		this._app_srv.getDataScraperBySite(obj).subscribe(res => {
-			// console.log(res);
-			this.filterData  = res;
-			this.filterData.map(row => {
-				if(!this.marcas.includes(row.marca)) {
-					this.marcas.push(row.marca);
-				}
-				if(!this.webs.includes(row.desc_site)) {
-					this.webs.push(row.desc_site);
-				}
-			});
-			this.data_alterna = [...this.filterData];
+			this.filterData = res.data;
+			this.marcas = res.combos.marcas;
+			this.webs = res.combos.webs;
+			
 		});
 	}
 	marcas:any = [];
@@ -186,13 +177,12 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.last_step   = 3;
 		this.step        = 5;
 		let obj = {
-			id_mascota : this.id_mascota,
+			id_mascota : parseInt(this.id_mascota),
 			...this.formDetail.value,
-			sabores_selected : this.benefice.filter(res => res.enable)
+			selected : this.benefice.filter(res => res.enable)
 		}
 		this.filterData = null;
 		this._app_srv.getDataScraperBySite(obj).subscribe(res => {
-			// console.log(res);
 			this.filterData  = res;
 			this.filterData.map(row => {
 				if(!this.marcas.includes(row.marca)) {

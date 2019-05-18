@@ -2,6 +2,11 @@
 <section class="theme-ancaor" id="contenido" [ngSwitch]="step">
   <div class="content-section" *ngSwitchCase="0">
     <h2>¿Cuentanos de tu mascota?</h2>
+    <div class="back">
+      <button mat-fab color="primary" routerLink="/">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
     <div class="continue">
       <button mat-fab color="primary" [disabled]="formDetail.invalid" (click)="formDetail.valid &amp;&amp; goToStep(1)">
         <mat-icon>send</mat-icon>

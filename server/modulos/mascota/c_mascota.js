@@ -41,10 +41,18 @@ async function getDataScraperBySite(req,res) {
     try {
         let data_req              = JSON.parse(req.query.data);
         // data_req.id_site          = 1;
-        data_req.sabores_selected = Array.from(data_req.sabores_selected, row => row.abvr);
-        data_req.sabores_selected = data_req.sabores_selected.length > 0 ? data_req.sabores_selected.join() : '';
-        console.log(data_req);
-        let data                  = await M_mascota.getDataScraperBySite(data_req);
+        data_req.selected = Array.from(data_req.selected, row => row.abvr);
+        data_req.selected = data_req.selected.length > 0 ? data_req.selected.join() : '';
+        let filtros  = {
+            feeding  : data_req.feeding,
+            race     : data_req.race,
+            size     : data_req.size,
+            age      : data_req.age,
+            selected : data_req.selected
+
+        }
+        
+        let data = await M_mascota.getDataScraperByMascota(data_req.id_mascota, data_req.recomendacion, filtros);
         res.status(global.HTTP_200).send(data);
     } catch (err) {
         print_response_error(req.url, err, res);

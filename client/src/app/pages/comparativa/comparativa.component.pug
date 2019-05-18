@@ -1,6 +1,9 @@
 section.theme-ancaor(id="contenido", [ngSwitch]="step")
 	.content-section(*ngSwitchCase="0")
 		h2 ¿Cuentanos de tu mascota?
+		.back
+			button(mat-fab color="primary", routerLink="/")
+				mat-icon arrow_back
 		.continue
 			button(mat-fab color="primary", [disabled]="formDetail.invalid", (click)="formDetail.valid && goToStep(1)")
 				mat-icon send
