@@ -56,6 +56,8 @@
 				mat-label Contraseña
 				input.password(matInput, [type]="hide ? 'password' : 'text'", placeholder="", formControlName="password", maxlength="20")
 				button.password-button((click)="ShowHidePass()") {{ hide ? 'Mostrar' : 'Ocultar' }}
+		label.err_login(*ngIf="msj_err")
+			span {{ msj_err }}
 		button.login-button((click)="login()") Iniciar Sesión
 		.cont-post-login
 			P ¿Aún no tienes una cuenta?

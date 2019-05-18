@@ -20,9 +20,11 @@ async function register(req, res) {
     try {
         let data_req = req.body;
         let query =  {nom_persona   : data_req.nom_persona,
-                      ape_pate_pers : data_req.apellidos,
+                      ape_pate_pers : data_req.ape_pate_pers,
+                      ape_mate_pers : data_req.ape_mate_pers,
                       usuario       : data_req.username,
-                      clave         : data_req.password }
+                      clave         : data_req.password,
+                      flg_acti      : '1' }
         let data  = await M_utils.insertTableReturnId('persona', query, 'id_persona');
         if(!data.id_persona) {
             throw { msj : 'Hubo un error'}

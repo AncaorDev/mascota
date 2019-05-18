@@ -39,6 +39,7 @@ async function insertScraper(req,res) {
 
 async function getDataScraperBySite(req,res) {
     try {
+        console.log(req.query);
         let data_req              = JSON.parse(req.query.data);
         // data_req.id_site          = 1;
         data_req.selected = Array.from(data_req.selected, row => row.abvr);
@@ -49,10 +50,12 @@ async function getDataScraperBySite(req,res) {
             size     : data_req.size,
             age      : data_req.age,
             selected : data_req.selected
-
         }
-        
+        if(data_req.token) {
+            data_req.token = jwt.decode(__get(req.query.token), JWT_KEY);
+        }
         let data = await M_mascota.getDataScraperByMascota(data_req.id_mascota, data_req.recomendacion, filtros);
+        // let save = await M_mascota.saveDataUser(data_req.id_mascota, data_req.recomendacion, filtros, data_req.token);
         res.status(global.HTTP_200).send(data);
     } catch (err) {
         print_response_error(req.url, err, res);
@@ -84,8 +87,6 @@ async function getBeneficioPorMascota(req,res) {
 
 async function getDataScraper(req,res) {
     try {
-        // let data_req = req.query;
-        // Traer sabores
         let data = await M_mascota.getDataScraper();
         res.status(global.HTTP_200).send(data);
     } catch (err) {
@@ -97,7 +98,6 @@ async function deleteDataScraper(req,res) {
     // let data_req = req.query;
     let info = JSON.parse(req.query.data);
     let data = await M_mascota.deleteDataScraper(info.scraper.id_scraper, info.scraper._id_site);
-    console.log(data);
     res.status(global.HTTP_200).send(data);
 }
 

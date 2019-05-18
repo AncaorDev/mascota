@@ -155,20 +155,21 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	}
 
 	resumeData():void {
+		// console.log(localStorage.getItem('token'));
 		this.last_step   = 2;
 		this.step        = 5;
 		let obj = {
 			id_mascota : parseInt(this.id_mascota),
 			...this.formDetail.value,
 			selected : this.tastes.filter(res => res.enable),
-			recomendacion : 1
+			recomendacion : 1,
+			token : localStorage.getItem('token')
 		};
 		this.filterData = null;
 		this._app_srv.getDataScraperBySite(obj).subscribe(res => {
 			this.filterData = res.data;
 			this.marcas = res.combos.marcas;
 			this.webs = res.combos.webs;
-			
 		});
 	}
 	marcas:any = [];
@@ -179,7 +180,8 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		let obj = {
 			id_mascota : parseInt(this.id_mascota),
 			...this.formDetail.value,
-			selected : this.benefice.filter(res => res.enable)
+			selected : this.benefice.filter(res => res.enable),
+			token : localStorage.getItem('token')
 		}
 		this.filterData = null;
 		this._app_srv.getDataScraperBySite(obj).subscribe(res => {

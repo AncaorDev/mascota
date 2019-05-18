@@ -29,6 +29,10 @@
       text-align: center;
     }
   }
+  .extra {
+    height: 620px;
+    top: 314px;
+  }
   @media screen and (max-height: 500px) {
     .center {
       transition: -webkit-transform 0.5s;
@@ -325,6 +329,13 @@
     transition: transform 0.1s;
     transition: transform 0.1s, -webkit-transform 0.1s;
   }
+  .center .login .disabled {
+    background-color: rgba(188, 188, 188, 0.4);
+  }
+
+  .height-50{
+    height: 70px;
+  }
   .center .login .login-button:active {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
@@ -359,6 +370,10 @@
     P {
       margin: 2px;
     }
+  }
+  .err_login {
+    color: red;
+    font-size: 13px;
   }
   @-webkit-keyframes breath {
     0%, 100% {

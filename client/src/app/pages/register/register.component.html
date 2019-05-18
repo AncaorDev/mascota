@@ -1,35 +1,52 @@
 
-<div class="center">
+<div class="center extra">
   <h3>Ingrese sus datos</h3>
   <form class="login" [formGroup]="form">
     <label>
-      <mat-form-field class="full-width">
-        <mat-label>Apellidos</mat-label>
-        <input matInput placeholder="" formControlName="apellidos" maxlength="50" minlength="5">
+      <mat-form-field class="full-width height-50">
+        <mat-label>Apellido Paterno</mat-label>
+        <input matInput placeholder="" formControlName="ape_pate_pers" maxlength="50" minlength="5">
       </mat-form-field>
     </label>
     <label>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width height-50">
+        <mat-label>Apellido Paterno</mat-label>
+        <input matInput placeholder="" formControlName="ape_mate_pers" maxlength="50" minlength="5">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field class="full-width height-50">
         <mat-label>Nombres</mat-label>
         <input matInput placeholder="" formControlName="nom_persona" maxlength="50" minlength="5">
       </mat-form-field>
     </label>
     <label>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width height-50">
         <mat-label>Usuario</mat-label>
         <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5" required>
       </mat-form-field>
     </label>
     <label>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width height-50">
         <mat-label>Contraseña</mat-label>
         <input class="password" matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20">
         <button class="password-button">Mostrar</button>
       </mat-form-field>
     </label>
-    <button class="login-button" (click)="register()">Registrarse</button>
+    <button class="login-button" [ngClass]="{'disabled' : form.invalid}" [disabled]="form.invalid" (click)="register()">Registrarse</button>
     <div class="cont-post-login">
       <P>¿Ya tienes una cuenta?</P><a routerLink="/login">Iniciar Sesión</a>
     </div>
   </form>
+  <div class="social-buttons">
+    <div class="social">
+      <div class="fa fa-wechat"></div>
+    </div>
+    <div class="social">
+      <div class="fa fa-weibo"></div>
+    </div>
+    <div class="social">
+      <div class="fa fa-paw"></div>
+    </div>
+  </div>
 </div>

@@ -73,6 +73,7 @@
         <button class="password-button" (click)="ShowHidePass()">{{ hide ? 'Mostrar' : 'Ocultar' }}</button>
       </mat-form-field>
     </label>
+    <label class="err_login" *ngIf="msj_err"><span>{{ msj_err }}</span></label>
     <button class="login-button" (click)="login()">Iniciar Sesión</button>
     <div class="cont-post-login">
       <P>¿Aún no tienes una cuenta?</P><a routerLink="/register">Registrate</a>

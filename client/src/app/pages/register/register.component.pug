@@ -1,35 +1,39 @@
-.center
+.center.extra
 	h3 Ingrese sus datos
 	form.login([formGroup]="form")
 		label
-			mat-form-field.full-width
-				mat-label Apellidos
-				input(matInput, placeholder="", formControlName="apellidos", maxlength="50", minlength="5")
+			mat-form-field.full-width.height-50
+				mat-label Apellido Paterno
+				input(matInput, placeholder="", formControlName="ape_pate_pers", maxlength="50", minlength="5")
 		label
-			mat-form-field.full-width
+			mat-form-field.full-width.height-50
+				mat-label Apellido Paterno
+				input(matInput, placeholder="", formControlName="ape_mate_pers", maxlength="50", minlength="5")
+		label
+			mat-form-field.full-width.height-50
 				mat-label Nombres
 				input(matInput, placeholder="", formControlName="nom_persona", maxlength="50", minlength="5")
 		label
-			mat-form-field.full-width
+			mat-form-field.full-width.height-50
 				mat-label Usuario
 				input(matInput, placeholder="", formControlName="username", maxlength="50", minlength="5", required)
 		label
-			mat-form-field.full-width
+			mat-form-field.full-width.height-50
 				mat-label Contraseña
 				input.password(matInput, [type]="hide ? 'password' : 'text'", placeholder="", formControlName="password", maxlength="20")
 				button.password-button Mostrar
-		button.login-button((click)="register()") Registrarse
+		button.login-button([ngClass]="{'disabled' : form.invalid}" , [disabled]="form.invalid" , (click)="register()") Registrarse
 		.cont-post-login
 			P ¿Ya tienes una cuenta?
 			a(routerLink="/login") Iniciar Sesión
 
-//-   .social-buttons
-//-     .social
-//-       .fa.fa-wechat
-//-     .social
-//-       .fa.fa-weibo
-//-     .social
-//-       .fa.fa-paw
+	.social-buttons
+		.social
+			.fa.fa-wechat
+		.social
+			.fa.fa-weibo
+		.social
+			.fa.fa-paw
 
 //- div.theme.ancaor.general
 //-     div.cs-color-toolbar

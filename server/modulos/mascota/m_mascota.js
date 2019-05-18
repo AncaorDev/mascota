@@ -149,6 +149,20 @@ function getDataScraperByMascota(id_mascota, recomendacion, filtros) {
     });
 }
 
+function saveDataUser(id_mascota, recomendacion, filtros, id_usuario = null){
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT * FROM __func_02_save_data_user($1,$2,$3,$4) res;`;
+        sql = pgpromise.as.format(sql, [id_mascota, recomendacion, filtros]);
+        console.log(sql);
+        dbp.one(sql).then(data => {
+            if(data.res.status) return reject (data.res);
+            resolve(data.res);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => saveDataUser => " + err });
+        })
+    });
+}
+
 function getSaborPorMascota(id_mascota) {
     return new Promise((resolve,reject) => {
         let sql = `SELECT s.id_sabor,
@@ -226,5 +240,6 @@ module.exports = {
     getSaborPorMascota,
     getBeneficioPorMascota,
     getDataScraper,
-    deleteDataScraper
+    deleteDataScraper,
+    saveDataUser
 };
