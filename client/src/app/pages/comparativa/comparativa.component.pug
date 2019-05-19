@@ -69,7 +69,7 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", (click)="goToStep(1)")
 				mat-icon arrow_back
 		.continue
-			button(mat-fab color="primary", [disabled]="tastesSelect()", (click)="!tastesSelect() && resumeData()")
+			button(mat-fab color="primary", [disabled]="tastesSelect()", (click)="!tastesSelect() && dataSabor()")
 				mat-icon send
 		.division
 			.card-taste(*ngIf="!tastes")
