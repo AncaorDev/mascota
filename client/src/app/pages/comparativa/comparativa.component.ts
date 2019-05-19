@@ -173,9 +173,10 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		};
 		this.filterData = null;
 		this._app_srv.getDataScraperBySite(obj).subscribe(res => {
-			this.filterData = res.data;
-			this.marcas     = res.marcas;
-			this.webs       = res.webs;
+			this.filterData   = res.data;
+			this.marcas       = res.marcas;
+			this.webs         = res.webs;
+			this.data_alterna = this.filterData.length > 0 ? [...this.filterData] : [];
 		});
 	}
 
@@ -196,6 +197,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			this.filterData = res.data;
 			this.marcas     = res.marcas;
 			this.webs       = res.webs;
+			this.data_alterna = this.filterData.length > 0 ? [...this.filterData] : [];
 		});
 	}
 
