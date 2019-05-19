@@ -86,4 +86,10 @@ export class AppService implements OnInit{
         return this._httpClient.get(this.path_mascota+'deleteDataScraper',{ params: Params });
     }
 
+    getTypeRecommendation(obj:any): Observable<any> {
+        let Params = new HttpParams()
+            .set('data', JSON.stringify(obj));
+        return this._httpClient.get(this.path_mascota+'getTypeRecommendation',{ params: Params });
+    }
+
 }

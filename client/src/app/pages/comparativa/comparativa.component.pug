@@ -47,20 +47,10 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", [disabled]="!type_reco", (click)="type_reco && goToStep(type_reco)")
 				mat-icon send
 		.division
-			.card.card__top((click)="type_reco = 2")
-				img(src="./assets/images/sabor.png", alt="", [ngClass]="{'color' : type_reco == 2 }")
+			.card(*ngFor="let row of recomendacion;", [ngClass]="row.class_recomendacion", (click)="type_reco = row.id_sec_recomedacion")
+				img(src="./assets/images/{{ row.img_recomendacion }}", alt="", [ngClass]="{'color' : type_reco == row.id_sec_recomedacion }")
 				.text
-					p Sabor
-					img(src="./assets/images/huella.png", alt="")
-			.card.card((click)="type_reco = 3")
-				img(src="./assets/images/beneficios.png", alt="", [ngClass]="{'color' : type_reco == 3 }")
-				.text
-					p Beneficios
-					img(src="./assets/images/huella.png", alt="")
-			.card.card__bottom((click)="type_reco = 4;")
-				img(src="./assets/images/money.png", alt="", [ngClass]="{'color' : type_reco == 4 }")
-				.text
-					p Costos
+					p {{ row.desc_recomendacion }}
 					img(src="./assets/images/huella.png", alt="")
 
 	.content-section(*ngSwitchCase="2")

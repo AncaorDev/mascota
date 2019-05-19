@@ -40,6 +40,7 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 	user:any;
 	marcas:any = [];
 	webs:any = [];
+	recomendacion:any;
 	constructor(
 		private _app_srv:AppService,
 		private route: ActivatedRoute,
@@ -58,6 +59,9 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 			this.data_opt = res;
 		});
 
+		this._app_srv.getTypeRecommendation({}).subscribe(res => {
+			this.recomendacion = res;
+		})
 		this.sub_data_sabores = this._app_srv.sabores_x_mascota.pipe(filter(fil => fil != null)).subscribe(res => {
 			this.tastes = res;
 		});
@@ -161,11 +165,11 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.last_step   = 2;
 		this.step        = 5;
 		let obj = {
-			id_mascota    : parseInt(this.id_mascota),
-			selected      : this.tastes.filter(res => res.enable),
-			recomendacion : ERecomendacion.SABOR,
-			token         : localStorage.getItem('token'),
-			...this.formDetail.value
+			...this.formDetail.value,
+			id_mascota 	  : parseInt(this.id_mascota),
+			selected 	  : this.tastes.filter(res => res.enable),
+			recomendacion : this.type_reco,
+			token         : localStorage.getItem('token')
 		};
 		this.filterData = null;
 		this._app_srv.getDataScraperBySite(obj).subscribe(res => {
@@ -181,11 +185,11 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		this.last_step   = 3;
 		this.step        = 5;
 		let obj = {
-			id_mascota    : parseInt(this.id_mascota),
-			selected      : this.benefice.filter(res => res.enable),
-			recomendacion : ERecomendacion.BENEFICIO,
-			token         : localStorage.getItem('token'),
-			...this.formDetail.value
+			...this.formDetail.value,
+			id_mascota 	   : parseInt(this.id_mascota),
+			selected       : this.benefice.filter(res => res.enable),
+			recomendacion  : this.type_reco,
+			token          : localStorage.getItem('token')
 		}
 		this.filterData = null;
 		this._app_srv.getDataScraperBySite(obj).subscribe(res => {

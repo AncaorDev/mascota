@@ -30,10 +30,6 @@ export class AuthService {
 
     register(obj:any): Observable<any> {
         return this._httpClient.post(this.path_auth+'register', obj, this.header);
-        // let Params = new HttpParams()
-        //     .set('username', values.username)
-        //     .set('password', values.password);
-        // return this._httpClient.post(this.path_auth+'login',{ params: Params });
     }
 
     validateToken(token:string):void {

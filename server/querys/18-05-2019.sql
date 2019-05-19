@@ -7,7 +7,7 @@ CREATE OR REPLACE FUNCTION public.__func_01_get_data_scraper(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 DECLARE
