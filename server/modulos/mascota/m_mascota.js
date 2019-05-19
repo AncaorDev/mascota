@@ -233,6 +233,19 @@ function deleteDataScraper(id_scraper, id_site){
         })
     });
 }
+
+function getTypeRecommendation() {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT * FROM recomendacion`;
+        sql = pgpromise.as.format(sql);
+        dbp.any(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getTypeRecommendation => " + err });
+        })
+    });
+}
+
 module.exports = {
     getCombosByMascota,
     insertScraper,
@@ -241,5 +254,6 @@ module.exports = {
     getBeneficioPorMascota,
     getDataScraper,
     deleteDataScraper,
-    saveDataUser
+    saveDataUser,
+    getTypeRecommendation
 };

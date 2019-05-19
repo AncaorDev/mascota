@@ -12,5 +12,6 @@ api
     .get('/getBeneficioPorMascota', ensureAuth, ctrl.getBeneficioPorMascota)
     .get('/getDataScraper'        , ensureAuth, ctrl.getDataScraper)
     .get('/deleteDataScraper'     , ensureAuth, ctrl.deleteDataScraper)
+    .get('/getTypeRecommendation' , ensureAuth, ctrl.getTypeRecommendation)
 
 module.exports = api;

@@ -101,6 +101,12 @@ async function deleteDataScraper(req,res) {
     res.status(global.HTTP_200).send(data);
 }
 
+async function getTypeRecommendation(req,res) {
+    // let info = JSON.parse(req.query.data);
+    let data = await M_mascota.getTypeRecommendation();
+    res.status(global.HTTP_200).send(data);
+}
+
 module.exports = {
     getCombosByMascota,
     insertScraper,
@@ -108,5 +114,6 @@ module.exports = {
     getSaborPorMascota,
     getBeneficioPorMascota,
     getDataScraper,
-    deleteDataScraper
+    deleteDataScraper,
+    getTypeRecommendation
 };
