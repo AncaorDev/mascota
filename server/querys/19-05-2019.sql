@@ -164,3 +164,43 @@ EXCEPTION
 END;
 
 $BODY$;
+
+
+
+CREATE OR REPLACE FUNCTION public.__func_02_exist_value_in_tags(
+	__value character varying,
+	__tags character varying[])
+    RETURNS boolean
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+DECLARE
+	__rec CHARACTER VARYING;
+	__cont INTEGER DEFAULT 0;
+	__cont_interno INTEGER;
+	__exist boolean DEFAULT false;
+
+BEGIN
+	-- Aumentar el contador si existe el valor en los tags
+		FOR __rec IN
+			SELECT UNNEST(__tags)
+		LOOP
+			SELECT strpos(__value, __rec)
+			  INTO __cont_interno;
+			 
+			__cont := __cont_interno + __cont;
+		
+		END LOOP;
+	
+	__exist := (CASE WHEN __cont > 0 THEN TRUE ELSE FALSE END);
+	
+	RETURN __exist;
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN __exist;
+END;
+
+$BODY$;
