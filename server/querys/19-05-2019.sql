@@ -24,7 +24,7 @@ CREATE OR REPLACE FUNCTION public.__func_01_get_data_scraper(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 DECLARE
@@ -108,7 +108,7 @@ BEGIN
 		          'webs'   , (SELECT * FROM webs)
 	        )
 	   INTO __result;
-	
+
     RETURN __result;
 EXCEPTION
     WHEN SQLSTATE 'MASCO' THEN

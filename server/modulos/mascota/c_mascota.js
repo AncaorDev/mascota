@@ -55,7 +55,7 @@ async function getDataScraperBySite(req,res) {
             data_req.token = jwt.decode(__get(req.query.token), JWT_KEY);
         }
         let data = await M_mascota.getDataScraperByMascota(data_req.id_mascota, data_req.recomendacion, filtros);
-        // let save = await M_mascota.saveDataUser(data_req.id_mascota, data_req.recomendacion, filtros, data_req.token);
+        let save = await M_mascota.saveDataUser(data_req.id_mascota, data_req.recomendacion, filtros, data_req.token);
         res.status(global.HTTP_200).send(data);
     } catch (err) {
         print_response_error(req.url, err, res);
