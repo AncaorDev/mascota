@@ -206,7 +206,7 @@ WITH (
     OIDS = FALSE
 );
 
-CREATE OR REPLACE FUNCTION public.__func_02_save_data_user(
+CREATE OR REPLACE FUNCTION public.__func_03_save_data_user(
 	__id_mascota integer,
 	__recomendacion integer,
 	__filtros jsonb,

@@ -151,7 +151,7 @@ function getDataScraperByMascota(id_mascota, recomendacion, filtros) {
 
 function saveDataUser(id_mascota, recomendacion, filtros, id_usuario = null){
     return new Promise((resolve,reject) => {
-        let sql = `SELECT * FROM __func_02_save_data_user($1,$2,$3,$4) res;`;
+        let sql = `SELECT * FROM __func_03_save_data_user($1,$2,$3,$4) res;`;
         sql = pgpromise.as.format(sql, [id_mascota, recomendacion, filtros, id_usuario]);
         // console.log(sql);
         dbp.one(sql).then(data => {
