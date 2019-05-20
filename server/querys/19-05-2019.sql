@@ -16,6 +16,17 @@ INSERT INTO recomendacion (desc_recomendacion, img_recomendacion, class_recomend
 				          ('Beneficios'      , 'beneficios.png' , ''                 , 3),
 						  ('Costos'          , 'money.png'      , 'card__bottom'     , 4);
 
+
+
+ALTER TABLE public.alimento
+ ADD COLUMN tags CHARACTER VARYING[];
+
+ALTER TABLE public.raza
+ ADD COLUMN tags CHARACTER VARYING[];
+
+ALTER TABLE public.size
+ ADD COLUMN tags CHARACTER VARYING[];
+
 CREATE OR REPLACE FUNCTION public.__func_01_get_data_scraper(
 	__id_mascota integer,
 	__recomendacion integer,
@@ -40,38 +51,72 @@ DECLARE
 		__msj_excep           TEXT;
 		__data                JSONB;
 		__combos              JSONB;
-		__select_recomendacion TEXT[];
-		__edad INTEGER;
+		__select_recomendacion CHARACTER VARYING[];
+		__tag_feeding CHARACTER VARYING[];
+        __tag_race CHARACTER VARYING[];
+        __tag_size CHARACTER VARYING[];
+        __tag_age CHARACTER VARYING[];
 BEGIN
 	-- Datos
-		__select_recomendacion := CONCAT('{',__filtros->>'selected','}')::TEXT[];
-		__edad := (__filtros->>'age')::INTEGER;
+		__select_recomendacion := CONCAT('{',__filtros->>'selected','}')::CHARACTER VARYING[];
+		-- TAG DE EDADES
+			SELECT COALESCE(tags,'{}'::CHARACTER VARYING[])
+			  INTO __tag_age
+			  FROM edades
+			 WHERE _id_animal  = __id_mascota
+			   AND correlativo = (__filtros->>'age')::INTEGER;
+		-- TAG DE ALIMENTACION
+			SELECT COALESCE(tags,'{}'::CHARACTER VARYING[])
+			  INTO __tag_feeding
+			  FROM alimento
+			 WHERE _id_animal  = __id_mascota
+			   AND correlativo = (__filtros->>'feeding')::INTEGER;
+		-- TAG DE RAZA
+			SELECT COALESCE(tags,'{}'::CHARACTER VARYING[])
+			  INTO __tag_race
+			  FROM raza
+			 WHERE _id_animal  = __id_mascota
+			   AND correlativo = (__filtros->>'race')::INTEGER;
+		-- TAG DE TAMAÑO
+			SELECT COALESCE(tags,'{}'::CHARACTER VARYING[])
+			  INTO __tag_size
+			  FROM size
+			 WHERE _id_animal  = __id_mascota
+			   AND correlativo = (__filtros->>'size')::INTEGER;
 	-- Datos por recomendación
 		WITH scraper AS (
-			SELECT sxs.*
-		  	  FROM scraper_x_site sxs,
-			      (SELECT UNNEST(__select_recomendacion) AS rec) tab
-		     WHERE LOWER(sxs.nombre) ILIKE LOWER(CONCAT('%',tab.rec,'%')) OR LOWER(sxs.descripcion) ILIKE LOWER(CONCAT('%',tab.rec,'%'))
+			WITH filtro_1 AS (
+				SELECT sxs.*
+		  	  	  FROM scraper_x_site sxs,
+			           (SELECT UNNEST(__select_recomendacion) AS rec) tab
+		     	 WHERE LOWER(sxs.nombre) ILIKE LOWER(CONCAT('%',tab.rec,'%')) OR LOWER(sxs.descripcion) ILIKE LOWER(CONCAT('%',tab.rec,'%'))
+			), filtro_2 AS (
+				SELECT *
+	              FROM filtro_1
+                 WHERE TRUE = ((SELECT __func_02_exist_value_in_tags(LOWER(nombre), __tag_age)) OR (SELECT __func_02_exist_value_in_tags(LOWER(descripcion), __tag_age)))
+			), filtro_3 AS (
+				SELECT *
+	              FROM filtro_2
+                 WHERE TRUE = ((SELECT __func_02_exist_value_in_tags(LOWER(nombre), __tag_feeding)) OR (SELECT __func_02_exist_value_in_tags(LOWER(descripcion), __tag_feeding)))
+			), filtro_4 AS (
+				SELECT *
+	              FROM filtro_3
+                 WHERE TRUE = ((SELECT __func_02_exist_value_in_tags(LOWER(nombre), __tag_race)) OR (SELECT __func_02_exist_value_in_tags(LOWER(descripcion), __tag_race)))
+			)
+			SELECT *
+	          FROM filtro_4
+             WHERE TRUE = ((SELECT __func_02_exist_value_in_tags(LOWER(nombre), __tag_size)) OR (SELECT __func_02_exist_value_in_tags(LOWER(descripcion), __tag_size)))
+		    
 	   ), datos_filtrados AS(
 			SELECT *,
 				  (SELECT __get_arry_nombre_mark(LOWER(s.nombre),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
-																	FROM (SELECT UNNEST(__select_recomendacion || (SELECT tags::TEXT[]
-																													 FROM edades
-																													WHERE _id_animal  = __id_mascota
-																													  AND correlativo = __edad)
-																				 ) AS val
-																		 ) tab
+																	FROM (SELECT UNNEST(__select_recomendacion || __tag_age || __tag_feeding || __tag_race || __tag_size) AS val) tab
 																 )
 												)
 				  ) AS arry_nombre,
 				  (SELECT __get_arry_nombre_mark(LOWER(s.descripcion),(SELECT ARRAY_AGG(LOWER(tab.val))::CHARACTER VARYING[]
-																		 FROM (SELECT UNNEST(__select_recomendacion || (SELECT tags::TEXT[]
-																														  FROM edades
-																														 WHERE _id_animal  = __id_mascota
-																														   AND correlativo = __edad)
-																					  ) AS val
-																			  ) tab
-																	  )
+																	     FROM (SELECT UNNEST(__select_recomendacion || __tag_age || __tag_feeding || __tag_race || __tag_size) AS val) tab
+																      )
 												)
 				  ) AS arry_descrip,
 				  st.desc_site
@@ -81,7 +126,7 @@ BEGIN
 	   ), data_scraper AS (
 		   SELECT ARRAY_TO_JSON(ARRAY_AGG(tab))::JSONB
 		     FROM datos_filtrados tab
-	   ), marcas AS (
+	   ), webs AS (
 			WITH desc_sites AS(
 			 SELECT s.desc_site
 			  FROM site s,
@@ -92,7 +137,7 @@ BEGIN
 			)
 			SELECT ARRAY_AGG(tab.desc_site)
 			  FROM desc_sites tab
-	   ), webs AS (
+	   ), marcas AS (
 		   WITH desc_marcas AS(
 			 SELECT marca
 			   FROM scraper
@@ -103,9 +148,9 @@ BEGIN
 			  FROM desc_marcas tab
 	   )
 	   SELECT JSONB_BUILD_OBJECT(
-		          'data'   , (SELECT * FROM data_scraper),
-		          'marcas' , (SELECT * FROM marcas),
-		          'webs'   , (SELECT * FROM webs)
+		          'data'   , COALESCE((SELECT * FROM data_scraper), '[]'::JSONB),
+		          'marcas' , COALESCE((SELECT * FROM marcas), '{}'::TEXT[]),
+		          'webs'   , COALESCE((SELECT * FROM webs), '{}'::TEXT[])
 	        )
 	   INTO __result;
 
