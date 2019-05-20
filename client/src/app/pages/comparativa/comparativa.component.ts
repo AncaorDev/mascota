@@ -180,8 +180,6 @@ export class ComparativaComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	
-
 	dataBenefice():void {
 		this.last_step   = 3;
 		this.step        = 5;
