@@ -20,6 +20,37 @@ import { LoginComponent } from './pages/login/login.component';
 import { HeadersService } from './core/header.service';
 import { AppService } from './app.service';
 import { RegisterComponent } from './pages/register/register.component';
+
+// Dependencias
+import {
+	SocialLoginModule,
+	AuthServiceConfig,
+	GoogleLoginProvider,
+	FacebookLoginProvider,
+	// LinkedinLoginProvider
+  } from "angular-6-social-login";
+
+  // Configs 
+export function getAuthServiceConfigs() {
+	let config = new AuthServiceConfig(
+		[
+		  {
+			id: FacebookLoginProvider.PROVIDER_ID,
+			provider: new FacebookLoginProvider("373122450211904")
+		  },
+		  {
+			id: GoogleLoginProvider.PROVIDER_ID,
+			provider: new GoogleLoginProvider("944641015536-umthl7gjroahctuiblatj6vpvsc308eq.apps.googleusercontent.com")
+		  }
+		  /*,
+			{
+			  id: LinkedinLoginProvider.PROVIDER_ID,
+			  provider: new LinkedinLoginProvider("1098828800522-m2ig6bieilc3tpqvmlcpdvrpvn86q4ks.apps.googleusercontent.com")
+			},*/
+		]
+	);
+	return config;
+  }
 @NgModule({
   	declarations: [
 		AppComponent,
@@ -40,9 +71,18 @@ import { RegisterComponent } from './pages/register/register.component';
 		MaterialModule,
 		HttpClientModule,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		SocialLoginModule
 	],
-	providers: [Globals,HeadersService,AppService],
+	providers: [
+		Globals,
+		HeadersService,
+		AppService,
+		{
+			provide : AuthServiceConfig,
+			useFactory : getAuthServiceConfigs
+		}
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

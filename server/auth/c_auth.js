@@ -2,11 +2,15 @@
 'use strict'
 
 const M_auth = require('./m_auth');
-const M_utils = require('./../utils/m_utils')
+const M_utils = require('./../utils/m_utils');
+
 async function login(req, res) {
     try {
        let data_req = req.query;
-       if (!data_req.username || !data_req.password) throw {status:global.HTTP_400, msj : global.ANP};
+
+       // Validar datos requeridos
+       if (!data_req.email && (!data_req.username || !data_req.password))
+        throw {status:global.HTTP_400, msj : global.ANP};
 
        let data  = await M_auth.login(data_req);
        let token = jwt.encode({id_persona: data.data.id_persona},JWT_KEY);

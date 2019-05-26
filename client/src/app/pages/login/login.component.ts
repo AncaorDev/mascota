@@ -19,6 +19,7 @@ import { AppService } from 'src/app/app.service';
 // import { User } from 'app/main/models/user.model';
 // import { DATA_LOGIN } from 'app/main/models/general.model';
 
+import * as fromSocial from 'angular-6-social-login';
 var colorTmp: string = '';
 
 @Component({
@@ -54,7 +55,8 @@ export class LoginComponent implements OnInit {
         private _router: Router,
         public _globals:Globals,
         private _authService : AuthService,
-        private _app_srv : AppService
+        private _app_srv : AppService,
+        private socialAuthService : fromSocial.AuthService
     ) {
         this.form = this._builderForm();
         // this.setMediaQuery();
@@ -63,16 +65,16 @@ export class LoginComponent implements OnInit {
     ngOnInit():void {
         let passwordInput = document.querySelector('.password');
         let usernameInput = document.querySelector('.user_name');
-        let face:any = document.querySelector('.face')
+        let face:any      = document.querySelector('.face')
 
-        passwordInput.addEventListener('focus', event => {
+        passwordInput.addEventListener('focus', () => {
             document.querySelectorAll('.hand').forEach(hand => {
               hand.classList.add('hide')
             })
             document.querySelector('.tongue').classList.remove('breath')
         });
 
-        passwordInput.addEventListener('blur', event => {
+        passwordInput.addEventListener('blur', () => {
             document.querySelectorAll('.hand').forEach(hand => {
                 hand.classList.remove('hide')
                 hand.classList.remove('peek')
@@ -80,7 +82,7 @@ export class LoginComponent implements OnInit {
             document.querySelector('.tongue').classList.add('breath')
         });
 
-        passwordInput.addEventListener('blur', event => {
+        passwordInput.addEventListener('blur', () => {
             document.querySelectorAll('.hand').forEach(hand => {
                 hand.classList.remove('hide')
                 hand.classList.remove('peek')
@@ -88,7 +90,7 @@ export class LoginComponent implements OnInit {
             document.querySelector('.tongue').classList.add('breath')
         });
 
-        usernameInput.addEventListener('focus', event => {
+        usernameInput.addEventListener('focus', () => {
             let length = Math.min(this.username.value.length - 16, 19)
             document.querySelectorAll('.hand').forEach(hand => {
                 hand.classList.remove('hide')
@@ -98,7 +100,7 @@ export class LoginComponent implements OnInit {
             face.style.setProperty('--rotate-head', `${-length}deg`)
         });
 
-        usernameInput.addEventListener('blur', event => {
+        usernameInput.addEventListener('blur', () => {
             face.style.setProperty('--rotate-head', '0deg')
         });
     }
@@ -148,7 +150,7 @@ export class LoginComponent implements OnInit {
     Link: https://dribbble.com/shots/4485321-Login-Page-Homepage
     */
 
-    ShowHidePass() {
+    ShowHidePass():void {
         this.hide = !this.hide;
         if (this.hide) {
             document.querySelectorAll('.hand').forEach(hand => {
@@ -161,5 +163,27 @@ export class LoginComponent implements OnInit {
             hand.classList.add('peek')
             })
         }
+    }
+
+    async socialSignIn(socialPlatform : string) {
+        try {
+            let socialPlatformProvider;
+            if(socialPlatform == this._globals.RedesSociales.FACEBOOK){
+            socialPlatformProvider = fromSocial.FacebookLoginProvider.PROVIDER_ID;
+            }else if(socialPlatform == this._globals.RedesSociales.GOOGLE) {
+            socialPlatformProvider = fromSocial.GoogleLoginProvider.PROVIDER_ID;
+            } /*else if (socialPlatform == "linkedin") {
+            socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
+            }*/
+            let dataLogin = await this.socialAuthService.signIn(socialPlatformProvider);
+            this._authService.login({email : dataLogin.email, image : dataLogin.image}).subscribe(res => {
+                this._app_srv.user.next(res.data);
+                localStorage.setItem('token', res.token);
+                this._router.navigate(['/']);
+            },err => {throw(err)});
+        } catch (err) {
+            console.log(err);
+        }    
+        
     }
 }

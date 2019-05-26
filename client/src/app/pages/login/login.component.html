@@ -70,11 +70,13 @@
       <mat-form-field class="full-width">
         <mat-label>Contraseña</mat-label>
         <input class="password" matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20">
-        <button class="password-button" (click)="ShowHidePass()">{{ hide ? 'Mostrar' : 'Ocultar' }}</button>
+        <button class="password-button" type="button" (click)="ShowHidePass()">{{ hide ? 'Mostrar' : 'Ocultar' }}</button>
       </mat-form-field>
     </label>
     <label class="err_login" *ngIf="msj_err"><span>{{ msj_err }}</span></label>
-    <button class="login-button" (click)="login()">Iniciar Sesión</button>
+    <button class="login-button" type="button" (click)="login()">Iniciar Sesión</button>
+    <button type="button" (click)="socialSignIn(_globals.RedesSociales.FACEBOOK)">Facebook</button>
+    <button type="button" (click)="socialSignIn(_globals.RedesSociales.GOOGLE)">Google</button>
     <div class="cont-post-login">
       <P>¿Aún no tienes una cuenta?</P><a routerLink="/register">Registrate</a>
     </div>
