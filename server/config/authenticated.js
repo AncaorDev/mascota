@@ -23,7 +23,8 @@ global.ensureAuth = (req, res, next) => {
             'getDataScraper',
             'deleteDataScraper',
             'register',
-            'getTypeRecommendation'
+            'getTypeRecommendation',
+            'getUsers'
         ];
 
         if (url_NoToken.indexOf(trimmedPath) < 0) {
@@ -50,11 +51,11 @@ global.ensureAuth = (req, res, next) => {
                 noWarnings: false
             });
         }
-        global.__BD_USER__  = 'postgres';
-        global.__BD_PASS__  = 'postgres';
-        global.__BD_HOST__  = 'localhost';
+        global.__BD_USER__  = 'ancaor_beta';
+        global.__BD_PASS__  = 'cJ9ULSBtkS2vUSU';
+        global.__BD_HOST__  = '35.245.104.208';
         global.__BD_PORT__  = 5432;
-        global.__DATABASE__ = 'mascota1';
+        global.__DATABASE__ = 'mascota';
 
         let __conexion = 'postgres://' + global.__BD_USER__ + ':' + global.__BD_PASS__ + '@' + global.__BD_HOST__ + ':' + global.__BD_PORT__ + '/' + global.__DATABASE__;
         if (global.dbp) {

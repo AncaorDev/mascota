@@ -6,6 +6,7 @@
     .user(*ngIf="user")
         span Bienvenido:
         p {{user.nom_persona+' '+user.ape_pate_pers }}
+        button( *ngIf="user.is_admin", mat-raised-button, color="accent", routerLink="admin") Panel
         button(mat-raised-button, color="primary", (click)="cerrarSesion()") Cerrar Sessión
 
 //- .nav-body(id="cabecera")

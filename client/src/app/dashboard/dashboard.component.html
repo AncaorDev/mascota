@@ -1,0 +1,62 @@
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon"><i class="material-icons">content_copy</i></div>
+            <p class="card-category">Espacio Usado</p>
+            <h3 class="card-title">0.2/50<small>GB</small></h3>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <h4 class="card-title">Usuarios Registrados</h4>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Búsquedas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                  <td>{{ i + 1  }}</td>
+                  <td>{{ user.nom_persona }}</td>
+                  <td>{{ user.ape_pate_pers + ' ' + (user.ape_mate_pers ? user.ape_mate_pers : '')  }}</td>
+                  <td><i class="material-icons">eye</i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-chart">
+          <div class="card-header card-header-success">
+            <div class="ct-chart" id="dailySalesChart"></div>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Gráfico de filtros</h4>
+            <p class="card-category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 0%</span> en proceso</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><i class="material-icons">access_time</i>  en proceso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@
   <div class="spacer"></div><span class="login" routerLink="/login" *ngIf="!user"> Iniciar Sesión</span>
   <div class="user" *ngIf="user"><span>Bienvenido:</span>
     <p>{{user.nom_persona+' '+user.ape_pate_pers }}</p>
+    <button *ngIf="user.is_admin" mat-raised-button color="accent" routerLink="admin">Panel</button>
     <button mat-raised-button color="primary" (click)="cerrarSesion()">Cerrar Sessión</button>
   </div>
 </div>

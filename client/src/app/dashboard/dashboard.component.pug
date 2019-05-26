@@ -1,0 +1,262 @@
+.main-content
+	.container-fluid
+		.row
+			.col-lg-3.col-md-6.col-sm-6
+				.card.card-stats
+					.card-header.card-header-warning.card-header-icon
+						.card-icon
+							i.material-icons content_copy
+						p.card-category Espacio Usado
+						h3.card-title
+							| 0.2/50
+							small GB
+					.card-footer
+						//- .stats
+						//- 	i.material-icons.text-danger warning
+						//- 	a(href='#pablo') Get More Space...
+			//- .col-lg-3.col-md-6.col-sm-6
+			//- 	.card.card-stats
+			//- 		.card-header.card-header-success.card-header-icon
+			//- 			.card-icon
+			//- 				i.material-icons store
+			//- 			p.card-category Revenue
+			//- 			h3.card-title $34,245
+			//- 		.card-footer
+			//- 			.stats
+			//- 				i.material-icons date_range
+			//- 				|  Last 24 Hours
+			//- .col-lg-3.col-md-6.col-sm-6
+			//- 	.card.card-stats
+			//- 		.card-header.card-header-danger.card-header-icon
+			//- 			.card-icon
+			//- 				i.material-icons info_outline
+			//- 			p.card-category Fixed Issues
+			//- 			h3.card-title 75
+			//- 		.card-footer
+			//- 			.stats
+			//- 				i.material-icons local_offer
+			//- 				|  Tracked from Github
+			//- .col-lg-3.col-md-6.col-sm-6
+			//- 	.card.card-stats
+			//- 		.card-header.card-header-info.card-header-icon
+			//- 			.card-icon
+			//- 				i.fa.fa-twitter
+			//- 			p.card-category Followers
+			//- 			h3.card-title +245
+			//- 		.card-footer
+			//- 			.stats
+			//- 				i.material-icons update
+			//- 				|  Just Updated
+		.row
+			//- .col-lg-6.col-md-12
+				.card
+					//- .card-header.card-header-tabs.card-header-primary
+						.nav-tabs-navigation
+							.nav-tabs-wrapper
+								span.nav-tabs-title Tasks:
+								ul.nav.nav-tabs(data-tabs='tabs')
+									li.nav-item
+										a.nav-link.active(mat-button='', href='#profile', data-toggle='tab')
+											i.material-icons bug_report
+											|  Bugs
+											.ripple-container
+									li.nav-item
+										a.nav-link(mat-button='', href='#messages', data-toggle='tab')
+											i.material-icons code
+											|  Website
+											.ripple-container
+									li.nav-item
+										a.nav-link(mat-button='', href='#settings', data-toggle='tab')
+											i.material-icons cloud
+											|  Server
+											.ripple-container
+					//- .card-body
+						.tab-content
+							#profile.tab-pane.active
+								table.table
+									tbody
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='', checked='')
+														span.form-check-sign
+															span.check
+											td Sign contract for "What are conference organizers afraid of?"
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='')
+														span.form-check-sign
+															span.check
+											td Lines From Great Russian Literature? Or E-mails From My Boss?
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='')
+														span.form-check-sign
+															span.check
+											td
+												| Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='', checked='')
+														span.form-check-sign
+															span.check
+											td Create 4 Invisible User Experiences you Never Knew About
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+							#messages.tab-pane
+								table.table
+									tbody
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='', checked='')
+														span.form-check-sign
+															span.check
+											td
+												| Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='')
+														span.form-check-sign
+															span.check
+											td Sign contract for "What are conference organizers afraid of?"
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+							#settings.tab-pane
+								table.table
+									tbody
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='')
+														span.form-check-sign
+															span.check
+											td Lines From Great Russian Literature? Or E-mails From My Boss?
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='', checked='')
+														span.form-check-sign
+															span.check
+											td
+												| Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+										tr
+											td
+												.form-check
+													label.form-check-label
+														input.form-check-input(type='checkbox', value='', checked='')
+														span.form-check-sign
+															span.check
+											td Sign contract for "What are conference organizers afraid of?"
+											td.td-actions.text-right
+												button.btn.btn-primary.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Edit Task')
+													i.material-icons edit
+												button.btn.btn-danger.btn-link.btn-sm.btn-just-icon(mat-raised-button='', type='button', mattooltip='Remove')
+													i.material-icons close
+			.col-lg-6.col-md-12
+				.card
+					.card-header.card-header-warning
+						h4.card-title Usuarios Registrados
+						//- p.card-category New employees on 15th September, 2016
+					.card-body.table-responsive
+						table.table.table-hover
+							thead.text-warning
+								tr
+									th ID
+									th Nombre
+									th Apellidos
+									th Búsquedas
+							tbody
+								tr(*ngFor="let user of users; let i = index")
+									td {{ i + 1  }}
+									td {{ user.nom_persona }}
+									td {{ user.ape_pate_pers + ' ' + (user.ape_mate_pers ? user.ape_mate_pers : '')  }}
+									td
+										i.material-icons eye
+										//- mat-icon eye
+		.row
+			.col-md-4
+				.card.card-chart
+					.card-header.card-header-success
+						#dailySalesChart.ct-chart
+					.card-body
+						h4.card-title Gráfico de filtros
+						p.card-category
+							span.text-success
+								i.fa.fa-long-arrow-up
+								|  0%
+							|  en proceso
+					.card-footer
+						.stats
+							i.material-icons access_time
+							|   en proceso
+			//- .col-md-4
+			//- 	.card.card-chart
+			//- 		.card-header.card-header-warning
+			//- 			#websiteViewsChart.ct-chart
+			//- 		.card-body
+			//- 			h4.card-title Email Subscriptions
+			//- 			p.card-category Last Campaign Performance
+			//- 		.card-footer
+			//- 			.stats
+			//- 				i.material-icons access_time
+			//- 				|  campaign sent 2 days ago
+			//- .col-md-4
+			//- 	.card.card-chart
+			//- 		.card-header.card-header-danger
+			//- 			#completedTasksChart.ct-chart
+			//- 		.card-body
+			//- 			h4.card-title Completed Tasks
+			//- 			p.card-category Last Campaign Performance
+			//- 		.card-footer
+			//- 			.stats
+			//- 				i.material-icons access_time
+			//- 				|  campaign sent 2 days ago

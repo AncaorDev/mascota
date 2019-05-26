@@ -47,7 +47,7 @@ section.theme-ancaor(id="contenido", [ngSwitch]="step")
 			button(mat-fab color="primary", [disabled]="!type_reco", (click)="type_reco && goToStep(type_reco)")
 				mat-icon send
 		.division
-			.card(*ngFor="let row of recomendacion;", [ngClass]="row.class_recomendacion", (click)="type_reco = row.id_sec_recomedacion")
+			.card-custom(*ngFor="let row of recomendacion;", [ngClass]="row.class_recomendacion", (click)="type_reco = row.id_sec_recomedacion")
 				img(src="./assets/images/{{ row.img_recomendacion }}", alt="", [ngClass]="{'color' : type_reco == row.id_sec_recomedacion }")
 				.text
 					p {{ row.desc_recomendacion }}

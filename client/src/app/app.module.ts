@@ -20,6 +20,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HeadersService } from './core/header.service';
 import { AppService } from './app.service';
 import { RegisterComponent } from './pages/register/register.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ComponentsModule } from './components/components.module';
 @NgModule({
   	declarations: [
 		AppComponent,
@@ -31,7 +33,8 @@ import { RegisterComponent } from './pages/register/register.component';
 		CsMatIconComponent,
 		RecomendacionComponent,
 		LoginComponent,
-		RegisterComponent
+		RegisterComponent,
+		AdminLayoutComponent
 	],
 	imports: [
 		BrowserModule,
@@ -40,7 +43,8 @@ import { RegisterComponent } from './pages/register/register.component';
 		MaterialModule,
 		HttpClientModule,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		ComponentsModule
 	],
 	providers: [Globals,HeadersService,AppService],
 	bootstrap: [AppComponent]

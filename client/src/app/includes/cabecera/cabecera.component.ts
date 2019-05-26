@@ -33,6 +33,7 @@ export class CabeceraComponent implements OnInit, OnDestroy {
 		if(localStorage.getItem('data_user')) {
 			this.user = JSON.parse(localStorage.getItem('data_user'));
 			this._globals.__DATA_USER = JSON.parse(localStorage.getItem('data_user'));
+			console.log(this._globals.__DATA_USER);
 		}
 		this.sub_user  = this._app_srv.user.pipe(filter(fil => fil.id_persona != null)).subscribe(res => {
 			localStorage.setItem('data_user', JSON.stringify(res));

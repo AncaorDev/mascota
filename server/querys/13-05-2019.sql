@@ -13,7 +13,7 @@ CREATE FUNCTION public.trg_crypt_users_pass()
     RETURNS trigger
     LANGUAGE 'plpgsql'
     COST 100
-    VOLATILE NOT LEAKPROOF 
+    VOLATILE NOT LEAKPROOF
 AS $BODY$
 
 DECLARE
@@ -40,7 +40,7 @@ CREATE OR REPLACE FUNCTION __auth__01_registrar_usuario(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 
@@ -66,17 +66,17 @@ BEGIN
 		__ape_mate_pers := __datos->>'ape_mate_pers';
 		__username      := __datos->>'username';
 		__password      := __datos->>'password';
-		
+
 	-- Insertar
 		INSERT INTO PERSONA
 					(nom_persona   , ape_pate_pers   , ape_mate_pers   , usuario    , clave)
 			 VALUES (__nom_persona , __ape_pate_pers , __ape_mate_pers , __username , (__password)::BYTEA);
 		GET DIAGNOSTICS __affected_rows = ROW_COUNT;
-		
+
 		IF __affected_rows = 0 THEN
 			RAISE EXCEPTION USING ERRCODE = 'MASCO', MESSAGE = 'No se puedo insertar';
 		END IF;
-		
+
 	--Respuesta
 		__result := JSONB_BUILD_OBJECT(
 			'msj' , __MSJ_INSERT
