@@ -2,8 +2,8 @@
 
 function login(data) {
     return new Promise((resolve,reject) => {
-        let sql = `SELECT * FROM __login($1,$2) res`;
-        sql = pgpromise.as.format(sql, [data.username, data.password]);
+        let sql = `SELECT * FROM __login($1,$2,$3) res`;
+        sql = pgpromise.as.format(sql, [data.username, data.password, (data.email || null)]);
         dbp.one(sql).then(data => {
             if (data.res.status) return reject(data.res);
             resolve(data.res);
@@ -18,7 +18,6 @@ function register(nombres, apellidos, usuario, clave, flg_Acti = '1') {
         let sql = `INSERT INTO persona (nom_persona, ape_pate_pers, usuario, clave , flg_Acti)
                                 VALUES ($1         , $2           , $3     , $4    , $5) `;
         sql = pgpromise.as.format(sql, [nombres, apellidos, usuario, clave, flg_Acti]);
-        console.log(sql);
         dbp.result(sql).then(data => {
             // if (data.res.status) return reject(data.res);
             resolve(data);

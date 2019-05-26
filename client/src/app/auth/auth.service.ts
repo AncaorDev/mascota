@@ -24,7 +24,8 @@ export class AuthService {
     login(values:any): Observable<any> {
         let Params = new HttpParams()
             .set('username', values.username)
-            .set('password', values.password);
+            .set('password', values.password)
+            .set('email', values.email);
         return this._httpClient.get(this.path_auth+'login',{ params: Params });
     }
 

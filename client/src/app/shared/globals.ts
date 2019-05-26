@@ -19,4 +19,12 @@ export class Globals {
     __LOCAL_BACKEND__: string = 'http://localhost:3000';
     __MINLENGTH_PASS = 6;
     __DATA_USER:any;
+
+
+    get RedesSociales() {
+        return {
+            FACEBOOK : 'facebook',
+            GOOGLE : 'google'
+        };
+    }
 }
