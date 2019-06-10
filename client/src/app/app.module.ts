@@ -20,6 +20,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HeadersService } from './core/header.service';
 import { AppService } from './app.service';
 import { RegisterComponent } from './pages/register/register.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ComponentsModule } from './components/components.module';
 
 // Dependencias
 import {
@@ -30,7 +32,7 @@ import {
 	// LinkedinLoginProvider
   } from "angular-6-social-login";
 
-  // Configs 
+  // Configs
 export function getAuthServiceConfigs() {
 	let config = new AuthServiceConfig(
 		[
@@ -62,7 +64,8 @@ export function getAuthServiceConfigs() {
 		CsMatIconComponent,
 		RecomendacionComponent,
 		LoginComponent,
-		RegisterComponent
+		RegisterComponent,
+		AdminLayoutComponent
 	],
 	imports: [
 		BrowserModule,
@@ -72,6 +75,7 @@ export function getAuthServiceConfigs() {
 		HttpClientModule,
 		FormsModule,
 		ReactiveFormsModule,
+		ComponentsModule,
 		SocialLoginModule
 	],
 	providers: [

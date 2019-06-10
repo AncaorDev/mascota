@@ -283,7 +283,7 @@ CREATE OR REPLACE FUNCTION public.__func_02_exist_value_in_tags(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 DECLARE
@@ -299,13 +299,13 @@ BEGIN
 		LOOP
 			SELECT strpos(__value, __rec)
 			  INTO __cont_interno;
-			 
+
 			__cont := __cont_interno + __cont;
-		
+
 		END LOOP;
-	
+
 	__exist := (CASE WHEN __cont > 0 THEN TRUE ELSE FALSE END);
-	
+
 	RETURN __exist;
 EXCEPTION
     WHEN OTHERS THEN

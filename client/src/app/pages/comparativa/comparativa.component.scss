@@ -174,7 +174,10 @@
                 }
             }
         }
-        .card {
+        .card-custom {
+            background: none;
+            margin: 0;
+            box-shadow: none;
             cursor: pointer;
             align-items: center;
             justify-content: center;

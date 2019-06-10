@@ -1,6 +1,6 @@
-app-cabecera.theme-ancaor
+app-cabecera.theme-ancaor(*ngIf="!is_admin")
 router-outlet
-.footer
+.footer(*ngIf="!is_admin")
     .images
         img(src="./assets/images/banderas/peru.jpg", alt="")
         img(src="./assets/images/banderas/argentina.jpg", alt="")

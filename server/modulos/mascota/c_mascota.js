@@ -51,11 +51,13 @@ async function getDataScraperBySite(req,res) {
             age      : data_req.age,
             selected : data_req.selected
         }
+        let id_persona = null;
         if(data_req.token) {
-            data_req.token = jwt.decode(__get(req.query.token), JWT_KEY);
+            data_req.token = jwt.decode(data_req.token, JWT_KEY);
+            id_persona     = data_req.token.id_persona;
         }
         let data = await M_mascota.getDataScraperByMascota(data_req.id_mascota, data_req.recomendacion, filtros);
-        let save = await M_mascota.saveDataUser(data_req.id_mascota, data_req.recomendacion, filtros, data_req.token);
+        let save = await M_mascota.saveDataUser(data_req.id_mascota, data_req.recomendacion, filtros, id_persona);
         res.status(global.HTTP_200).send(data);
     } catch (err) {
         print_response_error(req.url, err, res);
@@ -107,6 +109,12 @@ async function getTypeRecommendation(req,res) {
     res.status(global.HTTP_200).send(data);
 }
 
+async function getUsers(req,res) {
+    // let info = JSON.parse(req.query.data);
+    let data = await M_mascota.getUsers();
+    res.status(global.HTTP_200).send(data);
+}
+
 module.exports = {
     getCombosByMascota,
     insertScraper,
@@ -115,5 +123,6 @@ module.exports = {
     getBeneficioPorMascota,
     getDataScraper,
     deleteDataScraper,
-    getTypeRecommendation
+    getTypeRecommendation,
+    getUsers
 };

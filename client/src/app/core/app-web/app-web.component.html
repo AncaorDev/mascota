@@ -1,7 +1,7 @@
 
-<app-cabecera class="theme-ancaor"></app-cabecera>
+<app-cabecera class="theme-ancaor" *ngIf="!is_admin"></app-cabecera>
 <router-outlet></router-outlet>
-<div class="footer">
+<div class="footer" *ngIf="!is_admin">
   <div class="images"><img src="./assets/images/banderas/peru.jpg" alt=""><img src="./assets/images/banderas/argentina.jpg" alt=""><img src="./assets/images/banderas/brasil.jpg" alt=""></div>
   <div class="text"><span>Ingles | Español</span></div>
 </div>

@@ -72,7 +72,7 @@
       </button>
     </div>
     <div class="division">
-      <div class="card" *ngFor="let row of recomendacion;" [ngClass]="row.class_recomendacion" (click)="type_reco = row.id_sec_recomedacion"><img src="./assets/images/{{ row.img_recomendacion }}" alt="" [ngClass]="{'color' : type_reco == row.id_sec_recomedacion }">
+      <div class="card-custom" *ngFor="let row of recomendacion;" [ngClass]="row.class_recomendacion" (click)="type_reco = row.id_sec_recomedacion"><img src="./assets/images/{{ row.img_recomendacion }}" alt="" [ngClass]="{'color' : type_reco == row.id_sec_recomedacion }">
         <div class="text">
           <p>{{ row.desc_recomendacion }}</p><img src="./assets/images/huella.png" alt="">
         </div>

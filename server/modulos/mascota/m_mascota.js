@@ -139,7 +139,7 @@ function getDataScraperByMascota(id_mascota, recomendacion, filtros) {
     return new Promise((resolve,reject) => {
         let sql = `SELECT * FROM __func_01_get_data_scraper($1,$2,$3) res;`;
         sql = pgpromise.as.format(sql, [id_mascota, recomendacion, filtros]);
-        // console.log(sql);
+        console.log(sql);
         dbp.one(sql).then(data => {
             if(data.res.status) return reject (data.res);
             resolve(data.res);
@@ -153,9 +153,9 @@ function saveDataUser(id_mascota, recomendacion, filtros, id_usuario = null){
     return new Promise((resolve,reject) => {
         let sql = `SELECT * FROM __func_03_save_data_user($1,$2,$3,$4) res;`;
         sql = pgpromise.as.format(sql, [id_mascota, recomendacion, filtros, id_usuario]);
-        // console.log(sql);
+        console.log(sql);
         dbp.one(sql).then(data => {
-            if(data.res.status) return reject (data.res);
+            if(data.res.status && data.res.status != 200) return reject (data.res);
             resolve(data.res);
         }).catch(err => {
             reject({ msj: global.MSJ_ERROR, err: "M_mascota => saveDataUser => " + err });
@@ -246,6 +246,18 @@ function getTypeRecommendation() {
     });
 }
 
+function getUsers() {
+    return new Promise((resolve,reject) => {
+        let sql = `SELECT * FROM persona WHERE id_persona NOT IN (0,19)`;
+        sql = pgpromise.as.format(sql);
+        dbp.any(sql).then(data => {
+            resolve(data);
+        }).catch(err => {
+            reject({ msj: global.MSJ_ERROR, err: "M_mascota => getUsers => " + err });
+        })
+    });
+}
+
 module.exports = {
     getCombosByMascota,
     insertScraper,
@@ -255,5 +267,6 @@ module.exports = {
     getDataScraper,
     deleteDataScraper,
     saveDataUser,
-    getTypeRecommendation
+    getTypeRecommendation,
+    getUsers
 };

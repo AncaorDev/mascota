@@ -12,9 +12,18 @@ async function login(req, res) {
        if (!data_req.email && (!data_req.username || !data_req.password))
         throw {status:global.HTTP_400, msj : global.ANP};
 
-       let data  = await M_auth.login(data_req);
-       let token = jwt.encode({id_persona: data.data.id_persona},JWT_KEY);
-       res.status(global.HTTP_200).send({data : data.data, token});
+        let data  = await M_auth.login(data_req);
+        if(data && data.data && data.data.clave) {
+                delete data.data.clave;
+        }
+        if(data.data){
+            if(data.data.usuario == 'admin' && data.data.id_persona == 19){
+                data.data['is_admin'] = true;
+            }
+        }
+
+        let token = jwt.encode({id_persona: data.data.id_persona},JWT_KEY);
+        res.status(global.HTTP_200).send({data : data.data, token});
     } catch (err) {
         print_response_error(req.url, err, res);
     }
