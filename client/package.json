@@ -5,7 +5,7 @@
     "ng": "ng",
     "pug:w": "pug -O \"{doctype: 'html'}\" src -P -w",
     "pug": "pug -O \"{doctype: 'html'}\" src ",
-    "start": "concurrently  \"npm run pug:w\" \"ng serve --open --port 4300\"",
+    "start": "concurrently  \"npm run pug:w\" \"ng serve --open --port 4200\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
