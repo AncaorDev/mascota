@@ -47,6 +47,7 @@ function getCombosByMascota(id_mascota) {
                         ) AS combos
                    FROM (SELECT $1 AS id_mascota) m;`;
         sql = pgpromise.as.format(sql, [id_mascota]);
+        console.log(sql);
         dbp.any(sql).then(data => {
             resolve(data[0].combos);
         }).catch(err => {

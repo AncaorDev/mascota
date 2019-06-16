@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Globals {
-    iconos : any = {
-        pileta: 'assets/images/svg/pileta.svg'
-    }
 
     static get ICONS() {
         return {
@@ -12,11 +9,14 @@ export class Globals {
             capacitacion: 'assets/images/svg/capacitacion.svg',
             actividades: 'assets/images/svg/actividades.svg',
             voluntariado: 'assets/images/svg/voluntariado.svg',
-            proyectos: 'assets/images/svg/proyectos.svg'
+            proyectos: 'assets/images/svg/proyectos.svg',
+            facebook: 'assets/images/svg/facebook.svg',
+            twitter: 'assets/images/svg/twitter.svg',
+            google: 'assets/images/svg/google-plus.svg'
         }
     }
 
-    __LOCAL_BACKEND__: string = 'http://localhost:3000';
+    __LOCAL_BACKEND__: string = 'https://api.ancaor.com'; 
     __MINLENGTH_PASS = 6;
     __DATA_USER:any;
 

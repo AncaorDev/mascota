@@ -5,32 +5,37 @@
     <label>
       <mat-form-field class="full-width height-50">
         <mat-label>Apellido Paterno</mat-label>
-        <input matInput placeholder="" formControlName="ape_pate_pers" maxlength="50" minlength="4">
+        <input matInput placeholder="" formControlName="ape_pate_pers" maxlength="50" minlength="4" required>
+        <mat-error>{{ getErrorMessage(ape_pate_pers, 'Ingrese apellido paterno') }}</mat-error>
       </mat-form-field>
     </label>
     <label>
       <mat-form-field class="full-width height-50">
-        <mat-label>Apellido Paterno</mat-label>
-        <input matInput placeholder="" formControlName="ape_mate_pers" maxlength="50" minlength="4">
+        <mat-label>Apellido Materno</mat-label>
+        <input matInput placeholder="" formControlName="ape_mate_pers" maxlength="50" minlength="4" required>
+        <mat-error>{{ getErrorMessage(ape_mate_pers, 'Ingrese apellido materno') }}</mat-error>
       </mat-form-field>
     </label>
     <label>
       <mat-form-field class="full-width height-50">
         <mat-label>Nombres</mat-label>
-        <input matInput placeholder="" formControlName="nom_persona" maxlength="50" minlength="4">
+        <input matInput placeholder="" formControlName="nom_persona" maxlength="50" minlength="4" required>
+        <mat-error>{{ getErrorMessage(nom_persona, 'Ingrese nombres') }}</mat-error>
       </mat-form-field>
     </label>
     <label>
       <mat-form-field class="full-width height-50">
         <mat-label>Usuario</mat-label>
-        <input matInput placeholder="" formControlName="username" maxlength="50" minlength="4" required>
+        <input matInput placeholder="" formControlName="username" maxlength="50" minlength="5" required>
+        <mat-error>{{ getErrorMessage(username, 'Ingrese usuario') }}</mat-error>
       </mat-form-field>
     </label>
     <label>
       <mat-form-field class="full-width height-50">
         <mat-label>Contraseña</mat-label>
-        <input class="password" matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20">
+        <input class="password" matInput [type]="hide ? 'password' : 'text'" placeholder="" formControlName="password" maxlength="20" required>
         <button class="password-button">Mostrar</button>
+        <mat-error>{{ getErrorMessage(password, 'Ingrese contraseña') }}</mat-error>
       </mat-form-field>
     </label>
     <button class="login-button" [ngClass]="{'disabled' : form.invalid}" [disabled]="form.invalid" (click)="register()">Registrarse</button>
@@ -38,15 +43,4 @@
       <P>¿Ya tienes una cuenta?</P><a routerLink="/login">Iniciar Sesión</a>
     </div>
   </form>
-  <div class="social-buttons">
-    <div class="social">
-      <div class="fa fa-wechat"></div>
-    </div>
-    <div class="social">
-      <div class="fa fa-weibo"></div>
-    </div>
-    <div class="social">
-      <div class="fa fa-paw"></div>
-    </div>
-  </div>
 </div>

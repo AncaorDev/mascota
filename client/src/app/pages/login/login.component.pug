@@ -59,8 +59,9 @@
 		label.err_login(*ngIf="msj_err")
 			span {{ msj_err }}
 		button.login-button(type="button", (click)="login()") Iniciar Sesión
-		button(type="button", (click)="socialSignIn(_globals.RedesSociales.FACEBOOK)") Facebook
-		button(type="button", (click)="socialSignIn(_globals.RedesSociales.GOOGLE)") Google
+		.login-redes
+			cs-mat-icon.icon-redes(icon="facebook", size="35px", (click)="socialSignIn(_globals.RedesSociales.FACEBOOK)")
+			cs-mat-icon.icon-redes(icon="google", size="35px", (click)="socialSignIn(_globals.RedesSociales.GOOGLE)")
 		.cont-post-login
 			P ¿Aún no tienes una cuenta?
 			a(routerLink="/register") Registrate

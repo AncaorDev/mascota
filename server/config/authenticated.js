@@ -51,9 +51,9 @@ global.ensureAuth = (req, res, next) => {
                 noWarnings: false
             });
         }
-        global.__BD_USER__  = 'ancaor_beta';
-        global.__BD_PASS__  = 'cJ9ULSBtkS2vUSU';
-        global.__BD_HOST__  = '35.245.104.208';
+        global.__BD_USER__  = 'admin';
+        global.__BD_PASS__  = 'Se5PegfEGBHCFrZ';
+        global.__BD_HOST__  = '35.236.253.236';
         global.__BD_PORT__  = 5432;
         global.__DATABASE__ = 'mascota';
 

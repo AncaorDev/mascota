@@ -4,6 +4,7 @@ const M_mascota = require('./m_mascota');
 
 async function getCombosByMascota(req, res) {
     try {
+        console.log(req);
         let id_mascota = parseInt(req.query.id_mascota);
         let combos     = await M_mascota.getCombosByMascota(id_mascota);
         res.status(global.HTTP_200).send(combos);
@@ -39,7 +40,6 @@ async function insertScraper(req,res) {
 
 async function getDataScraperBySite(req,res) {
     try {
-        console.log(req.query);
         let data_req              = JSON.parse(req.query.data);
         // data_req.id_site          = 1;
         data_req.selected = Array.from(data_req.selected, row => row.abvr);

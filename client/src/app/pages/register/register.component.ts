@@ -57,14 +57,22 @@ export class RegisterComponent implements OnInit {
         // this.mobileQuery && this.mobileQuery.removeListener(this._mobileQueryListener);
     }
 
+    getErrorMessage(form, msj?) {
+        if(form.errors) {
+            console.log(form.errors);
+            if(form.errors.required) return msj || 'Ingrese información';
+            if(form.errors.minlength) return 'Mínimo ' + form.errors.minlength.requiredLength + ' caracteres';
+        }
+    }
+
     private _builderForm() {
         let usuario = '^[a-zA-Z0-9._@\-]*$';
         let form = this._formBuilder.group({
-            nom_persona   : [null, [Validators.required,Validators.maxLength(50)]],
-            ape_pate_pers : [null, [Validators.required,Validators.maxLength(50)]],
-            ape_mate_pers : [null, [Validators.required,Validators.maxLength(50)]],
-            username      : ['', [Validators.required, Validators.pattern(usuario), Validators.minLength(5), Validators.maxLength(50)]],
-            password      : ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])]
+            nom_persona   : [null, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+            ape_pate_pers : [null, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+            ape_mate_pers : [null, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+            username      : [null, [Validators.required, Validators.pattern(usuario), Validators.minLength(5), Validators.maxLength(50)]],
+            password      : [null, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])]
         });
         return form;
     }

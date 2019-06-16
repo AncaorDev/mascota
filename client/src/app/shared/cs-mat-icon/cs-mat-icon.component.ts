@@ -9,8 +9,10 @@ import { Globals } from '../globals';
 })
 
 export class CsMatIconComponent implements OnChanges{
-	@Input() icon: string;
-	@Input() size?: string;
+	@Input() icon:string;
+	@Input() size?:string;
+	@Input() inline?:boolean = false;
+	@Input() color?:string = '';
 	@ViewChild('id_icon') el_icon;
 
 	constructor(private mdIconRegistry: MatIconRegistry,
@@ -27,8 +29,8 @@ export class CsMatIconComponent implements OnChanges{
 
 	loadProperties() {
 		if (this.size) {
-			this.el_icon._elementRef.nativeElement.style.width  = `${this.size}px`,
-			this.el_icon._elementRef.nativeElement.style.height = `${this.size}px`;
+			this.el_icon._elementRef.nativeElement.style.width  = `${this.size}`,
+			this.el_icon._elementRef.nativeElement.style.height = `${this.size}`;
 		}
 	}
 }

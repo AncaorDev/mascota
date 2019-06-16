@@ -75,8 +75,10 @@
     </label>
     <label class="err_login" *ngIf="msj_err"><span>{{ msj_err }}</span></label>
     <button class="login-button" type="button" (click)="login()">Iniciar Sesión</button>
-    <button type="button" (click)="socialSignIn(_globals.RedesSociales.FACEBOOK)">Facebook</button>
-    <button type="button" (click)="socialSignIn(_globals.RedesSociales.GOOGLE)">Google</button>
+    <div class="login-redes">
+      <cs-mat-icon class="icon-redes" icon="facebook" size="35px" (click)="socialSignIn(_globals.RedesSociales.FACEBOOK)"></cs-mat-icon>
+      <cs-mat-icon class="icon-redes" icon="google" size="35px" (click)="socialSignIn(_globals.RedesSociales.GOOGLE)"></cs-mat-icon>
+    </div>
     <div class="cont-post-login">
       <P>¿Aún no tienes una cuenta?</P><a routerLink="/register">Registrate</a>
     </div>
